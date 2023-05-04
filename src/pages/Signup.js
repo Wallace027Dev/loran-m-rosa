@@ -6,7 +6,7 @@ import { useState } from "react";
 import { useAuth } from "../context/authContext";
 import styled from "styled-components";
 
-const Body = styled.body`
+const Main = styled.main`
   margin-top: 32rem;
   flex-direction: column;
 
@@ -76,7 +76,7 @@ function Subscribe() {
   }
 
   return (
-    <Body className="center">
+    <Main className="center">
       <div>
         <form onSubmit={handleSubmit}>
           <div>
@@ -121,7 +121,7 @@ function Subscribe() {
           </Link>
         </div>
       </div>
-    </Body>
+    </Main>
   );
 }
 

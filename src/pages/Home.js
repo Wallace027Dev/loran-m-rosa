@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-const Body = styled.body`
+const Main = styled.main`
   margin-top: 44.5rem;
   flex-direction: column;
   text-align: center;
@@ -8,9 +8,9 @@ const Body = styled.body`
 
 function Home() {
   return (
-    <Body className="center">
+    <Main className="center">
       <h1>Hello User</h1>
-    </Body>
+    </Main>
   );
 }
 

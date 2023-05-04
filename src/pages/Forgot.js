@@ -5,7 +5,7 @@ import { Inpt } from "../components/Inpt";
 import { useAuth } from "../context/authContext";
 import { useState } from "react";
 
-const Body = styled.body`
+const Main = styled.main`
   margin-top: 32rem;
   flex-direction: column;
 
@@ -52,7 +52,7 @@ function Forgot() {
   }
 
   return (
-    <Body className="center">
+    <Main className="center">
       <div>
         <form onSubmit={handleSubmit}>
           <div>
@@ -81,7 +81,7 @@ function Forgot() {
           </Link>
         </div>
       </div>
-    </Body>
+    </Main>
   );
 }
 

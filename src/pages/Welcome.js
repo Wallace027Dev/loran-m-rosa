@@ -8,7 +8,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 import { auth } from "../services/firebase";
 
-const Body = styled.body`
+const Main = styled.main`
   margin-top: 44.5rem;
   flex-direction: column;
   text-align: center;
@@ -47,7 +47,7 @@ function Welcome() {
   }
 
   return (
-    <Body className="center">
+    <Main className="center">
       <div>
         <Btn>
           <Link
@@ -70,7 +70,7 @@ function Welcome() {
           Login
         </Link>
       </div>
-    </Body>
+    </Main>
   );
 }
 
