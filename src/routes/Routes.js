@@ -1,7 +1,7 @@
 import { Routes, Route } from 'react-router-dom';
 import Home from '../pages/Home';
 import Login from '../pages/Login';
-import Subscribe from '../pages/Subscribe';
+import Signup from '../pages/Signup';
 import Forgot from '../pages/Forgot';
 
 function AppRoutes() {
@@ -9,7 +9,7 @@ function AppRoutes() {
 		<Routes>
 			<Route path='/' element={ <Home /> } />
 			<Route path='/login' element={ <Login /> } />
-			<Route path='/subscribe' element={ <Subscribe /> } />
+			<Route path='/signup' element={ <Signup /> } />
 			<Route path='/forgot' element={ <Forgot /> } />
 		</Routes>
 	)

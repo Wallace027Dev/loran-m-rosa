@@ -30,7 +30,9 @@ function Home() {
     <Body className="center">
       <div>
         <Btn>
-          <h3>Inscreva-se</h3>
+          <Link style={{ color: "var(--secondary)" }} className="lnk" to="/signup">
+            Inscreva-se
+          </Link>
         </Btn>
         <Btn className="btnImg">
           <img src={Google} alt="Google Icon Button" />
