@@ -47,7 +47,7 @@ function Login() {
 
     try {
       await signIn(email, password);
-      navigate("/");
+      navigate("/home");
     } catch (error) {
       console.log(error);
       alert("Ocorreu um erro ao tentar efetuar o login");
