@@ -34,7 +34,7 @@ const Main = styled.main`
 `;
 
 function Welcome() {
-  const [user, setUser] = useState({});
+  const [user, setUser] = useState(null);
   const navigate = useNavigate();
 
   function handleGoogleSignIn() {
