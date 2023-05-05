@@ -5,7 +5,11 @@ import Facebook from "../images/Facebook.png";
 import styled from "styled-components";
 import { Link, useNavigate } from "react-router-dom";
 
-import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
+import {
+  GoogleAuthProvider,
+  FacebookAuthProvider,
+  signInWithPopup,
+} from "firebase/auth";
 import { auth } from "../services/firebase";
 
 const Main = styled.main`
@@ -46,6 +50,19 @@ function Welcome() {
       });
   }
 
+  function HandleFacebookSigniIn() {
+    const provider = new FacebookAuthProvider();
+
+    signInWithPopup(auth, provider)
+      .then((result) => {
+        setUser(result.user);
+        navigate("/home");
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }
+
   return (
     <Main className="center">
       <div>
@@ -62,7 +79,7 @@ function Welcome() {
           <img src={Google} alt="Google Icon Button" />
           <h3>Continue com Google</h3>
         </Btn>
-        <Btn className="btnImg">
+        <Btn onClick={HandleFacebookSigniIn} className="btnImg">
           <img src={Facebook} alt="Google Icon Button" />
           <h3>Continue com facebook</h3>
         </Btn>
