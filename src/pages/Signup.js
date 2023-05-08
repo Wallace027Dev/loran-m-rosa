@@ -1,13 +1,13 @@
 import { Link, useNavigate } from "react-router-dom";
 import { Btn } from "../components/Btn";
 import { Inpt } from "../components/Inpt";
-
+import bakoads from "../assets/bakoads.png";
 import { useState } from "react";
 import { useAuth } from "../context/authContext";
 import styled from "styled-components";
 
 const Main = styled.main`
-  margin-top: 32rem;
+  margin-top: 2rem;
   flex-direction: column;
 
   form {
@@ -27,10 +27,18 @@ const Main = styled.main`
     flex-direction: row;
     width: 30rem;
   }
+
+	.logo {
+    img {
+      width: 30rem;
+    }
+  }
 `;
 
 function Subscribe() {
   const { signUp } = useAuth();
+  const [brand, setBrand] = useState("");
+  const [phone, setPhone] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
@@ -78,7 +86,28 @@ function Subscribe() {
   return (
     <Main className="center">
       <div>
+			<div className="logo center">
+          <img src={bakoads} alt="Bakoads Logo" />
+        </div>
         <form onSubmit={handleSubmit}>
+          <div>
+            <h3>Marca</h3>
+            <Inpt
+              type="name"
+              value={brand}
+              placeholder="Insira o nome de sua marca..."
+              onChange={(e) => setBrand(e.target.value)}
+            />
+          </div>
+          <div>
+            <h3>Whatsapp</h3>
+            <Inpt
+              type="number"
+              value={phone}
+              placeholder="Insira seu número de telefone..."
+              onChange={(e) => setPhone(e.target.value)}
+            />
+          </div>
           <div>
             <h3>Email</h3>
             <Inpt

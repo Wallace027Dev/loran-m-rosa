@@ -1,7 +1,8 @@
 import { useState } from "react";
 import { Btn } from "../components/Btn";
-import Google from "../images/Google.png";
-import Facebook from "../images/Facebook.png";
+import google from "../assets/google.png";
+import facebook from "../assets/facebook.png";
+import bakoads from "../assets/bakoads.png";
 import styled from "styled-components";
 import { Link, useNavigate } from "react-router-dom";
 
@@ -12,8 +13,8 @@ import {
 } from "firebase/auth";
 import { auth } from "../services/firebase";
 
-const Main = styled.main`
-  margin-top: 44.5rem;
+const Container = styled.main`
+  margin-top: 2rem;
   flex-direction: column;
   text-align: center;
 
@@ -25,11 +26,22 @@ const Main = styled.main`
     img {
       position: relative;
       left: -40%;
+      height: 2rem;
     }
   }
 
-  img {
-    height: 2rem;
+  .logo {
+    img {
+      width: 30rem;
+			margin-bottom: 15rem;
+    }
+    h2 {
+			position: absolute;
+      max-width: 60vw;
+			top: 30%;
+			color: var(--primary);
+			font-weight: 800;
+    }
   }
 `;
 
@@ -64,30 +76,39 @@ function Welcome() {
   }
 
   return (
-    <Main className="center">
+    <Container className="center">
       <div>
-        <Btn>
-          <Link
-            style={{ color: "var(--secondary)" }}
-            className="lnk"
-            to="/signup"
-          >
-            Inscreva-se
+        <div className="logo">
+          <img src={bakoads} alt="Bakoads Logo" />
+          <h2>
+            Crie a sua conta para anunciar com a <u>Bakoads</u> e mostre seus produtos
+            e serviços para mulhares de pessoas
+          </h2>
+        </div>
+        <div>
+          <Btn>
+            <Link
+              style={{ color: "var(--secondary)" }}
+              className="lnk"
+              to="/signup"
+            >
+              Inscreva-se
+            </Link>
+          </Btn>
+          <Btn onClick={handleGoogleSignIn} className="btnImg">
+            <img src={google} alt="Google Icon Button" />
+            <h3>Continue com Google</h3>
+          </Btn>
+          <Btn onClick={HandleFacebookSigniIn} className="btnImg">
+            <img src={facebook} alt="Google Icon Button" />
+            <h3>Continue com facebook</h3>
+          </Btn>
+          <Link className="lnk txt-center" to="/login">
+            Entrar com Email e senha
           </Link>
-        </Btn>
-        <Btn onClick={handleGoogleSignIn} className="btnImg">
-          <img src={Google} alt="Google Icon Button" />
-          <h3>Continue com Google</h3>
-        </Btn>
-        <Btn onClick={HandleFacebookSigniIn} className="btnImg">
-          <img src={Facebook} alt="Google Icon Button" />
-          <h3>Continue com facebook</h3>
-        </Btn>
-        <Link className="lnk txt-center" to="/login">
-          Login
-        </Link>
+        </div>
       </div>
-    </Main>
+    </Container>
   );
 }
 

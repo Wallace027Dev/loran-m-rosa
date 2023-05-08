@@ -1,12 +1,13 @@
 import { Link, useNavigate } from "react-router-dom";
-import { Btn } from "../components/Btn";
+import bakoads from "../assets/bakoads.png";
 import styled from "styled-components";
+import { Btn } from "../components/Btn";
 import { Inpt } from "../components/Inpt";
 import { useAuth } from "../context/authContext";
 import { useState } from "react";
 
 const Main = styled.main`
-  margin-top: 32rem;
+  margin-top: 2rem;
   flex-direction: column;
 
   form {
@@ -25,6 +26,20 @@ const Main = styled.main`
     justify-content: space-between;
     flex-direction: row;
     width: 30rem;
+  }
+
+  .logo {
+    img {
+      width: 30rem;
+      margin-bottom: 2.5rem;
+    }
+    h2 {
+      position: absolute;
+      max-width: 60vw;
+      top: 30%;
+      color: var(--primary);
+      font-weight: 800;
+		}
   }
 `;
 
@@ -59,6 +74,12 @@ function Login() {
   return (
     <Main className="center">
       <div>
+        <div className="logo center">
+          <img src={bakoads} alt="Bakoads Logo" />
+          <h2>
+            Administre a sua conta
+          </h2>
+        </div>
         <form onSubmit={handleSubmit}>
           <div>
             <h3>Email</h3>
