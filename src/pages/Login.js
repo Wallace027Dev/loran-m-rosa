@@ -7,7 +7,7 @@ import { useAuth } from "../context/authContext";
 import { useState } from "react";
 
 const Main = styled.main`
-  margin-top: 2rem;
+  margin-top: 0rem;
   flex-direction: column;
 
   form {

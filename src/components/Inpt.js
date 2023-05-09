@@ -12,7 +12,7 @@ export const Inpt = styled.input`
   display: flex;
   align-items: left;
   justify-content: center;
-  padding-left: 2.5rem;
+  padding: 0 2.5rem;
   ::placeholder {
     font-weight: 700;
     color: var(--tertiary);

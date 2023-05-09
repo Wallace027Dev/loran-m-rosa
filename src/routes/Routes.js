@@ -4,7 +4,7 @@ import Login from "../pages/Login";
 import Signup from "../pages/Signup";
 import Forgot from "../pages/Forgot";
 import Home from "../pages/Home";
-import { ProtectedRoute } from "../components/PrivateRoutes";
+import User from "../pages/User";
 
 function AppRoutes() {
   return (
@@ -13,12 +13,13 @@ function AppRoutes() {
       <Route path="/login" element={<Login />} />
       <Route path="/signup" element={<Signup />} />
       <Route path="/forgot" element={<Forgot />} />
+      <Route path="/user" element={<User />} />
       <Route
         path="/home"
         element={
-          <ProtectedRoute>
-            <Home />
-          </ProtectedRoute>
+          /* <ProtectedRoute> */
+          <Home />
+          /* </ProtectedRoute> */
         }
       />
     </Routes>
