@@ -1,4 +1,5 @@
 import { Link, useNavigate } from "react-router-dom";
+import bakoads from "../assets/bakoads.png";
 import { Btn } from "../components/Btn";
 import styled from "styled-components";
 import { Inpt } from "../components/Inpt";
@@ -6,9 +7,6 @@ import { useAuth } from "../context/authContext";
 import { useState } from "react";
 
 const Main = styled.main`
-  margin-top: 32rem;
-  flex-direction: column;
-
   form {
     display: flex;
     flex-direction: column;
@@ -18,6 +16,11 @@ const Main = styled.main`
   button {
     margin-top: 5rem;
   }
+
+  img {
+      width: 30rem;
+      margin-bottom: 2.5rem;
+    }
 
   .spc-around {
     display: flex;
@@ -56,6 +59,7 @@ function Forgot() {
       <div>
         <form onSubmit={handleSubmit}>
           <div>
+            <img src={bakoads} alt="Bakoads Logo" />
             <h3>Email</h3>
             <Inpt
               value={email}

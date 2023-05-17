@@ -5,9 +5,6 @@ import NewAdsForm from "../components/NewAdsForm";
 import { useState } from "react";
 
 const Main = styled.main`
-  margin-top: 1rem;
-  flex-direction: column;
-
   img {
     height: 10rem;
   }
@@ -36,9 +33,7 @@ function User() {
         <Btn onClick={() => setFormVisible(true)}>
           <h3>Criar novo Anúncio</h3>
         </Btn>
-
         {formVisible && <NewAdsForm onCreatedAd={handleCreateAd} />}
-
         <ul>
           {ads.map((ad) => (
             <li key={ad.id}>

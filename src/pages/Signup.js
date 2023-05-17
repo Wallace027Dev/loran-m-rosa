@@ -7,9 +7,6 @@ import { useAuth } from "../context/authContext";
 import styled from "styled-components";
 
 const Main = styled.main`
-  margin-top: 0rem;
-  flex-direction: column;
-
   form {
     display: flex;
     flex-direction: column;

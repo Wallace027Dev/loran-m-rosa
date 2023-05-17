@@ -4,10 +4,6 @@ import styled from "styled-components";
 import { Link } from "react-router-dom";
 
 const Container = styled.main`
-  margin-top: 0rem;
-  flex-direction: column;
-  text-align: center;
-
   .btnSign {
     color: var(--font-light);
   }

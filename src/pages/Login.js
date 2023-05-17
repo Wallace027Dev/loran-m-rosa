@@ -7,8 +7,6 @@ import { useAuth } from "../context/authContext";
 import { useState } from "react";
 
 const Main = styled.main`
-  margin-top: 0rem;
-  flex-direction: column;
 
   form {
     display: flex;
@@ -29,14 +27,13 @@ const Main = styled.main`
   }
 
   .logo {
+    flex-direction: column;
     img {
       width: 30rem;
       margin-bottom: 2.5rem;
     }
     h2 {
-      position: absolute;
       max-width: 60vw;
-      top: 30%;
       color: var(--primary);
       font-weight: 800;
 		}

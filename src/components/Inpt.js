@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components'
 
 export const Inpt = styled.input`
   background-color: var(--secondary);
@@ -13,8 +13,10 @@ export const Inpt = styled.input`
   align-items: left;
   justify-content: center;
   padding: 0 2.5rem;
+  font-size: 1.2rem;
+  outline: 0;
   ::placeholder {
     font-weight: 700;
     color: var(--tertiary);
   }
-`;
+`
