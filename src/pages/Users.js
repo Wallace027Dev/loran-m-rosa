@@ -1,25 +1,24 @@
-import styled from "styled-components";
-import Header from "../components/Header";
+import styled from 'styled-components'
+import Header from '../components/Header'
+import UsersList from '../components/UsersList'
 
 const Main = styled.main`
-
   form {
     display: flex;
     flex-direction: column;
     justify-content: left;
   }
-`;
+`
 
-function Users() {
+function Users () {
   return (
-    <Main className="center">
+    <Main className='center'>
       <div>
         <Header />
-      </div>
-      <div>
+        <UsersList />
       </div>
     </Main>
-  );
+  )
 }
 
 /*
@@ -34,4 +33,4 @@ fetch('http://localhost:3001/users')
 })
 */
 
-export default Users;
+export default Users
