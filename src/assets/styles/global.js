@@ -30,6 +30,7 @@ button {
 
 strong {
   font-weight: bold;
+  font-size: 2.4rem;
 }
 
 h1 {

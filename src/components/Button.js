@@ -11,15 +11,15 @@ export default styled.button`
   border: 2px solid var(--primary);
   color: var(--light-font);
   font-size: 1.2rem;
+  font-weight: bold;
   height: 4rem;
-  margin-bottom: 1.5rem;
+  margin: 2.4rem 0;
   max-width: 50rem;
   width: 100%;
   transition: 0.2s ease-in;
 
   &::placeholder {
     color: var(--tertiary);
-    font-weight: bold;
   }
 
   &:hover {
@@ -37,5 +37,3 @@ export default styled.button`
     cursor: default;
   }
 `
-
-//border: 2px solid var(--secondary);

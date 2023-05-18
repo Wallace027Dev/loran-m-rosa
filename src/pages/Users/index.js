@@ -1,92 +1,58 @@
+import { Link } from 'react-router-dom'
+
 import {
   Container,
   InputSearchContainer,
   Header,
   Card,
-  ListContainer,
-} from "./styles";
+  ListContainer
+} from './styles'
 
-import arrow from "../../assets/images/icons/arrow.svg";
-import edit from "../../assets/images/icons/edit.svg";
-import trash from "../../assets/images/icons/trash.svg";
+import arrow from '../../assets/images/icons/arrow.svg'
+import edit from '../../assets/images/icons/edit.svg'
+import trash from '../../assets/images/icons/trash.svg'
 
-function Users() {
+function Users () {
   return (
     <Container>
       <InputSearchContainer>
-        <input type="text" placeholder="Pesquise por nome..." />
+        <input type='text' placeholder='Pesquise por nome...' />
       </InputSearchContainer>
 
       <Header>
         <strong>3 usuários</strong>
-        <a href="/">Novo Usuário</a>
+        <Link to='../user/new'>Novo Usuário</Link>
       </Header>
 
       <ListContainer>
         <header>
-          <button type="button">
+          <button type='button'>
             <span>Nome</span>
-            <img src={arrow} alt="Arrow" />
+            <img src={arrow} alt='Arrow' />
           </button>
         </header>
       </ListContainer>
 
       <Card>
-        <div className="info">
-          <div className="user-name">
+        <div className='info'>
+          <div className='user-name'>
             <strong>Wallace Vieira</strong>
             <small>Instagram</small>
           </div>
           <span>wallaceofc@hotmail.com</span>
           <span>2799999-9999</span>
         </div>
-        <div className="actions">
-          <a href="/">
-            <img src={edit} alt="Edit" />
-          </a>
-          <button type="button">
-            <img src={trash} alt="Delete" />
-          </button>
-        </div>
-      </Card>
-      <Card>
-        <div className="info">
-          <div className="user-name">
-            <strong>Wallace Vieira</strong>
-            <small>Instagram</small>
-          </div>
-          <span>wallaceofc@hotmail.com</span>
-          <span>2799999-9999</span>
-        </div>
-        <div className="actions">
-          <a href="/">
-            <img src={edit} alt="Edit" />
-          </a>
-          <button type="button">
-            <img src={trash} alt="Delete" />
-          </button>
-        </div>
-      </Card>
-      <Card>
-        <div className="info">
-          <div className="user-name">
-            <strong>Wallace Vieira</strong>
-            <small>Instagram</small>
-          </div>
-          <span>wallaceofc@hotmail.com</span>
-          <span>2799999-9999</span>
-        </div>
-        <div className="actions">
-          <a href="/">
-            <img src={edit} alt="Edit" />
-          </a>
-          <button type="button">
-            <img src={trash} alt="Delete" />
+        <div className='actions'>
+          <Link to='..user/edit/123'>
+            <img src={edit} alt='Edit' />
+          </Link>
+          <button type='button'>
+            <img src={trash} alt='Delete' />
           </button>
         </div>
       </Card>
     </Container>
-  );
+  )
 }
 
 /*
@@ -101,4 +67,4 @@ fetch('http://localhost:3001/users')
 })
 */
 
-export default Users;
+export default Users

@@ -9,8 +9,7 @@ export default styled.input`
   font-size: 1.2rem;
   justify-content: center;
   height: 4rem;
-  margin-top: 1.2rem;
-  margin-bottom: 2.5rem;
+  margin-bottom: 1.2rem;
   max-width: 50rem;
   outline: 0;
   padding: 0 1.6rem;

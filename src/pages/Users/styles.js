@@ -1,7 +1,6 @@
 import styled from 'styled-components'
 
-export const Container = styled.div`
-`
+export const Container = styled.div``
 
 export const InputSearchContainer = styled.div`
   max-width: 100%;
@@ -11,7 +10,7 @@ export const InputSearchContainer = styled.div`
     background-color: var(--secondary);
     border: none;
     border-radius: 15px;
-    height: 3rem;
+    height: 4rem;
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
     outline: 0;
     padding: 0 1.6rem;
@@ -31,13 +30,13 @@ export const Header = styled.header`
 
   strong {
     color: var(--dark-font);
-    font-size: 1.5rem;
   }
 
   a {
     color: var(--primary);
     text-decoration: none;
     font-weight: bold;
+    font-size: 1.6rem;
     border: 2px solid var(--primary);
     padding: 0.5rem 1rem;
     border-radius: 4px;
@@ -89,7 +88,7 @@ export const Card = styled.div`
       align-items: center;
 
       strong {
-        font-size: 1rem;
+        font-size: 1.6rem;
       }
 
       small {
@@ -100,6 +99,7 @@ export const Card = styled.div`
         padding: 0.4rem;
         border-radius: 0.4rem;
         margin-left: 0.8rem;
+        font-size: 1.3rem;
       }
     }
 
@@ -107,6 +107,7 @@ export const Card = styled.div`
       display: block;
       font-size: 1rem;
       color: var(--tertiary);
+      font-size: 1.3rem;
     }
   }
 
