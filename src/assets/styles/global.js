@@ -10,7 +10,7 @@ export default createGlobalStyle`
 }
 
 body {
-  background-color: var(--light-font);
+  background-color: var(--bg);
   color: var(--dark-font);
 }
 
@@ -22,7 +22,7 @@ button {
   --primary: #9102d4;
   --secondary: #edebeb;
   --tertiary: #bfbfbf;
-  --light-font: #fff;
+  --bg: #fff;
   --dark-font: #303030;
 }
 

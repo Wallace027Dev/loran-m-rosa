@@ -44,7 +44,7 @@ export const Header = styled.header`
 
     &:hover {
       background: var(--primary);
-      color: var(--light-font);
+      color: var(--bg);
     }
   }
 `

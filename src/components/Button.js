@@ -9,7 +9,7 @@ export default styled.button`
   background: var(--primary);
   border-radius: 1.25rem;
   border: 2px solid var(--primary);
-  color: var(--light-font);
+  color: var(--bg);
   font-size: 1.2rem;
   font-weight: bold;
   height: 4rem;
@@ -23,7 +23,7 @@ export default styled.button`
   }
 
   &:hover {
-    background: var(--light-font);
+    background: var(--bg);
     color: var(--primary);
   }
 
