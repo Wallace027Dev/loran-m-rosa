@@ -10,7 +10,7 @@ export const Container = styled.main`
       max-width: 60vw;
       top: 30%;
       color: var(--primary);
-      font-weight: 800;
+      font-weight: bold;
     }
   }
 `

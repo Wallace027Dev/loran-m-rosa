@@ -1,6 +1,6 @@
 import { Container } from './styles'
 
-import bakoads from '../../assets/icons/bakoads.png'
+import bakoads from '../../assets/images/bakoads.png'
 
 export default function Header () {
   return (

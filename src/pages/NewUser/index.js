@@ -1,3 +1,5 @@
+import PageHeader from '../../components/PageHeader'
+
 export default function NewUser () {
-  return 'newuser'
+  return <PageHeader title='Editar Wallace Vieira' />
 }

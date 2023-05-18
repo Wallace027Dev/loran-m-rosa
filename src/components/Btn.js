@@ -5,7 +5,7 @@ export const Btn = styled.button`
   border-radius: 1.25rem;
   border: none;
   color: white;
-  font-weight: 700;
+  font-weight: bold;
   height: 4rem;
   margin-bottom: 1.5rem;
   width: 100%;

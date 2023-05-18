@@ -22,6 +22,6 @@ export const Container = styled.main`
   h2 {
     max-width: 60vw;
     color: var(--primary);
-    font-weight: 800;
+    font-weight: bold;
   }
 `

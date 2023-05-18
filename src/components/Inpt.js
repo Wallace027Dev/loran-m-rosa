@@ -17,7 +17,7 @@ export const Inpt = styled.input`
   font-size: 1.2rem;
   outline: 0;
   ::placeholder {
-    font-weight: 700;
+    font-weight: bold;
     color: var(--tertiary);
   }
 `

@@ -1,6 +1,5 @@
 import { createGlobalStyle } from 'styled-components'
 
-
 export default createGlobalStyle`
 
 @import url("https://fonts.googleapis.com/css2?family=Lato:wght@400;700;900&display=swap");
@@ -9,7 +8,7 @@ export default createGlobalStyle`
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: "Lato", sans-serif;
+  font-family: "Sora", sans-serif;
 }
 
 body {
@@ -33,7 +32,7 @@ button {
 
 
 strong {
-  font-weight: 800;
+  font-weight: bold;
 }
 
 h1 {
@@ -58,7 +57,7 @@ p {
 
 .lnk {
   font-size: 1.4rem;
-  font-weight: 900;
+  font-weight: bold;
   text-decoration: none;
   color: var(--primary);
 }

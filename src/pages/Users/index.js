@@ -7,9 +7,9 @@ import {
   ListContainer
 } from './styles'
 
-import arrow from '../../assets/icons/arrow.svg'
-import edit from '../../assets/icons/edit.svg'
-import trash from '../../assets/icons/trash.svg'
+import arrow from '../../assets/images/icons/arrow.svg'
+import edit from '../../assets/images/icons/edit.svg'
+import trash from '../../assets/images/icons/trash.svg'
 
 const Main = styled.main`
   form {

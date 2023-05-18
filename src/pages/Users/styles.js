@@ -37,7 +37,7 @@ export const Header = styled.header`
   a {
     color: var(--primary);
     text-decoration: none;
-    font-weight: 800;
+    font-weight: bold;
     border: 2px solid var(--primary);
     padding: 0.5rem 1rem;
     border-radius: 4px;
@@ -64,7 +64,7 @@ export const ListContainer = styled.div`
 
     span {
       margin-right: 0.5rem;
-      font-weight: 800;
+      font-weight: bold;
       color: var(--primary);
     }
   }
@@ -95,7 +95,7 @@ export const Card = styled.div`
       small {
         background: var(--tertiary);
         color: var(--primary);
-        font-weight: 800;
+        font-weight: bold;
         text-transform: uppercase;
         padding: 0.4rem;
         border-radius: 0.4rem;
