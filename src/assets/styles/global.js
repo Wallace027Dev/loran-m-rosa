@@ -1,18 +1,15 @@
-import { createGlobalStyle } from 'styled-components'
+import { createGlobalStyle } from "styled-components";
 
 export default createGlobalStyle`
-
-@import url("https://fonts.googleapis.com/css2?family=Lato:wght@400;700;900&display=swap");
-
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
   font-family: "Sora", sans-serif;
+	font-size: 62.5%;
 }
 
 body {
-  font-size: 62.5%;
   background-color: var(--light-font);
   color: var(--dark-font);
 }
@@ -43,20 +40,16 @@ h2 {
   font-size: 2.2rem;
 }
 
-h3 {
+p, u {
   font-size: 1.6rem;
 }
 
-h4 {
-  font-size: 1rem;
-}
-
-p {
-  font-size: 0.4rem;
+span {
+	font-size: 1rem;
 }
 
 .lnk {
-  font-size: 1.4rem;
+  font-size: 1.2rem;
   font-weight: bold;
   text-decoration: none;
   color: var(--primary);
@@ -67,4 +60,22 @@ p {
   justify-content: center;
   align-items: center;
 }
-`
+
+.btn {
+		cursor: pointer;
+    background: var(--primary);
+    border-radius: 1.25rem;
+    border: none;
+    height: 4rem;
+    margin-bottom: 1.5rem;
+    max-width: 50rem;
+    width: 100%;
+		font-weight: bold;
+		font-size: 1.2rem;
+		color: var(--light-font);
+		
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+`;

@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { Btn } from "./Btn";
 import { Inpt } from "./Inpt";
 import { v4 as uuid } from "uuid";
 
@@ -61,7 +60,7 @@ function NewAdsForm({ onCreatedAd }) {
         type="name"
         value={name}
         onChange={(e) => setName(e.target.value)}
-				placeholder="Digite o nome do anúncio..."
+        placeholder="Digite o nome do anúncio..."
       />
       <h3>Data</h3>
       <Inpt
@@ -112,9 +111,9 @@ function NewAdsForm({ onCreatedAd }) {
         onChange={(e) => handleNumericInputChange(e, setNewRecords)}
       />
 
-      <Btn type="submit">
+      <button className="btn" type="submit">
         <h3>Enviar dados</h3>
-      </Btn>
+      </button>
     </form>
   );
 }

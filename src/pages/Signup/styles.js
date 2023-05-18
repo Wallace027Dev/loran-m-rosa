@@ -1,14 +1,20 @@
 import styled from "styled-components";
 
 export const Container = styled.main`
+  margin-bottom: 1.2rem;
+	
   form {
     display: flex;
     flex-direction: column;
     justify-content: left;
-  }
-
-  button {
-    margin-top: 5rem;
+    label {
+      color: var(--primary);
+      font-weight: bold;
+      font-size: 1.6rem;
+    }
+    button {
+      margin-top: 5rem;
+    }
   }
 
   .spc-around {
