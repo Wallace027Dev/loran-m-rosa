@@ -1,8 +1,8 @@
-import styled from "styled-components";
+import styled from 'styled-components'
 
 export const Container = styled.main`
   margin-bottom: 1.2rem;
-	
+
   form {
     display: flex;
     flex-direction: column;
@@ -17,11 +17,10 @@ export const Container = styled.main`
     }
   }
 
-  .spc-around {
+  .spc-betwn {
     display: flex;
     align-items: center;
     justify-content: space-between;
     flex-direction: row;
-    width: 30rem;
   }
-`;
+`

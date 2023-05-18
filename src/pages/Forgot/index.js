@@ -1,59 +1,60 @@
-import { Link, useNavigate } from "react-router-dom";
-import { Inpt } from "../../components/Inpt";
-import { useAuth } from "../../context/authContext";
-import { useState } from "react";
-import { Container } from "./styles";
+import { Link, useNavigate } from 'react-router-dom'
+import { useAuth } from '../../context/authContext'
+import { useState } from 'react'
+import { Container } from './styles'
+import Input from '../../components/Input'
+import Button from '../../components/Button'
 
-function Forgot() {
-  const navigate = useNavigate();
-  const { resetPassword } = useAuth();
-  const [email, setEmail] = useState("");
-  const [loading, setLoading] = useState(false);
+function Forgot () {
+  const navigate = useNavigate()
+  const { resetPassword } = useAuth()
+  const [email, setEmail] = useState('')
+  const [loading, setLoading] = useState(false)
 
-  async function handleSubmit(e) {
-    e.preventDefault();
+  async function handleSubmit (e) {
+    e.preventDefault()
 
-    setLoading(true);
+    setLoading(true)
 
     try {
-      await resetPassword(email);
-      alert("Foi enviado um link para seu email");
-      navigate("/login");
+      await resetPassword(email)
+      alert('Foi enviado um link para seu email')
+      navigate('/login')
     } catch {
-      alert("ocorreu um erro");
+      alert('ocorreu um erro')
     }
 
-    setLoading(false);
+    setLoading(false)
   }
 
   return (
     <Container>
       <form onSubmit={handleSubmit}>
         <label>Email</label>
-        <Inpt
+        <Input
           value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          type="email"
-          placeholder="Insira seu email..."
+          onChange={e => setEmail(e.target.value)}
+          type='email'
+          placeholder='Insira seu email...'
         />
-        <button disable={loading} className="btn btnImg">
+        <Button disable={loading}>
           Recuperar senha
-        </button>
+        </Button>
       </form>
-      <div className="spc-around">
-        <span style={{ color: "var(--tertiary)" }}>Já tem uma conta?</span>
-        <Link className="lnk" to="/login">
+      <div className='spc-around'>
+        <span style={{ color: 'var(--tertiary)' }}>Já tem uma conta?</span>
+        <Link className='lnk' to='/login'>
           Logue-se
         </Link>
       </div>
-      <div className="spc-around">
-        <span style={{ color: "var(--tertiary)" }}>Não tem uma conta?</span>
-        <Link className="lnk" to="/signup">
+      <div className='spc-around'>
+        <span style={{ color: 'var(--tertiary)' }}>Não tem uma conta?</span>
+        <Link className='lnk' to='/signup'>
           Cadastre-se
         </Link>
       </div>
     </Container>
-  );
+  )
 }
 
-export default Forgot;
+export default Forgot

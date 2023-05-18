@@ -1,35 +1,36 @@
-import { Link, useNavigate } from "react-router-dom";
-import { Inpt } from "../../components/Inpt";
-import { Container } from "./styles";
-import { useAuth } from "../../context/authContext";
-import { useState } from "react";
+import { Link, useNavigate } from 'react-router-dom'
+import { Container } from './styles'
+import { useAuth } from '../../context/authContext'
+import { useState } from 'react'
+import Input from '../../components/Input'
+import Button from '../../components/Button'
 
-function Login() {
-  const { signIn } = useAuth();
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [loading, setLoading] = useState(false);
-  const navigate = useNavigate();
+function Login () {
+  const { signIn } = useAuth()
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
+  const [loading, setLoading] = useState(false)
+  const navigate = useNavigate()
 
-  async function handleSubmit(e) {
-    e.preventDefault();
+  async function handleSubmit (e) {
+    e.preventDefault()
 
-    setLoading(true);
+    setLoading(true)
 
     if (password.length < 6) {
-      alert("Sua senha deve ter no mínimo 6 caracteres!");
-      return;
+      alert('Sua senha deve ter no mínimo 6 caracteres!')
+      return
     }
 
     try {
-      await signIn(email, password);
-      navigate("/home");
+      await signIn(email, password)
+      navigate('/home')
     } catch (error) {
-      console.log(error);
-      alert("Ocorreu um erro ao tentar efetuar o login");
+      console.log(error)
+      alert('Ocorreu um erro ao tentar efetuar o login')
     }
 
-    setLoading(false);
+    setLoading(false)
   }
 
   return (
@@ -37,36 +38,36 @@ function Login() {
       <p>Administre a sua conta</p>
       <form onSubmit={handleSubmit}>
         <label>Email</label>
-        <Inpt
+        <Input
           value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          type="email"
-          placeholder="Insira seu email..."
+          onChange={e => setEmail(e.target.value)}
+          type='email'
+          placeholder='Insira seu email...'
         />
-        <div className="spc-around">
+        <div className='spc-around'>
           <label>Senha</label>
-          <Link className="lnk" to="/forgot">
+          <Link className='lnk' to='/forgot'>
             Esqueceu sua senha?
           </Link>
         </div>
-        <Inpt
+        <Input
           value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          type="password"
-          placeholder="Insira sua senha..."
+          onChange={e => setPassword(e.target.value)}
+          type='password'
+          placeholder='Insira sua senha...'
         />
-        <button disable={loading} className="btn btnImg">
+        <Button disable={loading}>
           Login
-        </button>
+        </Button>
       </form>
-      <div className="spc-around">
-        <span style={{ color: "var(--tertiary)" }}>Não tem uma conta?</span>
-        <Link className="lnk" to="/signup">
+      <div className='spc-around'>
+        <span style={{ color: 'var(--tertiary)' }}>Não tem uma conta?</span>
+        <Link className='lnk' to='/signup'>
           Inscreva-se
         </Link>
       </div>
     </Container>
-  );
+  )
 }
 
-export default Login;
+export default Login

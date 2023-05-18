@@ -1,4 +1,4 @@
-import { createGlobalStyle } from "styled-components";
+import { createGlobalStyle } from 'styled-components'
 
 export default createGlobalStyle`
 * {
@@ -60,22 +60,4 @@ span {
   justify-content: center;
   align-items: center;
 }
-
-.btn {
-		cursor: pointer;
-    background: var(--primary);
-    border-radius: 1.25rem;
-    border: none;
-    height: 4rem;
-    margin-bottom: 1.5rem;
-    max-width: 50rem;
-    width: 100%;
-		font-weight: bold;
-		font-size: 1.2rem;
-		color: var(--light-font);
-		
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-`;
+`

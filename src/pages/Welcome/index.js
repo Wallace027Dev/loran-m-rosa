@@ -1,7 +1,8 @@
-import { Link } from "react-router-dom";
-import { Container, Buttons } from "./style";
+import { Link } from 'react-router-dom'
+import { Container, Buttons } from './style'
+import Button from '../../components/Button'
 
-function Welcome() {
+function Welcome () {
   return (
     <Container>
       <p>
@@ -9,15 +10,15 @@ function Welcome() {
         produtos e serviços para milhares de pessoas
       </p>
       <Buttons>
-        <Link className="lnk" to="/signup">
-          <button className="btn">Inscreva-se</button>
+        <Link className='lnk' to='/signup'>
+          <Button>Inscreva-se</Button>
         </Link>
-        <Link className="lnk txt-center" to="/login">
+        <Link className='lnk txt-center' to='/login'>
           Entrar com Email e senha
         </Link>
       </Buttons>
     </Container>
-  );
+  )
 }
 
-export default Welcome;
+export default Welcome

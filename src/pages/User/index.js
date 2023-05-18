@@ -1,24 +1,25 @@
-import NewAdsForm from "../../components/NewAdsForm";
-import { Container } from "./styles";
-import { useState } from "react";
+import Button from '../../components/Button'
+import NewAdsForm from '../../components/NewAdsForm'
+import { Container } from './styles'
+import { useState } from 'react'
 
-function User() {
-  const [ads, setAds] = useState([]);
-  const [formVisible, setFormVisible] = useState(false);
+function User () {
+  const [ads, setAds] = useState([])
+  const [formVisible, setFormVisible] = useState(false)
 
-  const handleCreateAd = (newAd) => {
-    setAds((prevAds) => [...prevAds, newAd]);
-  };
+  const handleCreateAd = newAd => {
+    setAds(prevAds => [...prevAds, newAd])
+  }
 
   return (
-    <Container className="center">
+    <Container className='center'>
       <div>
-        <button className="btn" onClick={() => setFormVisible(true)}>
+        <Button onClick={() => setFormVisible(true)}>
           <h3>Criar novo Anúncio</h3>
-        </button>
+        </Button>
         {formVisible && <NewAdsForm onCreatedAd={handleCreateAd} />}
         <ul>
-          {ads.map((ad) => (
+          {ads.map(ad => (
             <li key={ad.id}>
               <h2>{ad.name}</h2>
               <h3>date: {ad.date}</h3>
@@ -34,7 +35,7 @@ function User() {
         </ul>
       </div>
     </Container>
-  );
+  )
 }
 
-export default User;
+export default User
