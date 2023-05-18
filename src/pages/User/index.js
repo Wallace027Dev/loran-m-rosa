@@ -1,41 +1,25 @@
-import styled from "styled-components";
-import icon from "../assets/icon.png";
-import { Btn } from "../components/Btn";
-import NewAdsForm from "../components/NewAdsForm";
-import { useState } from "react";
+import { Container } from './styles'
+import { Btn } from '../../components/Btn'
+import NewAdsForm from '../../components/NewAdsForm'
+import { useState } from 'react'
 
-const Main = styled.main`
-  img {
-    height: 10rem;
+function User () {
+  const [ads, setAds] = useState([])
+  const [formVisible, setFormVisible] = useState(false)
+
+  const handleCreateAd = newAd => {
+    setAds(prevAds => [...prevAds, newAd])
   }
-
-  form {
-    display: flex;
-    flex-direction: column;
-    justify-content: left;
-  }
-`;
-
-function User() {
-  const [ads, setAds] = useState([]);
-  const [formVisible, setFormVisible] = useState(false);
-
-  const handleCreateAd = (newAd) => {
-    setAds((prevAds) => [...prevAds, newAd]);
-  };
 
   return (
-    <Main className="center">
-      <div>
-        <img src={icon} alt="Bakoads Icon" />
-      </div>
+    <Container className='center'>
       <div>
         <Btn onClick={() => setFormVisible(true)}>
           <h3>Criar novo Anúncio</h3>
         </Btn>
         {formVisible && <NewAdsForm onCreatedAd={handleCreateAd} />}
         <ul>
-          {ads.map((ad) => (
+          {ads.map(ad => (
             <li key={ad.id}>
               <h2>{ad.name}</h2>
               <h3>date: {ad.date}</h3>
@@ -50,8 +34,8 @@ function User() {
           ))}
         </ul>
       </div>
-    </Main>
-  );
+    </Container>
+  )
 }
 
-export default User;
+export default User

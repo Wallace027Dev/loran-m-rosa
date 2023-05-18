@@ -8,7 +8,8 @@ export const Inpt = styled.input`
   border: none;
   color: var(--tertiary);
   height: 4rem;
-  width: 30rem;
+  width: 100%;
+  max-width: 50rem;
   display: flex;
   align-items: left;
   justify-content: center;
