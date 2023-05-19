@@ -4,6 +4,7 @@ import { useAuth } from '../../context/authContext'
 import { useState } from 'react'
 import Input from '../../components/Input'
 import Button from '../../components/Button'
+import Modal from '../../components/Modal'
 
 function Login () {
   const { signIn } = useAuth()
@@ -24,7 +25,7 @@ function Login () {
 
     try {
       await signIn(email, password)
-      navigate('/home')
+      navigate('/')
     } catch (error) {
       console.log(error)
       alert('Ocorreu um erro ao tentar efetuar o login')
@@ -35,6 +36,7 @@ function Login () {
 
   return (
     <Container>
+      <Modal danger />
       <p>Administre a sua conta</p>
       <form onSubmit={handleSubmit}>
         <label>Email</label>
@@ -56,9 +58,7 @@ function Login () {
           type='password'
           placeholder='Insira sua senha...'
         />
-        <Button disable={loading}>
-          Login
-        </Button>
+        <Button disable={loading}>Login</Button>
       </form>
       <div className='spc-around'>
         <span style={{ color: 'var(--tertiary)' }}>Não tem uma conta?</span>

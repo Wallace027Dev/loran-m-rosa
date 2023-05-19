@@ -11,7 +11,7 @@ export default createGlobalStyle`
 
 body {
   background-color: var(--bg);
-  color: var(--dark-font);
+  color: var(--font);
 }
 
 button {
@@ -19,11 +19,15 @@ button {
 }
 
 :root {
+  --bg: #fff;
+  --font: #303030;
+
   --primary: #9102d4;
   --secondary: #edebeb;
   --tertiary: #bfbfbf;
-  --bg: #fff;
-  --dark-font: #303030;
+
+  --danger: #f63131;
+  --danger-light: #f97171;
 }
 
 

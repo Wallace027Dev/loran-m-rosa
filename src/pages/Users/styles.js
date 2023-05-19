@@ -15,7 +15,7 @@ export const InputSearchContainer = styled.div`
     outline: 0;
     padding: 0 1.6rem;
     font-size: 1.2rem;
-    color: var(--dark-font);
+    color: var(--font);
     &::placeholder {
       color: var(--tertiary);
     }
@@ -29,7 +29,7 @@ export const Header = styled.header`
   margin-top: 3.2rem;
 
   strong {
-    color: var(--dark-font);
+    color: var(--font);
   }
 
   a {

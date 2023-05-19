@@ -1,4 +1,4 @@
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 
 export default styled.button`
   cursor: pointer;
@@ -36,4 +36,22 @@ export default styled.button`
     background: var(--tertiary);
     cursor: default;
   }
+
+  ${({ danger }) =>
+    danger &&
+    css`
+      background: var(--danger);
+      border: 2px solid var(--danger);
+
+      &:hover {
+        background: var(--danger-light);
+        border: 2px solid var(--danger-light);
+        color: var(--tertiary);
+      }
+
+      &:active {
+        background: var(--bg);
+        color: var(--font);
+      }
+    `}
 `
