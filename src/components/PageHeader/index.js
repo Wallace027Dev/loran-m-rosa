@@ -8,7 +8,7 @@ import arrow from '../../assets/images/icons/arrow.svg'
 export default function PageHeader ({ title }) {
   return (
     <Container>
-      <Link to='/'>
+      <Link to='../../users'>
         <img src={arrow} alt='Back Arrow' />
         <span>Voltar</span>
       </Link>
@@ -17,7 +17,6 @@ export default function PageHeader ({ title }) {
   )
 }
 
-
 PageHeader.propTypes = {
-  title: PropTypes.string.isRequired,
+  title: PropTypes.string.isRequired
 }

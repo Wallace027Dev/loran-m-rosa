@@ -44,7 +44,7 @@ function Users () {
           <span>2799999-9999</span>
         </div>
         <div className='actions'>
-          <Link to='..user/edit/123'>
+          <Link to='../../user/edit/123'>
             <img src={edit} alt='Edit' />
           </Link>
           <button type='button'>
