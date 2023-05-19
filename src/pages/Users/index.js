@@ -16,7 +16,7 @@ import Modal from '../../components/Modal'
 function Users () {
   return (
     <Container>
-      <Modal />
+      <Modal danger />
 
       <InputSearchContainer>
         <input type='text' placeholder='Pesquise por nome...' />
