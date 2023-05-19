@@ -4,7 +4,6 @@ import { useAuth } from '../../context/authContext'
 import { useState } from 'react'
 import Input from '../../components/Input'
 import Button from '../../components/Button'
-import Modal from '../../components/Modal'
 
 function Login () {
   const { signIn } = useAuth()
@@ -36,11 +35,11 @@ function Login () {
 
   return (
     <Container>
-      <Modal danger />
       <p>Administre a sua conta</p>
       <form onSubmit={handleSubmit}>
         <label>Email</label>
         <Input
+          style={{ marginBottom: 12 }}
           value={email}
           onChange={e => setEmail(e.target.value)}
           type='email'

@@ -58,6 +58,7 @@ function Subscribe () {
       <form onSubmit={handleSubmit}>
         <label>Marca</label>
         <Input
+          style={{ marginBottom: 12 }}
           type='name'
           value={brand}
           placeholder='Insira o nome de sua marca...'
@@ -65,6 +66,7 @@ function Subscribe () {
         />
         <label>Whatsapp</label>
         <Input
+          style={{ marginBottom: 12 }}
           type='number'
           value={phone}
           placeholder='Insira seu número de telefone...'
@@ -72,6 +74,7 @@ function Subscribe () {
         />
         <label>Email</label>
         <Input
+          style={{ marginBottom: 12 }}
           type='email'
           value={email}
           placeholder='Insira seu email...'
@@ -79,6 +82,7 @@ function Subscribe () {
         />
         <label>Senha</label>
         <Input
+          style={{ marginBottom: 12 }}
           type='password'
           value={password}
           placeholder='Insira sua senha...'

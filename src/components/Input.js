@@ -1,4 +1,4 @@
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 
 export default styled.input`
   background-color: var(--secondary);
@@ -9,7 +9,6 @@ export default styled.input`
   font-size: 1.2rem;
   justify-content: center;
   height: 4rem;
-  margin-bottom: 1.2rem;
   max-width: 50rem;
   outline: 0;
   padding: 0 1.6rem;
@@ -24,4 +23,11 @@ export default styled.input`
     color: var(--tertiary);
     font-weight: bold;
   }
+
+  ${({ error }) =>
+    error &&
+    css`
+      color: var(--danger);
+      border-color: var(--danger) !important;
+    `}
 `

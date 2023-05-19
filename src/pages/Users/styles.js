@@ -6,22 +6,6 @@ export const Container = styled.div`
 
 export const InputSearchContainer = styled.div`
   max-width: 100%;
-
-  input {
-    width: 100%;
-    background-color: var(--secondary);
-    border: none;
-    border-radius: 15px;
-    height: 4rem;
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
-    outline: 0;
-    padding: 0 1.6rem;
-    font-size: 1.2rem;
-    color: var(--font);
-    &::placeholder {
-      color: var(--tertiary);
-    }
-  }
 `
 
 export const Header = styled.header`
