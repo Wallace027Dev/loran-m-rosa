@@ -17,6 +17,7 @@ export default styled.button`
   max-width: 50rem;
   width: 100%;
   transition: 0.2s ease-in;
+  appearance: none;
 
   &::placeholder {
     color: var(--tertiary);

@@ -14,6 +14,7 @@ export default styled.input`
   padding: 0 1.6rem;
   width: 100%;
   transition: border-color 0.2s ease-in;
+  appearance: none;
 
   &:focus {
     border: 2px solid var(--primary);

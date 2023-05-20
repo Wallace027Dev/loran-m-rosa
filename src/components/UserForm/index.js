@@ -80,6 +80,7 @@ export default function UserForm ({ buttonLabel }) {
 
       <FormGroup>
         <Select value={category} onChange={e => setCategory(e.target.value)}>
+          <option value=''>Categoria</option>
           <option value='instagram'>Instagram</option>
           <option value='Facebook'>Facebook</option>
           <option value='Facebook e Instagram'>Facebook e Instagram</option>
