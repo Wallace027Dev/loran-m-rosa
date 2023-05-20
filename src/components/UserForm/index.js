@@ -1,4 +1,7 @@
 import PropTypes from 'prop-types'
+import { useState } from 'react'
+
+import isEmailValid from '../../utils/isEmailValid'
 
 import { Form } from './styles'
 
@@ -6,7 +9,6 @@ import FormGroup from '../FormGroup'
 import Input from '../Input'
 import Select from '../Select'
 import Button from '../Button'
-import { useState } from 'react'
 
 export default function UserForm ({ buttonLabel }) {
   const [name, setName] = useState('')
@@ -14,6 +16,43 @@ export default function UserForm ({ buttonLabel }) {
   const [phone, setPhone] = useState('')
   const [category, setCategory] = useState('')
   const [errors, setErrors] = useState([])
+
+  function handleNameChange (e) {
+    setName(e.target.value)
+    // Checks if the user has typed something in the 'name' field
+    if (!e.target.value) {
+      setErrors(prevState => [
+        ...prevState,
+        { field: 'name', message: 'Nome é obrigatório.' }
+      ])
+    } else {
+      setErrors(prevState => prevState.filter(error => error.field !== 'name'))
+    }
+  }
+
+  function handleEmailChange (e) {
+    setEmail(e.target.value)
+    // Checks if the user has typed something in the
+    // 'email' field and validates using regex
+    if (e.target.value && !isEmailValid(e.target.value)) {
+      // Checks if there is already an object with error
+      // 'email.field' = 'email' in the 'errors' object
+      const errorAlreadyExists = errors.find(error => error.field === 'email')
+      // if exists, execution stops
+      if (errorAlreadyExists) {
+        return
+      }
+      // otherwise, insert this object
+      setErrors(prevState => [
+        ...prevState,
+        { field: 'email', message: 'E-mail inválido.' }
+      ])
+    } else {
+      setErrors(prevState => prevState.filter(error => error.field !== 'email'))
+    }
+  }
+
+  console.log(errors)
 
   function handleSubmit (e) {
     e.preventDefault()
@@ -26,21 +65,6 @@ export default function UserForm ({ buttonLabel }) {
     })
   }
 
-  function handleNameChange (e) {
-    setName(e.target.value)
-
-    if (!e.target.value) {
-      setErrors(prevState => [
-        ...prevState,
-        { field: 'name', message: 'Nome é obrgatório.' }
-      ])
-    } else {
-      setErrors(prevState => prevState.filter(error => error.field !== 'name'))
-    }
-  }
-
-  console.log(errors)
-
   return (
     <Form onSubmit={handleSubmit}>
       <FormGroup>
@@ -48,11 +72,7 @@ export default function UserForm ({ buttonLabel }) {
       </FormGroup>
 
       <FormGroup>
-        <Input
-          value={email}
-          placeholder='Email'
-          onChange={e => setEmail(e.target.value)}
-        />
+        <Input value={email} placeholder='Email' onChange={handleEmailChange} />
       </FormGroup>
 
       <FormGroup>
