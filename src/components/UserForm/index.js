@@ -13,6 +13,7 @@ export default function UserForm ({ buttonLabel }) {
   const [email, setEmail] = useState('')
   const [phone, setPhone] = useState('')
   const [category, setCategory] = useState('')
+  const [errors, setErrors] = useState([])
 
   function handleSubmit (e) {
     e.preventDefault()
@@ -25,14 +26,25 @@ export default function UserForm ({ buttonLabel }) {
     })
   }
 
+  function handleNameChange (e) {
+    setName(e.target.value)
+
+    if (!e.target.value) {
+      setErrors(prevState => [
+        ...prevState,
+        { field: 'name', message: 'Nome é obrgatório.' }
+      ])
+    } else {
+      setErrors(prevState => prevState.filter(error => error.field !== 'name'))
+    }
+  }
+
+  console.log(errors)
+
   return (
     <Form onSubmit={handleSubmit}>
       <FormGroup>
-        <Input
-          value={name}
-          placeholder='Nome'
-          onChange={e => setName(e.target.value)}
-        />
+        <Input value={name} placeholder='Nome' onChange={handleNameChange} />
       </FormGroup>
 
       <FormGroup>
