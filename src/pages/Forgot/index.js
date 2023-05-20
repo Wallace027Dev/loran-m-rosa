@@ -29,17 +29,15 @@ function Forgot () {
 
   return (
     <Container>
-      <form onSubmit={handleSubmit}>
+      <form noValidate onSubmit={handleSubmit}>
         <label>Email</label>
         <Input
-          value={email}
-          onChange={e => setEmail(e.target.value)}
           type='email'
+          value={email}
           placeholder='Insira seu email...'
+          onChange={e => setEmail(e.target.value)}
         />
-        <Button disable={loading}>
-          Recuperar senha
-        </Button>
+        <Button disable={loading}>Recuperar senha</Button>
       </form>
       <div className='spc-around'>
         <span style={{ color: 'var(--tertiary)' }}>Já tem uma conta?</span>

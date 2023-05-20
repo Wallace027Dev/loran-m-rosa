@@ -41,37 +41,33 @@ export default function UserForm ({ buttonLabel }) {
 
   function handleSubmit (e) {
     e.preventDefault()
-
-    console.log({
-      name,
-      email,
-      phone,
-      category
-    })
   }
 
   return (
-    <Form onSubmit={handleSubmit}>
+    <Form noValidate onSubmit={handleSubmit}>
       <FormGroup error={getErrorMessageByFieldName('name')}>
         <Input
-          error={getErrorMessageByFieldName('name')}
+          type='text'
           value={name}
           placeholder='Nome'
           onChange={handleNameChange}
+          error={getErrorMessageByFieldName('name')}
         />
       </FormGroup>
 
       <FormGroup error={getErrorMessageByFieldName('email')}>
         <Input
-          error={getErrorMessageByFieldName('email')}
+          type='email'
           value={email}
           placeholder='Email'
           onChange={handleEmailChange}
+          error={getErrorMessageByFieldName('email')}
         />
       </FormGroup>
 
       <FormGroup>
         <Input
+          type='tel'
           value={phone}
           placeholder='Telefone'
           onChange={e => setPhone(e.target.value)}

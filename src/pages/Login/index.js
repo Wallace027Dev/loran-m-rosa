@@ -36,14 +36,14 @@ function Login () {
   return (
     <Container>
       <p>Administre a sua conta</p>
-      <form onSubmit={handleSubmit}>
+      <form noValidate onSubmit={handleSubmit}>
         <label>Email</label>
         <Input
-          style={{ marginBottom: 12 }}
-          value={email}
-          onChange={e => setEmail(e.target.value)}
           type='email'
+          value={email}
           placeholder='Insira seu email...'
+          onChange={e => setEmail(e.target.value)}
+          style={{ marginBottom: 12 }}
         />
         <div className='spc-around'>
           <label>Senha</label>
@@ -52,10 +52,10 @@ function Login () {
           </Link>
         </div>
         <Input
-          value={password}
-          onChange={e => setPassword(e.target.value)}
           type='password'
+          value={password}
           placeholder='Insira sua senha...'
+          onChange={e => setPassword(e.target.value)}
         />
         <Button disable={loading}>Login</Button>
       </form>

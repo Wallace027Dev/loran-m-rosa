@@ -55,7 +55,7 @@ function NewAdsForm ({ onCreatedAd }) {
   return (
     // form that will be rendered on the user page when clicking
     //  the 'criar novo anuncio' button
-    <form onSubmit={handleSubmit}>
+    <form noValidate onSubmit={handleSubmit}>
       <h3>Nome</h3>
       <Input
         type='name'
