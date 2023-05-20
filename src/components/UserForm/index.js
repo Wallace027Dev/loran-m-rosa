@@ -52,8 +52,6 @@ export default function UserForm ({ buttonLabel }) {
     }
   }
 
-  console.log(errors)
-
   function handleSubmit (e) {
     e.preventDefault()
 
@@ -65,14 +63,32 @@ export default function UserForm ({ buttonLabel }) {
     })
   }
 
+  function getErrorMessageByFieldName (fieldName) {
+    // look in the error array and look for an object with
+    // field equal to field using THIS function
+    return errors.find(error => error.field === fieldName)?.message
+    //the '?', checks if the value exists and is valid,
+    // and if so, returns the 'message'
+  }
+
   return (
     <Form onSubmit={handleSubmit}>
-      <FormGroup>
-        <Input value={name} placeholder='Nome' onChange={handleNameChange} />
+      <FormGroup error={getErrorMessageByFieldName('name')}>
+        <Input
+          error={getErrorMessageByFieldName('name')}
+          value={name}
+          placeholder='Nome'
+          onChange={handleNameChange}
+        />
       </FormGroup>
 
-      <FormGroup>
-        <Input value={email} placeholder='Email' onChange={handleEmailChange} />
+      <FormGroup error={getErrorMessageByFieldName('email')}>
+        <Input
+          error={getErrorMessageByFieldName('email')}
+          value={email}
+          placeholder='Email'
+          onChange={handleEmailChange}
+        />
       </FormGroup>
 
       <FormGroup>
