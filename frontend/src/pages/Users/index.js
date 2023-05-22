@@ -5,7 +5,7 @@ import {
   InputSearchContainer,
   Header,
   Card,
-  ListContainer
+  ListHeader
 } from './styles'
 
 import arrow from '../../assets/images/icons/arrow.svg'
@@ -16,9 +16,10 @@ import { useEffect, useState } from 'react'
 
 export default function Users () {
   const [users, setUsers] = useState([]);
+  const [orderBy, setOrderBy] = useState('asc');
 
   useEffect(() => {
-    fetch('http://localhost:3001/users')
+    fetch(`http://localhost:3001/users?orderBy=${orderBy}`)
       .then(async (response) => {
         const json = await response.json();
         setUsers(json)
@@ -26,7 +27,13 @@ export default function Users () {
     .catch((error) => {
       console.log('ERROR:', error)
     })
-  }, [])
+  }, [orderBy])
+
+  function handleToggleOrderBy() {
+    setOrderBy(
+      (prevState) => (prevState === 'asc' ? 'desc' : 'asc'),
+    );
+  }
 
   return (
     <Container>
@@ -42,18 +49,14 @@ export default function Users () {
         <Link to='../user/new'>Novo Usuário</Link>
       </Header>
 
-      <ListContainer>
-        <header>
-          <button type='button'>
+      <ListHeader orderBy={orderBy}>
+          <button type='button' onClick={handleToggleOrderBy}>
             <span>Nome</span>
             <img src={arrow} alt='Arrow' />
           </button>
-        </header>
-      </ListContainer>
+      </ListHeader>
 
-    {
-      users.map((users) =>(
-        <Card key={users.id}>
+    {users.map((users) =>(<Card key={users.id}>
         <div className='info'>
           <div className='user-name'>
             <strong>{users.name}</strong>
@@ -70,9 +73,8 @@ export default function Users () {
             <img src={trash} alt='Delete' />
           </button>
         </div>
-      </Card>
-      ))
-    }
+      </Card>))}
+
     </Container>
   )
 }
