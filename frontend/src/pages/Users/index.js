@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom'
+import { useEffect, useState } from 'react'
 
 import {
   Container,
@@ -11,12 +12,17 @@ import {
 import arrow from '../../assets/images/icons/arrow.svg'
 import edit from '../../assets/images/icons/edit.svg'
 import trash from '../../assets/images/icons/trash.svg'
+
 import Input from '../../components/Input'
-import { useEffect, useState } from 'react'
 
 export default function Users () {
   const [users, setUsers] = useState([]);
   const [orderBy, setOrderBy] = useState('asc');
+  const [searchTerm, setSearchTerm] = useState('');
+
+  const filteredUsers = users.filter((users) => (
+    users.name.toLowerCase().includes(searchTerm.toLowerCase())
+  ))
 
   useEffect(() => {
     fetch(`http://localhost:3001/users?orderBy=${orderBy}`)
@@ -35,28 +41,37 @@ export default function Users () {
     );
   }
 
+  function handleChangeSearchTerm(e) {
+    setSearchTerm(e.target.value)
+  }
+
   return (
     <Container>
       <InputSearchContainer>
-        <Input type='text' placeholder='Pesquise por nome...' />
+        <Input
+        type='text' 
+        value={searchTerm}
+        onChange={handleChangeSearchTerm} 
+        placeholder='Pesquise por nome...' 
+        />
       </InputSearchContainer>
 
       <Header>
         <strong>
-          {users.length} 
-          {users.length === 1 ? ' usuário' : ' usuários'}
+          {filteredUsers.length} 
+          {filteredUsers.length === 1 ? ' usuário' : ' usuários'}
           </strong>
         <Link to='../user/new'>Novo Usuário</Link>
       </Header>
 
       <ListHeader orderBy={orderBy}>
-          <button type='button' onClick={handleToggleOrderBy}>
+          {filteredUsers.length > 0 && <button type='button' onClick={handleToggleOrderBy}>
             <span>Nome</span>
             <img src={arrow} alt='Arrow' />
-          </button>
+          </button>} 
       </ListHeader>
 
-    {users.map((users) =>(<Card key={users.id}>
+    {filteredUsers.map((users) =>(<Card key={users.id}>
         <div className='info'>
           <div className='user-name'>
             <strong>{users.name}</strong>
