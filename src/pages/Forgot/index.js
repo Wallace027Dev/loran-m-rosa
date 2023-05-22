@@ -39,13 +39,13 @@ function Forgot () {
         />
         <Button disable={loading}>Recuperar senha</Button>
       </form>
-      <div className='spc-around'>
+      <div className='spc-betwn'>
         <span style={{ color: 'var(--tertiary)' }}>Já tem uma conta?</span>
         <Link className='lnk' to='/login'>
           Logue-se
         </Link>
       </div>
-      <div className='spc-around'>
+      <div className='spc-betwn'>
         <span style={{ color: 'var(--tertiary)' }}>Não tem uma conta?</span>
         <Link className='lnk' to='/signup'>
           Cadastre-se

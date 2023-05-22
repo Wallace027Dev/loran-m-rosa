@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components'
 
 export const Container = styled.main`
   form {
@@ -13,17 +13,19 @@ export const Container = styled.main`
       font-size: 1.6rem;
     }
   }
+  span {
+    color: var(--tertiary);
+  }
 
   button {
     margin-top: 5rem;
   }
 
-  .spc-around {
+  .spc-betwn {
+    margin-top: 0.8rem;
     display: flex;
     align-items: center;
     justify-content: space-between;
     flex-direction: row;
-    width: 30rem;
-    margin-bottom: 1rem;
   }
-`;
+`

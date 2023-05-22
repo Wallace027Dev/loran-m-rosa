@@ -24,11 +24,11 @@ export const Container = styled.main`
     margin-top: 4.5rem;
   }
 
-  .spc-around {
+  .spc-betwn {
+    margin-top: 0.8rem;
     display: flex;
     align-items: center;
     justify-content: space-between;
     flex-direction: row;
-    width: 30rem;
   }
 `

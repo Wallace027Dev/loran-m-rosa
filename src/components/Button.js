@@ -13,7 +13,6 @@ export default styled.button`
   font-size: 1.2rem;
   font-weight: bold;
   height: 4rem;
-  margin: 2.4rem 0;
   max-width: 50rem;
   width: 100%;
   transition: 0.2s ease-in;

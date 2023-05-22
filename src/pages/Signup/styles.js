@@ -18,6 +18,7 @@ export const Container = styled.main`
   }
 
   .spc-betwn {
+    margin-top: 0.8rem;
     display: flex;
     align-items: center;
     justify-content: space-between;

@@ -80,32 +80,37 @@ function Subscribe () {
 
   function handleConfirmPasswordChange (e) {
     setConfirmPassword(e.target.value)
-    if (password !== confirmPassword) {
-      setError({
-        field: 'confirmPassword',
-        message: 'Sua confirmação não está batendo com sua senha.'
-      })
-      return
-    } else {
-      removeError('name')
-    }
   }
 
   async function handleSubmit (e) {
     e.preventDefault()
     setLoading(true)
+
+    if (password !== confirmPassword) {
+      setError({
+        field: 'confirmPassword',
+        message: 'Sua confirmação não está batendo com sua senha.'
+      })
+
+      setLoading(false)
+      return
+    }
+
     try {
       await signUp(email, password)
       navigate('/login')
     } catch (error) {
-      alert('Ocorreu um erro ao tentar criar o usuário')
+      setError({
+        field: 'button',
+        message: 'Ocorreu um erro ao tentar criar o usuário.'
+      })
     }
     setLoading(false)
   }
 
   return (
     <Container>
-      <form onSubmit={handleSubmit}>
+      <form noValidate onSubmit={handleSubmit}>
         <label>Marca</label>
         <FormGroup error={getErrorMessageByFieldName('name')}>
           <Input
@@ -151,17 +156,19 @@ function Subscribe () {
         </FormGroup>
 
         <label style={{ marginTop: 12 }}>Confirme sua Senha</label>
-        <FormGroup error={getErrorMessageByFieldName('ConfirmPassword')}>
+        <FormGroup error={getErrorMessageByFieldName('confirmPassword')}>
           <Input
             type='password'
             value={confirmPassword}
             placeholder='Insira sua senha novamente...'
             onChange={handleConfirmPasswordChange}
-            error={getErrorMessageByFieldName('ConfirmPassword')}
+            error={getErrorMessageByFieldName('confirmPassword')}
           />
         </FormGroup>
 
-        <Button disable={loading}>Cadastre-se</Button>
+        <FormGroup error={getErrorMessageByFieldName('button')}>
+          <Button disable={loading}>Cadastre-se</Button>{' '}
+        </FormGroup>
       </form>
 
       <div className='spc-betwn'>
