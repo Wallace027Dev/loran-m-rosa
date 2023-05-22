@@ -34,13 +34,11 @@ function Subscribe () {
     }
   }
 
-  function handleCellphoneChange (e) {
-    setPhone(e.target.value)
+  function handlePhoneChange (e) {
+    setPhone(isPhoneValid(e.target.value))
 
-    if (e.target.value && !isPhoneValid(e.target.value)) {
-      setError({ field: 'phone', message: 'Contato inválido.' })
-    } else if (!e.target.value) {
-      setError({ field: 'phone', message: 'Contato é obrigatporio.' })
+    if (!e.target.value) {
+      setError({ field: 'phone', message: 'Contato é obrigatório.' })
     } else {
       removeError('phone')
     }
@@ -126,8 +124,9 @@ function Subscribe () {
         <FormGroup error={getErrorMessageByFieldName('phone')}>
           <Input
             type='tel'
+            maxLength='15'
             value={phone}
-            onChange={handleCellphoneChange}
+            onChange={handlePhoneChange}
             placeholder='Insira seu número de telefone...'
             error={getErrorMessageByFieldName('phone')}
           />
