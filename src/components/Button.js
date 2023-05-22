@@ -18,11 +18,16 @@ export default styled.button`
   transition: 0.2s ease-in;
   appearance: none;
 
+  &[disabled] {
+    background: var(--tertiary);
+    cursor: default;
+  }
+
   &::placeholder {
     color: var(--tertiary);
   }
 
-  &:hover {
+  &:not([disabled]):hover {
     background: var(--bg);
     color: var(--primary);
   }
@@ -30,11 +35,6 @@ export default styled.button`
   &:active {
     background: var(--secondary);
     color: var(--primary);
-  }
-
-  &[disabled] {
-    background: var(--tertiary);
-    cursor: default;
   }
 
   ${({ danger }) =>

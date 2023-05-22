@@ -23,7 +23,10 @@ function Subscribe () {
   const [password, setPassword] = useState('')
   const [confirmPassword, setConfirmPassword] = useState('')
 
-  const { setError, removeError, getErrorMessageByFieldName } = useErrors()
+  const { errors, setError, removeError, getErrorMessageByFieldName } =
+    useErrors()
+
+  const isFormValid = name && errors.length === 0
 
   function handleNameChange (e) {
     setName(e.target.value)
@@ -166,7 +169,7 @@ function Subscribe () {
         </FormGroup>
 
         <FormGroup error={getErrorMessageByFieldName('button')}>
-          <Button disable={loading}>Cadastre-se</Button>{' '}
+          <Button disabled={loading || !isFormValid}>Cadastre-se</Button>
         </FormGroup>
       </form>
 
