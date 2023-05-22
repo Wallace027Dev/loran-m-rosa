@@ -1,8 +1,7 @@
-export default function isEmailValid (phone) {
+export default function isPhoneValid (phone) {
   // receives the phone and validates it from
   // the browser side using regex
-  const regex = /^\(\d{2}\) \d{4,5}-\d{4}$/
-  const regexCaracteresInvalidos = /[^a-zA-Z0-9]/
+  const regex = /^\d{10,11}$/
 
-  return (regex && regexCaracteresInvalidos).test(phone)
+  return regex.test(phone)
 }

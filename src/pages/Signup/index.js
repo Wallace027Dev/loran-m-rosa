@@ -37,8 +37,10 @@ function Subscribe () {
   function handleCellphoneChange (e) {
     setPhone(e.target.value)
 
-    if (!e.target.value && !isPhoneValid(e.target.value)) {
+    if (e.target.value && !isPhoneValid(e.target.value)) {
       setError({ field: 'phone', message: 'Contato inválido.' })
+    } else if (!e.target.value) {
+      setError({ field: 'phone', message: 'Contato é obrigatporio.' })
     } else {
       removeError('phone')
     }
@@ -48,7 +50,7 @@ function Subscribe () {
     setEmail(e.target.value)
     // Checks if the user has typed something in the
     // 'email' field and validates using regex
-    if (e.target.value && !isEmailValid(e.target.value)) {
+    if ((e.target.value && !e.target.value) || !isEmailValid(e.target.value)) {
       setError({ field: 'email', message: 'E-mail inválido.' })
     } else {
       removeError('email')
@@ -57,8 +59,33 @@ function Subscribe () {
 
   function handlePasswordChange (e) {
     setPassword(e.target.value)
-    if (!e.target.value) {
-      setError({ field: 'password', message: 'Senha é obrigatório.' })
+
+    // check if it has 6 characters or more
+    // check if you have a number
+    // check if it has a capital letter
+    if (
+      !e.target.value.match(/.{6,}/) ||
+      !e.target.value.match(/[0-9]{1,}/) ||
+      !e.target.value.match(/[A-Z]{1,}/)
+    ) {
+      setError({
+        field: 'password',
+        message:
+          'Senha deve conter mais de 6 caracteres, número, letra maíuscula e minúscula.'
+      })
+    } else {
+      removeError('password')
+    }
+  }
+
+  function handleConfirmPasswordChange (e) {
+    setConfirmPassword(e.target.value)
+    if (password !== confirmPassword) {
+      setError({
+        field: 'confirmPassword',
+        message: 'Sua confirmação não está batendo com sua senha.'
+      })
+      return
     } else {
       removeError('name')
     }
@@ -67,32 +94,6 @@ function Subscribe () {
   async function handleSubmit (e) {
     e.preventDefault()
     setLoading(true)
-
-    let regexMaiuscula = /[A-Z]/ // verifica se tem letra maiúscula
-    let regexMinuscula = /[a-z]/ // verifica se tem letra minúscula
-    let regexNumero = /[0-9]/ // verifica se tem número
-
-    if (
-      !(
-        regexMaiuscula.test(password) &&
-        regexMinuscula.test(password) &&
-        regexNumero.test(password)
-      )
-    ) {
-      alert('Sua senha deve conter letra maiúscula, minúscula e número')
-      return
-    }
-
-    if (password.length < 6) {
-      alert('Sua senha deve ter no mínimo 6 caracteres!')
-      return
-    }
-
-    if (password !== confirmPassword) {
-      alert('As senhas não conferem!')
-      return
-    }
-
     try {
       await signUp(email, password)
       navigate('/login')
@@ -104,7 +105,7 @@ function Subscribe () {
 
   return (
     <Container>
-      <form noValidate onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit}>
         <label>Marca</label>
         <FormGroup error={getErrorMessageByFieldName('name')}>
           <Input
@@ -112,6 +113,7 @@ function Subscribe () {
             value={name}
             onChange={handleNameChange}
             placeholder='Insira o nome de sua marca..'
+            error={getErrorMessageByFieldName('name')}
           />
         </FormGroup>
 
@@ -122,6 +124,7 @@ function Subscribe () {
             value={phone}
             onChange={handleCellphoneChange}
             placeholder='Insira seu número de telefone...'
+            error={getErrorMessageByFieldName('phone')}
           />
         </FormGroup>
 
@@ -132,25 +135,29 @@ function Subscribe () {
             value={email}
             onChange={handleEmailChange}
             placeholder='Insira seu email...'
+            error={getErrorMessageByFieldName('email')}
           />
         </FormGroup>
 
         <label style={{ marginTop: 12 }}>Senha</label>
-        <FormGroup onChange={handlePasswordChange}>
+        <FormGroup error={getErrorMessageByFieldName('password')}>
           <Input
             type='password'
             value={password}
+            onChange={handlePasswordChange}
             placeholder='Insira sua senha...'
+            error={getErrorMessageByFieldName('password')}
           />
         </FormGroup>
 
         <label style={{ marginTop: 12 }}>Confirme sua Senha</label>
-        <FormGroup>
+        <FormGroup error={getErrorMessageByFieldName('ConfirmPassword')}>
           <Input
             type='password'
             value={confirmPassword}
             placeholder='Insira sua senha novamente...'
-            onChange={e => setConfirmPassword(e.target.value)}
+            onChange={handleConfirmPasswordChange}
+            error={getErrorMessageByFieldName('ConfirmPassword')}
           />
         </FormGroup>
 
