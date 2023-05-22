@@ -28,22 +28,27 @@ export default function Users () {
     )), [users, searchTerm])
 
   useEffect(() => {
-    setIsLoading(true)
+    async function loadUsers() {
+      try {
+        setIsLoading(true)
 
-    fetch(`http://localhost:3001/users?orderBy=${orderBy}`)
-      .then(async (response) => {
+      const response = await fetch(
+        `http://localhost:3001/users?orderBy=${orderBy}`,
+        )
+
         await delay(2000)
 
         const json = await response.json();
         setUsers(json)
-      })
-      .catch((error) => {
-        console.log('ERROR:', error)
-        
-      })
-      .finally(() => {
+      } catch(error) {
+        console.log('Deu merda', error)
+      } finally {
         setIsLoading(false)
-      })
+      }
+    }
+
+    loadUsers()
+
   }, [orderBy])
 
   function handleToggleOrderBy() {
