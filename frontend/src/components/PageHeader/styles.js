@@ -1,4 +1,4 @@
-import styled from 'styled-components'
+import styled from 'styled-components';
 
 export const Container = styled.header`
   margin-bottom: 2.4rem;
@@ -22,4 +22,4 @@ export const Container = styled.header`
   h1 {
     font-size: 2.4rem;
   }
-`
+`;

@@ -1,10 +1,10 @@
-import PropTypes from 'prop-types'
-import ReactDOM from 'react-dom'
+import PropTypes from 'prop-types';
+import ReactDOM from 'react-dom';
 
-import { OverLay, Container, Footer } from './styles'
-import Button from '../Button'
+import { OverLay, Container, Footer } from './styles';
+import Button from '../Button';
 
-export default function Modal ({ danger }) {
+export default function Modal({ danger }) {
   return ReactDOM.createPortal(
     <OverLay>
       <Container danger={danger}>
@@ -12,23 +12,23 @@ export default function Modal ({ danger }) {
         <p>Corpo do Modal</p>
 
         <Footer>
-          <button type='button' className='cancel-button'>
+          <button type="button" className="cancel-button">
             Cancelar
           </button>
-          <Button type='button' danger={danger} className='delete-button'>
+          <Button type="button" danger={danger} className="delete-button">
             Deletar
           </Button>
         </Footer>
       </Container>
     </OverLay>,
-    document.getElementById('modal-root')
-  )
+    document.getElementById('modal-root'),
+  );
 }
 
 Modal.porpTypes = {
-  danger: PropTypes.bool
-}
+  danger: PropTypes.bool,
+};
 
 Modal.dafaultProps = {
-  danger: false
-}
+  danger: false,
+};

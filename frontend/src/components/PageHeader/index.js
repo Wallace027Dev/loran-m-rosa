@@ -1,22 +1,22 @@
-import { Link } from 'react-router-dom'
-import PropTypes from 'prop-types'
+import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
 
-import { Container } from './styles'
+import { Container } from './styles';
 
-import arrow from '../../assets/images/icons/arrow.svg'
+import arrow from '../../assets/images/icons/arrow.svg';
 
-export default function PageHeader ({ title }) {
+export default function PageHeader({ title }) {
   return (
     <Container>
-      <Link to='../../users'>
-        <img src={arrow} alt='Back Arrow' />
+      <Link to="../../users">
+        <img src={arrow} alt="Back Arrow" />
         <span>Voltar</span>
       </Link>
       <h1>{title}</h1>
     </Container>
-  )
+  );
 }
 
 PageHeader.propTypes = {
-  title: PropTypes.string.isRequired
-}
+  title: PropTypes.string.isRequired,
+};

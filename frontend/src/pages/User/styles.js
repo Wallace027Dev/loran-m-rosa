@@ -1,4 +1,4 @@
-import styled from 'styled-components'
+import styled from 'styled-components';
 
 export const Container = styled.main`
   img {
@@ -10,4 +10,4 @@ export const Container = styled.main`
     flex-direction: column;
     justify-content: left;
   }
-`
+`;

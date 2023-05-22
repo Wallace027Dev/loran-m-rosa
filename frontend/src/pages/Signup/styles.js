@@ -1,4 +1,4 @@
-import styled from 'styled-components'
+import styled from 'styled-components';
 
 export const Container = styled.main`
   margin-bottom: 1.2rem;
@@ -24,4 +24,4 @@ export const Container = styled.main`
     justify-content: space-between;
     flex-direction: row;
   }
-`
+`;

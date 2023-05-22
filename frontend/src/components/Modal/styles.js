@@ -1,4 +1,4 @@
-import styled from 'styled-components'
+import styled from 'styled-components';
 
 export const OverLay = styled.div`
   background: rgba(0, 0, 0, 0.6);
@@ -11,7 +11,7 @@ export const OverLay = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-`
+`;
 
 export const Container = styled.div`
   max-width: 45rem;
@@ -28,7 +28,7 @@ export const Container = styled.div`
   p {
     margin-top: 0.8rem;
   }
-`
+`;
 
 export const Footer = styled.footer`
   margin-top: 3.2rem;
@@ -47,4 +47,4 @@ export const Footer = styled.footer`
   .delete-button {
     width: 10rem;
   }
-`
+`;

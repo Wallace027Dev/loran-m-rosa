@@ -1,12 +1,14 @@
-import React, { createContext, useState, useEffect, useContext } from "react";
+import React, {
+  createContext, useState, useEffect, useContext,
+} from 'react';
 import {
   createUserWithEmailAndPassword,
   onAuthStateChanged,
   signInWithEmailAndPassword,
   sendPasswordResetEmail,
   signOut,
-} from "firebase/auth";
-import { auth } from "../services/firebase";
+} from 'firebase/auth';
+import { auth } from '../services/firebase';
 
 const AuthContext = createContext();
 
@@ -26,7 +28,7 @@ export function AuthProvider({ children }) {
   }
 
   function signIn(email, password, token) {
-    localStorage.setItem("token", token);
+    localStorage.setItem('token', token);
     setCurrentUser({ token });
     return signInWithEmailAndPassword(auth, email, password);
   }
@@ -36,12 +38,12 @@ export function AuthProvider({ children }) {
   }
 
   const isAuthenticated = () => {
-    const token = localStorage.getItem("token");
+    const token = localStorage.getItem('token');
     return !!token;
   };
 
   useEffect(() => {
-    const token = localStorage.getItem("token");
+    const token = localStorage.getItem('token');
     if (token) {
       setCurrentUser({ token });
     }
@@ -57,12 +59,12 @@ export function AuthProvider({ children }) {
   return (
     <AuthContext.Provider
       value={{
-        resetPassword: resetPassword,
-        signUp: signUp,
-        signIn: signIn,
-        logOut: logOut,
-        currentUser: currentUser,
-        isAuthenticated: isAuthenticated,
+        resetPassword,
+        signUp,
+        signIn,
+        logOut,
+        currentUser,
+        isAuthenticated,
       }}
     >
       {children}

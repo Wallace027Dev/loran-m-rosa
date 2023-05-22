@@ -1,4 +1,4 @@
-import styled from 'styled-components'
+import styled from 'styled-components';
 
 export const Container = styled.main`
   p {
@@ -31,4 +31,4 @@ export const Container = styled.main`
     justify-content: space-between;
     flex-direction: row;
   }
-`
+`;

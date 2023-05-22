@@ -1,11 +1,11 @@
-import PageHeader from '../../components/PageHeader'
-import UserForm from '../../components/UserForm'
+import PageHeader from '../../components/PageHeader';
+import UserForm from '../../components/UserForm';
 
-export default function EditUser () {
+export default function EditUser() {
   return (
     <>
-      <PageHeader title='Editar Wallace Vieira' />
-      <UserForm buttonLabel='Salvar Alterações' />
+      <PageHeader title="Editar Wallace Vieira" />
+      <UserForm buttonLabel="Salvar Alterações" />
     </>
-  )
+  );
 }

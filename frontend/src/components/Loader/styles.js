@@ -1,4 +1,4 @@
-import styled, { keyframes } from 'styled-components'
+import styled, { keyframes } from 'styled-components';
 
 const load = keyframes`
   0% {
@@ -21,7 +21,7 @@ const load = keyframes`
   100% {
     box-shadow: 0 -0.83em 0 -0.4em, 0 -0.83em 0 -0.42em, 0 -0.83em 0 -0.44em, 0 -0.83em 0 -0.46em, 0 -0.83em 0 -0.477em;
   }
-`
+`;
 
 const round = keyframes`
   0% {
@@ -32,7 +32,7 @@ const round = keyframes`
     -webkit-transform: rotate(360deg);
     transform: rotate(360deg);
   }
-`
+`;
 
 export const Overlay = styled.div`
   width: 100%;
@@ -61,4 +61,4 @@ export const Overlay = styled.div`
     -webkit-animation: ${load} 1.7s infinite ease, ${round} 1.7s infinite ease;
     animation: ${load} 1.7s infinite ease, ${round} 1.7s infinite ease;
   }
-`
+`;

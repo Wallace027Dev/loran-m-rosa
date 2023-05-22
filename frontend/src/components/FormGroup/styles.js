@@ -1,4 +1,4 @@
-import styled from 'styled-components'
+import styled from 'styled-components';
 
 export const Continer = styled.div`
   & + & {
@@ -10,4 +10,4 @@ export const Continer = styled.div`
     margin-top: 0.8rem;
     display: block;
   }
-`
+`;

@@ -1,4 +1,4 @@
-import { createGlobalStyle } from 'styled-components'
+import { createGlobalStyle } from 'styled-components';
 
 export default createGlobalStyle`
 * {
@@ -6,7 +6,7 @@ export default createGlobalStyle`
   padding: 0;
   box-sizing: border-box;
   font-family: "Sora", sans-serif;
-	font-size: 62.5%;
+  font-size: 62.5%;
 }
 
 body {
@@ -50,7 +50,7 @@ p, u {
 }
 
 span {
-	font-size: 1rem;
+  font-size: 1rem;
 }
 
 .lnk {
@@ -65,4 +65,4 @@ span {
   justify-content: center;
   align-items: center;
 }
-`
+`;

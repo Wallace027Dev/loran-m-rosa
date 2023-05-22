@@ -1,11 +1,11 @@
-import { Container } from './styles'
+import { Container } from './styles';
 
-import bakoads from '../../assets/images/bakoads.png'
+import bakoads from '../../assets/images/bakoads.png';
 
-export default function Header () {
+export default function Header() {
   return (
     <Container>
-      <img src={bakoads} alt='Bakoads'/>
+      <img src={bakoads} alt="Bakoads" />
     </Container>
-  )
+  );
 }

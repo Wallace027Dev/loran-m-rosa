@@ -1,12 +1,12 @@
-import { BrowserRouter } from 'react-router-dom'
-import { AuthProvider } from '../../context/authContext'
-import { Container } from './styles'
+import { BrowserRouter } from 'react-router-dom';
+import { AuthProvider } from '../../context/authContext';
+import { Container } from './styles';
 
-import GlobalStyles from '../../assets/styles/global'
-import AppRoutes from '../../routes/Routes'
-import Header from '../Header'
+import GlobalStyles from '../../assets/styles/global';
+import AppRoutes from '../../routes/Routes';
+import Header from '../Header';
 
-function App () {
+function App() {
   return (
     <AuthProvider>
       <BrowserRouter>
@@ -17,7 +17,7 @@ function App () {
         </Container>
       </BrowserRouter>
     </AuthProvider>
-  )
+  );
 }
 
-export default App
+export default App;
