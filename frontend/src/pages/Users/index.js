@@ -13,26 +13,37 @@ import arrow from '../../assets/images/icons/arrow.svg'
 import edit from '../../assets/images/icons/edit.svg'
 import trash from '../../assets/images/icons/trash.svg'
 
+import Loader from '../../components/Loader'
 import Input from '../../components/Input'
+import delay from '../../utils/delay'
 
 export default function Users () {
   const [users, setUsers] = useState([]);
   const [orderBy, setOrderBy] = useState('asc');
   const [searchTerm, setSearchTerm] = useState('');
+  const [isLoading, setIsLoading] = useState(true);
 
   const filteredUsers = useMemo(() => users.filter((users) => (
       users.name.toLowerCase().includes(searchTerm.toLowerCase())
     )), [users, searchTerm])
 
   useEffect(() => {
+    setIsLoading(true)
+
     fetch(`http://localhost:3001/users?orderBy=${orderBy}`)
       .then(async (response) => {
+        await delay(2000)
+
         const json = await response.json();
         setUsers(json)
-    })
-    .catch((error) => {
-      console.log('ERROR:', error)
-    })
+      })
+      .catch((error) => {
+        console.log('ERROR:', error)
+        
+      })
+      .finally(() => {
+        setIsLoading(false)
+      })
   }, [orderBy])
 
   function handleToggleOrderBy() {
@@ -47,6 +58,8 @@ export default function Users () {
 
   return (
     <Container>
+      <Loader isLoading={isLoading} />
+
       <InputSearchContainer>
         <Input
         type='text' 
