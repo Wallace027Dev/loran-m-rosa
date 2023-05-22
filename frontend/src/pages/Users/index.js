@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom'
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useMemo } from 'react'
 
 import {
   Container,
@@ -20,9 +20,9 @@ export default function Users () {
   const [orderBy, setOrderBy] = useState('asc');
   const [searchTerm, setSearchTerm] = useState('');
 
-  const filteredUsers = users.filter((users) => (
-    users.name.toLowerCase().includes(searchTerm.toLowerCase())
-  ))
+  const filteredUsers = useMemo(() => users.filter((users) => (
+      users.name.toLowerCase().includes(searchTerm.toLowerCase())
+    )), [users, searchTerm])
 
   useEffect(() => {
     fetch(`http://localhost:3001/users?orderBy=${orderBy}`)
