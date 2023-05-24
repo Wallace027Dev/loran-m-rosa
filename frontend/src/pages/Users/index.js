@@ -15,7 +15,9 @@ import trash from '../../assets/images/icons/trash.svg';
 
 import Loader from '../../components/Loader';
 import Input from '../../components/Input';
+
 import delay from '../../utils/delay';
+import UsersService from '../../services/UsersService'
 
 export default function Users() {
   const [users, setUsers] = useState([]);
@@ -32,14 +34,9 @@ export default function Users() {
       try {
         setIsLoading(true);
 
-        const response = await fetch(
-          `http://localhost:3001/users?orderBy=${orderBy}`,
-        );
+        const usersList = await UsersService.listUsers(orderBy);
 
-        await delay(2000);
-
-        const json = await response.json();
-        setUsers(json);
+        setUsers(usersList);
       } catch (error) {
         console.log('Deu merda', error);
       } finally {
@@ -83,10 +80,10 @@ export default function Users() {
 
       <ListHeader orderBy={orderBy}>
         {filteredUsers.length > 0 && (
-        <button type="button" onClick={handleToggleOrderBy}>
-          <span>Nome</span>
-          <img src={arrow} alt="Arrow" />
-        </button>
+          <button type="button" onClick={handleToggleOrderBy}>
+            <span>Nome</span>
+            <img src={arrow} alt="Arrow" />
+          </button>
         )}
       </ListHeader>
 
