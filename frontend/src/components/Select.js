@@ -19,5 +19,5 @@ export default styled.select`
 
   &:focus {
     border: 2px solid var(--primary);
-  }
-`
+  };
+`;

@@ -37,9 +37,7 @@ export default styled.button`
     color: var(--primary);
   }
 
-  ${({ danger }) =>
-    danger &&
-    css`
+  ${({ danger }) => danger && css`
       background: var(--danger);
       border: 2px solid var(--danger);
 
@@ -47,11 +45,11 @@ export default styled.button`
         background: var(--danger-light);
         border: 2px solid var(--danger-light);
         color: var(--tertiary);
-      }
+      };
 
       &:active {
         background: var(--bg);
         color: var(--font);
-      }
-    `}
-`
+      };
+  `};
+`;
