@@ -6,7 +6,7 @@ class UsersService {
   }
 
   async listUsers(orderBy) {
-    return this.HttpClient.get(`/users?orderBy=${orderBy}`);
+    return this.HttpClient.get(`/userss?orderBy=${orderBy}`);
   }
 
   async createUser(user) {
