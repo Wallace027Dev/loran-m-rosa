@@ -1,14 +1,16 @@
-import delay from "../utils/delay";
+import HttpClient from './utils/HttpClient';
 
 class UsersService {
+  constructor() {
+    this.HttpClient = new HttpClient('http://localhost:3001');
+  }
+
   async listUsers(orderBy) {
-    const response = await fetch(
-      `http://localhost:3001/users?orderBy=${orderBy}`,
-    );
+    return this.HttpClient.get(`/users?orderBy=${orderBy}`);
+  }
 
-    await delay(500);
-
-    return response.json();
+  async createUser(user) {
+    return this.HttpClient.post('/users', user);
   }
 };
 
