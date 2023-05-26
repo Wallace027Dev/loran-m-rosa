@@ -7,14 +7,17 @@ import {
   Header,
   Card,
   ListHeader,
+  ErrorContainer
 } from './styles';
 
 import arrow from '../../assets/images/icons/arrow.svg';
 import edit from '../../assets/images/icons/edit.svg';
 import trash from '../../assets/images/icons/trash.svg';
+import sad from '../../assets/images/icons/sad.svg';
 
 import Loader from '../../components/Loader';
 import Input from '../../components/Input';
+import Button from '../../components/Button';
 
 import UsersService from '../../services/UsersService'
 
@@ -23,29 +26,28 @@ export default function Users() {
   const [orderBy, setOrderBy] = useState('asc');
   const [searchTerm, setSearchTerm] = useState('');
   const [isLoading, setIsLoading] = useState(true);
+  const [hasError, setHasError] = useState(false);
 
   const filteredUsers = useMemo(() => users.filter((user) => (
     user.name.toLowerCase().includes(searchTerm.toLowerCase())
   )), [users, searchTerm]);
 
-  useEffect(() => {
-    async function loadUsers() {
-      try {
-        setIsLoading(true);
+  async function loadUsers() {
+    try {
+      setIsLoading(true);
 
-        const usersList = await UsersService.listUsers(orderBy);
+      const usersList = await UsersService.listUsers(orderBy);
+      setUsers(usersList);
 
-        setUsers(usersList);
-      } catch (error) {
-        console.log('Name: ', error);
-        console.log('Message: ', error.message);
-        console.log('Response: ', error.response);
-        console.log(error);
-      } finally {
-        setIsLoading(false);
-      }
+      setHasError(false)
+    } catch {
+      setHasError(true)
+    } finally {
+      setIsLoading(false);
     }
+  }
 
+  useEffect(() => {
     loadUsers();
   }, [orderBy]);
 
@@ -57,6 +59,10 @@ export default function Users() {
 
   function handleChangeSearchTerm(e) {
     setSearchTerm(e.target.value);
+  }
+
+  function handleTryAgain() {
+    loadUsers();
   }
 
   return (
@@ -72,43 +78,63 @@ export default function Users() {
         />
       </InputSearchContainer>
 
-      <Header>
-        <strong>
-          {filteredUsers.length}
-          {filteredUsers.length === 1 ? ' usuário' : ' usuários'}
-        </strong>
+      <Header hasError={hasError}>
+        {!hasError && (
+          <strong>
+            {filteredUsers.length}
+            {filteredUsers.length === 1 ? ' usuário' : ' usuários'}
+          </strong>
+        )}
         <Link to="../user/new">Novo Usuário</Link>
       </Header>
 
-      <ListHeader orderBy={orderBy}>
-        {filteredUsers.length > 0 && (
-          <button type="button" onClick={handleToggleOrderBy}>
-            <span>Nome</span>
-            <img src={arrow} alt="Arrow" />
-          </button>
-        )}
-      </ListHeader>
+      {hasError && (
+        <ErrorContainer>
+          <img src={sad} alt="Sad Status" />
 
-      {filteredUsers.map((user) => (
-        <Card key={user.id}>
-          <div className="info">
-            <div className="user-name">
-              <strong>{user.name}</strong>
-              {user.category_name && <small>{user.category_name}</small>}
-            </div>
-            <span>{user.email}</span>
-            <span>{user.phone}</span>
+          <div className='datails'>
+            <strong>Ocorreu um erro ao obter os seus usuários.</strong>
+
+            <Button type='button' onClick={handleTryAgain}>
+              Tentar novamente
+            </Button>
           </div>
-          <div className="actions">
-            <Link to={`../../user/edit/${user.id}`}>
-              <img src={edit} alt="Edit" />
-            </Link>
-            <button type="button">
-              <img src={trash} alt="Delete" />
-            </button>
-          </div>
-        </Card>
-      ))}
+        </ErrorContainer>
+      )}
+
+      {!hasError && (
+        <>
+          {filteredUsers.length > 0 && (
+            <ListHeader orderBy={orderBy}>
+              <button type="button" onClick={handleToggleOrderBy}>
+                <span>Nome</span>
+                <img src={arrow} alt="Arrow" />
+              </button>
+            </ListHeader>
+          )}
+
+          {filteredUsers.map((user) => (
+            <Card key={user.id}>
+              <div className="info">
+                <div className="user-name">
+                  <strong>{user.name}</strong>
+                  {user.category_name && <small>{user.category_name}</small>}
+                </div>
+                <span>{user.email}</span>
+                <span>{user.phone}</span>
+              </div>
+              <div className="actions">
+                <Link to={`../../user/edit/${user.id}`}>
+                  <img src={edit} alt="Edit" />
+                </Link>
+                <button type="button">
+                  <img src={trash} alt="Delete" />
+                </button>
+              </div>
+            </Card>
+          ))}
+        </>
+      )}
 
     </Container>
   );

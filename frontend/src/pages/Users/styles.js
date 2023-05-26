@@ -11,8 +11,10 @@ export const InputSearchContainer = styled.div`
 export const Header = styled.header`
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: ${({ hasError }) => (hasError) ? 'flex-end' : 'space-between'};
   margin-top: 3.2rem;
+  border-bottom: 2px solid var(--secondary);
+  padding-bottom: 1.6rem;
 
   strong {
     color: var(--font);
@@ -50,9 +52,9 @@ export const ListHeader = styled.header`
     font-weight: bold;
     color: var(--primary);
   }
-  
+
   img {
-    transform: ${({orderBy}) => orderBy ==='asc' ? 'rotate(180deg)' : 'rotate(0deg)'};
+    transform: ${({ orderBy }) => orderBy === 'asc' ? 'rotate(180deg)' : 'rotate(0deg)'};
     transition: transform 0.2s ease-in;
   }
 `
@@ -106,6 +108,26 @@ export const Card = styled.div`
       background: transparent;
       border: none;
       margin-left: 0.8rem;
+    }
+  }
+`
+
+export const ErrorContainer = styled.div`
+  margin-top: 1.6rem;
+  display: flex;
+  align-items: center;
+
+  .datails {
+    margin-left: 2.4rem;
+
+    strong {
+      color: var(--danger);
+      display: block;
+    }
+
+    button {
+      max-width: 15rem;
+      margin-top: 0.8rem;
     }
   }
 `
