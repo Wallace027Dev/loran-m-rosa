@@ -11,7 +11,7 @@ export const InputSearchContainer = styled.div`
 export const Header = styled.header`
   display: flex;
   align-items: center;
-  justify-content: ${({ hasError }) => (hasError) ? 'flex-end' : 'space-between'};
+  justify-content: ${({ justifyContent }) => justifyContent};
   margin-top: 3.2rem;
   border-bottom: 2px solid var(--secondary);
   padding-bottom: 1.6rem;
@@ -128,6 +128,23 @@ export const ErrorContainer = styled.div`
     button {
       max-width: 15rem;
       margin-top: 0.8rem;
+    }
+  }
+`
+export const EmptyListContainer = styled.div`
+  margin-top: 1.6rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  
+  p {
+    color: var(--tertiary);
+    text-align: center;
+    margin-top: 0.8rem;
+    
+    strong {
+      font-size: 1.6rem;
+      color: var(--primary);
     }
   }
 `

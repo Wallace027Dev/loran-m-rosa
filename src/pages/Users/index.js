@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { useEffect, useState, useMemo } from 'react';
+import { useEffect, useState, useMemo, useCallback } from 'react';
 
 import {
   Container,
@@ -7,13 +7,15 @@ import {
   Header,
   Card,
   ListHeader,
-  ErrorContainer
+  ErrorContainer,
+  EmptyListContainer
 } from './styles';
 
 import arrow from '../../assets/images/icons/arrow.svg';
 import edit from '../../assets/images/icons/edit.svg';
 import trash from '../../assets/images/icons/trash.svg';
 import sad from '../../assets/images/icons/sad.svg';
+import emptyBox from '../../assets/images/icons/empty-box.svg';
 
 import Loader from '../../components/Loader';
 import Input from '../../components/Input';
@@ -32,7 +34,7 @@ export default function Users() {
     user.name.toLowerCase().includes(searchTerm.toLowerCase())
   )), [users, searchTerm]);
 
-  async function loadUsers() {
+  const loadUsers = useCallback(async () => {
     try {
       setIsLoading(true);
 
@@ -45,41 +47,50 @@ export default function Users() {
     } finally {
       setIsLoading(false);
     }
-  }
+  }, [orderBy]);
 
   useEffect(() => {
     loadUsers();
-  }, [orderBy]);
+  }, [loadUsers]);
 
   function handleToggleOrderBy() {
     setOrderBy(
       (prevState) => (prevState === 'asc' ? 'desc' : 'asc'),
     );
-  }
+  };
 
   function handleChangeSearchTerm(e) {
     setSearchTerm(e.target.value);
-  }
+  };
 
   function handleTryAgain() {
     loadUsers();
-  }
+  };
 
   return (
     <Container>
       <Loader isLoading={isLoading} />
 
-      <InputSearchContainer>
-        <Input
-          type="text"
-          value={searchTerm}
-          onChange={handleChangeSearchTerm}
-          placeholder="Pesquise por nome..."
-        />
-      </InputSearchContainer>
+      {users.length > 0 && (
+        <InputSearchContainer>
+          <Input
+            type="text"
+            value={searchTerm}
+            onChange={handleChangeSearchTerm}
+            placeholder="Pesquise por nome..."
+          />
+        </InputSearchContainer>)}
 
-      <Header hasError={hasError}>
-        {!hasError && (
+      <Header justifyContent={
+        hasError
+          ? 'flex-end'
+          : (
+            users.length > 0
+              ? 'space-between'
+              : 'center'
+          )
+      }>
+        {(!hasError && users.length > 0) && (
           <strong>
             {filteredUsers.length}
             {filteredUsers.length === 1 ? ' usuário' : ' usuários'}
@@ -104,6 +115,16 @@ export default function Users() {
 
       {!hasError && (
         <>
+          {(users.length < 1 && !isLoading) && (
+            <EmptyListContainer>
+              <img src={emptyBox} alt="Empty box" />
+              <p>
+                Você ainda não tem nenhum contato cadastrado!
+                Clique no botão <strong>”Novo contato”</strong> à cima para cadastrar o seu primeiro!
+              </p>
+            </EmptyListContainer>
+          )}
+
           {filteredUsers.length > 0 && (
             <ListHeader orderBy={orderBy}>
               <button type="button" onClick={handleToggleOrderBy}>
