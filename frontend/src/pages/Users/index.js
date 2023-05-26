@@ -16,7 +16,6 @@ import trash from '../../assets/images/icons/trash.svg';
 import Loader from '../../components/Loader';
 import Input from '../../components/Input';
 
-import delay from '../../utils/delay';
 import UsersService from '../../services/UsersService'
 
 export default function Users() {
@@ -38,7 +37,10 @@ export default function Users() {
 
         setUsers(usersList);
       } catch (error) {
-        console.log('Deu merda', error);
+        console.log('Name: ', error);
+        console.log('Message: ', error.message);
+        console.log('Response: ', error.response);
+        console.log(error);
       } finally {
         setIsLoading(false);
       }
