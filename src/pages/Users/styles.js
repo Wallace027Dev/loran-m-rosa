@@ -141,10 +141,25 @@ export const EmptyListContainer = styled.div`
     color: var(--tertiary);
     text-align: center;
     margin-top: 0.8rem;
-    
+
     strong {
       font-size: 1.6rem;
       color: var(--primary);
     }
   }
 `
+
+export const SeachNotFoundContainer = styled.div`
+  margin-top: 1.6rem;
+  display: flex;
+  align-items: flex-start;
+
+  span {
+    color: var(--tertiary);
+    margin-left: 2.4rem;
+    word-break: break-word;
+  }
+  span, strong {
+    font-size: 1.6rem;
+  }
+`;

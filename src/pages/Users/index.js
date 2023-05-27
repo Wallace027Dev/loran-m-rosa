@@ -8,7 +8,8 @@ import {
   Card,
   ListHeader,
   ErrorContainer,
-  EmptyListContainer
+  EmptyListContainer,
+  SeachNotFoundContainer
 } from './styles';
 
 import arrow from '../../assets/images/icons/arrow.svg';
@@ -16,6 +17,7 @@ import edit from '../../assets/images/icons/edit.svg';
 import trash from '../../assets/images/icons/trash.svg';
 import sad from '../../assets/images/icons/sad.svg';
 import emptyBox from '../../assets/images/icons/emptyBox.svg';
+import magnifierQuestion from '../../assets/images/icons/magnifierQuestion.svg';
 
 import Loader from '../../components/Loader';
 import Input from '../../components/Input';
@@ -123,6 +125,16 @@ export default function Users() {
                 Clique no botão <strong>”Novo contato”</strong> à cima para cadastrar o seu primeiro!
               </p>
             </EmptyListContainer>
+          )}
+
+          {(users.length > 0 && filteredUsers.length < 1) && (
+            <SeachNotFoundContainer>
+              <img src={magnifierQuestion} alt="Magnifier Question" />
+
+              <span>
+                Nenhum resultado foi encontrado para <strong>{searchTerm}</strong>
+              </span>
+            </SeachNotFoundContainer>
           )}
 
           {filteredUsers.length > 0 && (
