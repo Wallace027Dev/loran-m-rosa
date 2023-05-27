@@ -15,9 +15,9 @@ import {
 import arrow from '../../assets/images/icons/arrow.svg';
 import edit from '../../assets/images/icons/edit.svg';
 import trash from '../../assets/images/icons/trash.svg';
-import sad from '../../assets/images/icons/sad.svg';
-import emptyBox from '../../assets/images/icons/emptyBox.svg';
-import magnifierQuestion from '../../assets/images/icons/magnifierQuestion.svg';
+import sad from '../../assets/images/sad.svg';
+import emptyBox from '../../assets/images/emptyBox.svg';
+import magnifierQuestion from '../../assets/images/magnifierQuestion.svg';
 
 import Loader from '../../components/Loader';
 import Input from '../../components/Input';
