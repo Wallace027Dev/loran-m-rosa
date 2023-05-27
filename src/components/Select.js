@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 
 export default styled.select`
-  background-color: var(--secondary);
+  background: var(--secondary);
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
   border-radius: 15px;
   border: 2px solid var(--secondary);
@@ -13,9 +13,14 @@ export default styled.select`
   max-width: 50rem;
   outline: 0;
   padding: 0 1.6rem;
+  cursor: pointer;
   width: 100%;
   transition: border-color 0.2s ease-in;
   appearance: none;
+  
+    & option {
+      font-size: 1.6rem;
+    }
 
   &:focus {
     border: 2px solid var(--primary);

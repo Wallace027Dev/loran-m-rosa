@@ -1,8 +1,9 @@
 import PropTypes from 'prop-types';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 import isEmailValid from '../../utils/isEmailValid';
 import useErrors from '../../hooks/useErrors';
+import CategoriesService from '../../services/CategoriesService'
 
 import { Form } from './styles';
 
@@ -15,9 +16,20 @@ export default function UserForm({ buttonLabel }) {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [phone, setPhone] = useState('');
-  const [category, setCategory] = useState('');
+  const [categoryId, setCategoryId] = useState('');
+  const [categories, setCategories] = useState([])
 
   const { setError, removeError, getErrorMessageByFieldName } = useErrors();
+
+  useEffect(() => {
+    async function loadCategories() {
+      const categoriesList = await CategoriesService.listCategories();
+
+      setCategories(categoriesList)
+    }
+
+    loadCategories();
+  }, []);
 
   function handleNameChange(e) {
     setName(e.target.value);
@@ -25,8 +37,8 @@ export default function UserForm({ buttonLabel }) {
       setError({ field: 'name', message: 'Nome é obrigatório.' });
     } else {
       removeError('name');
-    }
-  }
+    };
+  };
 
   function handleEmailChange(e) {
     setEmail(e.target.value);
@@ -36,12 +48,12 @@ export default function UserForm({ buttonLabel }) {
       setError({ field: 'email', message: 'E-mail inválido.' });
     } else {
       removeError('email');
-    }
-  }
+    };
+  };
 
   function handleSubmit(e) {
     e.preventDefault();
-  }
+  };
 
   return (
     <Form noValidate onSubmit={handleSubmit}>
@@ -75,18 +87,24 @@ export default function UserForm({ buttonLabel }) {
       </FormGroup>
 
       <FormGroup>
-        <Select value={category} onChange={(e) => setCategory(e.target.value)}>
-          <option value="">Categoria</option>
-          <option value="instagram">Instagram</option>
-          <option value="Facebook">Facebook</option>
-          <option value="Facebook e Instagram">Facebook e Instagram</option>
+        <Select
+          value={categoryId}
+          onChange={(e) => setCategoryId(e.target.value)}
+        >
+          <option value="">Sem categoria</option>
+
+          {categories.map((category) => (
+            <option key={category.id} value={category.id}>
+              {category.name}
+            </option>
+          ))}
         </Select>
       </FormGroup>
 
       <Button type="submit">{buttonLabel}</Button>
     </Form>
   );
-}
+};
 
 UserForm.propTypes = {
   buttonLabel: PropTypes.string.isRequired,
