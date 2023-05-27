@@ -12,7 +12,7 @@ import Input from '../Input';
 import Select from '../Select';
 import Button from '../Button';
 
-export default function UserForm({ buttonLabel }) {
+export default function UserForm({ buttonLabel, onSubmit }) {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [phone, setPhone] = useState('');
@@ -62,6 +62,10 @@ export default function UserForm({ buttonLabel }) {
 
   function handleSubmit(e) {
     e.preventDefault();
+
+    onSubmit({
+      name, email, phone, categoryId,
+    });
   };
 
   return (
@@ -120,4 +124,5 @@ export default function UserForm({ buttonLabel }) {
 
 UserForm.propTypes = {
   buttonLabel: PropTypes.string.isRequired,
+  onSubmit: PropTypes.func.isRequired,
 };

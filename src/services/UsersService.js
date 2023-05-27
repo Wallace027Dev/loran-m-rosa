@@ -5,7 +5,7 @@ class UsersService {
     this.HttpClient = new HttpClient('http://localhost:3001');
   }
 
-  async listUsers(orderBy) {
+  async listUsers(orderBy = 'asc') {
     return this.HttpClient.get(`/users?orderBy=${orderBy}`);
   }
 
