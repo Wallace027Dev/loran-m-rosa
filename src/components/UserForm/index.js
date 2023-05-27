@@ -17,15 +17,24 @@ export default function UserForm({ buttonLabel }) {
   const [email, setEmail] = useState('');
   const [phone, setPhone] = useState('');
   const [categoryId, setCategoryId] = useState('');
-  const [categories, setCategories] = useState([])
+  const [categories, setCategories] = useState([]);
+  const [isLoadingCategories, setIsLoadingCategories] = useState(true);
 
   const { setError, removeError, getErrorMessageByFieldName } = useErrors();
 
+  const isFormValid = name && useErrors.length === 0;
+
   useEffect(() => {
     async function loadCategories() {
-      const categoriesList = await CategoriesService.listCategories();
+      try {
+        const categoriesList = await CategoriesService.listCategories();
 
-      setCategories(categoriesList)
+        setCategories(categoriesList);
+      } catch {
+        //
+      } finally {
+        setIsLoadingCategories(false);
+      }
     }
 
     loadCategories();
@@ -61,7 +70,7 @@ export default function UserForm({ buttonLabel }) {
         <Input
           type="text"
           value={name}
-          placeholder="Nome"
+          placeholder="Nome *"
           onChange={handleNameChange}
           error={getErrorMessageByFieldName('name')}
         />
@@ -86,10 +95,11 @@ export default function UserForm({ buttonLabel }) {
         />
       </FormGroup>
 
-      <FormGroup>
+      <FormGroup isLoading={isLoadingCategories}>
         <Select
           value={categoryId}
           onChange={(e) => setCategoryId(e.target.value)}
+          disabled={isLoadingCategories}
         >
           <option value="">Sem categoria</option>
 
@@ -97,11 +107,13 @@ export default function UserForm({ buttonLabel }) {
             <option key={category.id} value={category.id}>
               {category.name}
             </option>
-          ))}
+          ))};
         </Select>
       </FormGroup>
 
-      <Button type="submit">{buttonLabel}</Button>
+      <Button type="submit" disabled={!isFormValid}>
+        {buttonLabel}
+      </Button>
     </Form>
   );
 };

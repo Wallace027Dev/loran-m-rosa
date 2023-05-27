@@ -19,7 +19,7 @@ export default createGlobalStyle`
   };
 
   :root {
-    --bg: #fff;
+    --bg: #f6f5fc;
     --font: #303030;
 
     --primary: #9102d4;

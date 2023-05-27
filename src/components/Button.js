@@ -19,7 +19,8 @@ export default styled.button`
   appearance: none;
 
   &[disabled] {
-    background: var(--tertiary);
+    background: var(--tertiary); 
+    border-color: var(--tertiary);
     cursor: default;
   }
 

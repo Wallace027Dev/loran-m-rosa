@@ -18,11 +18,17 @@ export default styled.select`
   transition: border-color 0.2s ease-in;
   appearance: none;
   
-    & option {
-      font-size: 1.6rem;
-    }
+  & option {
+    font-size: 1.6rem;
+  }
 
   &:focus {
     border: 2px solid var(--primary);
   };
+
+  &[disabled] {
+    color: var(--tertiary);
+    border-color: var(--tertiary);
+    background-color: var(--secondary);
+  }
 `;
