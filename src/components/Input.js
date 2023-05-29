@@ -25,6 +25,12 @@ export default styled.input`
     font-weight: bold;
   };
 
+  &[disabled] {
+    color: var(--tertiary);
+    border-color: var(--tertiary);
+    background-color: var(--secondary);
+  }
+
   ${({ error }) => error && css`
       color: var(--danger);
       border-color: var(--danger) !important;

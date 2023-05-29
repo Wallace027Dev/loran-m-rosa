@@ -30,5 +30,6 @@ export default styled.select`
     color: var(--tertiary);
     border-color: var(--tertiary);
     background-color: var(--secondary);
+    opacity: 1;
   }
 `;
