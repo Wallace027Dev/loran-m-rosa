@@ -12,7 +12,7 @@ export default function NewUser() {
         category_id: formData.categoryId,
       }
 
-      const response = await UsersService.createUser(user); morningstar
+      const response = await UsersService.createUser(user);
 
       console.log('Response ->', response);
     } catch {

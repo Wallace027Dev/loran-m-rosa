@@ -7,10 +7,10 @@ class UsersService {
 
   async listUsers(orderBy = 'asc') {
     return this.HttpClient.get(`/users?orderBy=${orderBy}`);
-  }
+  };
 
   async createUser(user) {
-    return this.HttpClient.post('/users', user);
+    return this.HttpClient.post('/users', { body: user });
   }
 };
 
