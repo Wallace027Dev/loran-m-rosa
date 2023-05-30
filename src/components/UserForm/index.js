@@ -2,6 +2,7 @@ import PropTypes from 'prop-types';
 import { useState, useEffect } from 'react';
 
 import isEmailValid from '../../utils/isEmailValid';
+import formatPhone from '../../utils/formatPhone';
 import useErrors from '../../hooks/useErrors';
 import CategoriesService from '../../services/CategoriesService'
 
@@ -61,6 +62,10 @@ export default function UserForm({ buttonLabel, onSubmit }) {
     };
   };
 
+  function handlePhoneChange(e) {
+    setPhone(formatPhone(e.target.value));
+  }
+
   async function handleSubmit(e) {
     e.preventDefault();
 
@@ -71,6 +76,10 @@ export default function UserForm({ buttonLabel, onSubmit }) {
     })
 
     setIsSubmitting(false);
+    setName('');
+    setEmail('');
+    setPhone('');
+    setCategoryId('');
   };
 
   return (
@@ -100,9 +109,10 @@ export default function UserForm({ buttonLabel, onSubmit }) {
       <FormGroup>
         <Input
           type="tel"
+          maxLength={15}
           value={phone}
           placeholder="Telefone"
-          onChange={(e) => setPhone(e.target.value)}
+          onChange={handlePhoneChange}
           disabled={isSubmitting}
         />
       </FormGroup>

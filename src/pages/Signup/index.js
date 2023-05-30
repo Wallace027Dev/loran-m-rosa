@@ -3,7 +3,7 @@ import { useState } from 'react';
 
 import { useAuth } from '../../context/authContext';
 import isEmailValid from '../../utils/isEmailValid';
-import isPhoneValid from '../../utils/isPhoneValid';
+import formatPhone from '../../utils/formatPhone';
 
 import { Container } from './styles';
 
@@ -39,7 +39,7 @@ function Subscribe() {
   }
 
   function handlePhoneChange(e) {
-    setPhone(isPhoneValid(e.target.value));
+    setPhone(formatPhone(e.target.value));
 
     if (!e.target.value) {
       setError({ field: 'phone', message: 'Contato é obrigatório.' });
