@@ -22,4 +22,15 @@ export const Container = styled.header`
   h1 {
     font-size: 2.4rem;
   }
+
+  .link-container {
+  display: flex;
+  align-items: center;
+  }
+
+  .link-container a {
+    display: flex;
+    align-items: center;
+  }
+
 `;
