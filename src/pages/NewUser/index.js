@@ -1,6 +1,7 @@
 import PageHeader from '../../components/PageHeader';
 import UserForm from '../../components/UserForm'
 import UsersService from '../../services/UsersService';
+import toast from '../../utils/toast'
 
 export default function NewUser() {
   async function handleSubmit(formData) {
@@ -12,13 +13,20 @@ export default function NewUser() {
         category_id: formData.categoryId,
       };
 
-      const response = await UsersService.createUser(user);
+      await UsersService.createUser(user);
 
-      console.log('Response ->', response);
+      toast({
+        type: 'success',
+        text: 'Usuário cadastrado com sucesso!',
+      });
+
     } catch {
-      alert('Ocorreu um erro ao cadastrar o usuário.')
+      toast({
+        type: 'danger',
+        text: 'Ocorreu um erro ao cadastrar o usuário!',
+      });
     }
-  };
+  }
 
   return (
     <>

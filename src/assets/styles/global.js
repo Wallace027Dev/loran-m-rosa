@@ -28,6 +28,8 @@ export default createGlobalStyle`
 
     --danger: #FC5050;
     --danger-light: #f97171;
+
+    --success: #51ca73;
   };
 
   strong {
