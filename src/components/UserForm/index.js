@@ -38,6 +38,13 @@ const UserForm = forwardRef(({ buttonLabel, onSubmit, }, ref) => {
       setPhone(formatPhone(user.phone) ?? '');
       setCategoryId(user.category_id ?? '');
     },
+
+    resetFields: () => {
+      setName('');
+      setEmail('');
+      setPhone('');
+      setCategoryId('');
+    }
   }), []);
 
   useEffect(() => {

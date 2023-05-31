@@ -1,9 +1,12 @@
+import { useRef } from 'react';
 import PageHeader from '../../components/PageHeader';
 import UserForm from '../../components/UserForm'
 import UsersService from '../../services/UsersService';
 import toast from '../../utils/toast'
 
 export default function NewUser() {
+  const userFormRef = useRef(null);
+
   async function handleSubmit(formData) {
     try {
       const user = {
@@ -14,6 +17,8 @@ export default function NewUser() {
       };
 
       await UsersService.createUser(user);
+
+      userFormRef.current.resetFields();
 
       toast({
         type: 'success',
@@ -35,8 +40,9 @@ export default function NewUser() {
       />
 
       <UserForm
-        buttonLabel="Cadastrar"
+        ref={userFormRef}
         onSubmit={handleSubmit}
+        buttonLabel="Cadastrar"
       />
     </>
   );
