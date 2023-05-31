@@ -5,11 +5,13 @@ import PageHeader from '../../components/PageHeader';
 import UserForm from '../../components/UserForm';
 import Loader from '../../components/Loader'
 
-import toast from '../../utils/toast'
 import UsersService from '../../services/UsersService';
+import toast from '../../utils/toast'
 
 export default function EditUser() {
   const [isLoading, setIsLoading] = useState(true);
+  const [userName, setUserName] = useState('');
+
   const userFormRef = useRef(null);
 
   const { id } = useParams();
@@ -23,9 +25,10 @@ export default function EditUser() {
           id,
         );
 
-        console.log('EditUser', userFormRef);
-        console.log({ user });
+        userFormRef.current.setFieldsValues(user);
+
         setIsLoading(false);
+        setUserName(user.name);
       } catch {
         navigate('../../users');
         toast({
@@ -48,7 +51,7 @@ export default function EditUser() {
       <Loader isLoading={isLoading} />
 
       <PageHeader
-        title="Editar Wallace Vieira"
+        title={isLoading ? 'Carregando...' : `Editar ${userName}`}
       />
       <UserForm
         ref={userFormRef}

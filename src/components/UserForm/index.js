@@ -29,14 +29,14 @@ const UserForm = forwardRef(({ buttonLabel, onSubmit, }, ref) => {
     getErrorMessageByFieldName
   } = useErrors();
 
-  const isFormValid = name && useErrors.length === 0;
+  const isFormValid = (name && useErrors.length === 0);
 
   useImperativeHandle(ref, () => ({
     setFieldsValues: (user) => {
-      setName(user.name);
-      setEmail(user.email);
-      setPhone(user.phone);
-      setCategoryId(user.category_id);
+      setName(user.name ?? '');
+      setEmail(user.email ?? '');
+      setPhone(formatPhone(user.phone) ?? '');
+      setCategoryId(user.category_id ?? '');
     },
   }), []);
 
