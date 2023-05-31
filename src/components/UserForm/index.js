@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, forwardRef, useImperativeHandle } from 'react';
 
 import isEmailValid from '../../utils/isEmailValid';
 import formatPhone from '../../utils/formatPhone';
@@ -13,7 +13,7 @@ import Input from '../Input';
 import Select from '../Select';
 import Button from '../Button';
 
-export default function UserForm({ buttonLabel, onSubmit }) {
+const UserForm = forwardRef(({ buttonLabel, onSubmit, }, ref) => {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [phone, setPhone] = useState('');
@@ -22,9 +22,23 @@ export default function UserForm({ buttonLabel, onSubmit }) {
   const [isLoadingCategories, setIsLoadingCategories] = useState(true);
   const [isSubmitting, setIsSubmitting] = useState(false)
 
-  const { setError, removeError, getErrorMessageByFieldName } = useErrors();
+  const {
+    errors,
+    setError,
+    removeError,
+    getErrorMessageByFieldName
+  } = useErrors();
 
   const isFormValid = name && useErrors.length === 0;
+
+  useImperativeHandle(ref, () => ({
+    setFieldsValues: (user) => {
+      setName(user.name);
+      setEmail(user.email);
+      setPhone(user.phone);
+      setCategoryId(user.category_id);
+    },
+  }), []);
 
   useEffect(() => {
     async function loadCategories() {
@@ -40,7 +54,7 @@ export default function UserForm({ buttonLabel, onSubmit }) {
     }
 
     loadCategories();
-  }, []);
+  }, [setCategories]);
 
   function handleNameChange(e) {
     setName(e.target.value);
@@ -142,9 +156,12 @@ export default function UserForm({ buttonLabel, onSubmit }) {
       </Button>
     </Form>
   );
-};
+
+});
 
 UserForm.propTypes = {
   buttonLabel: PropTypes.string.isRequired,
   onSubmit: PropTypes.func.isRequired,
 };
+
+export default UserForm;

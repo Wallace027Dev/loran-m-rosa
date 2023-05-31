@@ -1,17 +1,16 @@
 import { useParams, useNavigate } from 'react-router-dom';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 import PageHeader from '../../components/PageHeader';
 import UserForm from '../../components/UserForm';
 import Loader from '../../components/Loader'
 
 import toast from '../../utils/toast'
-
 import UsersService from '../../services/UsersService';
 
 export default function EditUser() {
   const [isLoading, setIsLoading] = useState(true);
-
+  const userFormRef = useRef(null);
 
   const { id } = useParams();
   const navigate = useNavigate();
@@ -20,23 +19,24 @@ export default function EditUser() {
   useEffect(() => {
     async function loadUsers() {
       try {
-        const userData = await UsersService.getUserById(
+        const user = await UsersService.getUserById(
           id,
         );
 
-        console.log({ userData })
-        setIsLoading(false)
+        console.log('EditUser', userFormRef);
+        console.log({ user });
+        setIsLoading(false);
       } catch {
         navigate('../../users');
         toast({
           type: 'danger',
           text: 'Usuário não encontrado!',
-        })
+        });
       }
     }
 
     loadUsers()
-  }, [id])
+  }, [id, navigate])
 
 
   function handleSubmit(formData) {
@@ -51,8 +51,9 @@ export default function EditUser() {
         title="Editar Wallace Vieira"
       />
       <UserForm
-        buttonLabel="Salvar Alterações"
+        ref={userFormRef}
         onSubmit={handleSubmit}
+        buttonLabel="Salvar Alterações"
       />
     </>
   );
