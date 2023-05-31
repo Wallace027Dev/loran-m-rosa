@@ -26,6 +26,8 @@ import Modal from '../../components/Modal';
 
 import UsersService from '../../services/UsersService'
 
+import toast from '../../utils/toast'
+
 export default function Users() {
   const [users, setUsers] = useState([]);
   const [orderBy, setOrderBy] = useState('asc');
@@ -34,6 +36,7 @@ export default function Users() {
   const [hasError, setHasError] = useState(false);
   const [isDeleteModalVisible, setIsDeleteModalVisible] = useState(false);
   const [userBeingDeleted, setUserBeingDeleted] = useState(null);
+  const [isLoadingDelete, setIsLoadingDelete] = useState(false);
 
   const filteredUsers = useMemo(() => users.filter((user) => (
     user.name.toLowerCase().includes(searchTerm.toLowerCase())
@@ -79,10 +82,33 @@ export default function Users() {
 
   function handleCloseDeleteModal() {
     setIsDeleteModalVisible(false);
+    setUserBeingDeleted(null);
   }
 
-  function handleConfirmDeleteUser() {
-    console.log(userBeingDeleted.id)
+  async function handleConfirmDeleteUser() {
+    try {
+      setIsLoadingDelete(true);
+
+      await UsersService.deleteUser(userBeingDeleted.id);
+
+      setUsers((prevState) => prevState.filter(
+        (user) => user.id !== userBeingDeleted.id,
+      ));
+
+      handleCloseDeleteModal();
+
+      toast({
+        type: 'success',
+        text: 'Usuário deletado com sucesso!',
+      });
+    } catch {
+      toast({
+        type: 'danger',
+        text: 'Ocorreu um erro ao deletar o usuário!',
+      });
+    } finally {
+      setIsLoadingDelete(false);
+    }
   }
 
   return (
@@ -90,6 +116,7 @@ export default function Users() {
       <Loader isLoading={isLoading} />
       <Modal
         danger
+        isLoading={isLoadingDelete}
         visible={isDeleteModalVisible}
         title={`Tem certeza que deseja remover o usuário "${userBeingDeleted?.name}"?`}
         confirmLabel={"Deletar"}

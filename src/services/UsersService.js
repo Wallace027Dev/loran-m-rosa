@@ -20,6 +20,10 @@ class UsersService {
   updateUser(id, user) {
     return this.HttpClient.put(`/users/${id}`, { body: user });
   };
+
+  deleteUser(id) {
+    return this.HttpClient.delete(`/users/${id}`);
+  }
 };
 
 export default new UsersService();

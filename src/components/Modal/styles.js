@@ -42,6 +42,10 @@ export const Footer = styled.footer`
     margin-right: 2.4rem;
     color: var(--tertiary);
     font-size: 1.2rem;
+
+    &[disabled] {
+      cursor: not-allowed;
+    }
   }
 
   .delete-button {

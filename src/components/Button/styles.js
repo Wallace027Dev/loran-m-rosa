@@ -19,9 +19,9 @@ export const StyledButton = styled.button`
   appearance: none;
 
   &[disabled] {
-    background: var(--tertiary); 
-    border-color: var(--tertiary);
-    cursor: default;
+    background: var(--tertiary) !important; 
+    border-color: var(--tertiary) !important;
+    cursor: default !important;
   }
 
   &::placeholder {
@@ -43,9 +43,9 @@ export const StyledButton = styled.button`
       border: 2px solid var(--danger);
 
       &:hover {
-        background: var(--danger-light);
-        border: 2px solid var(--danger-light);
-        color: var(--tertiary);
+        background: var(--danger-light !important);
+        border: 2px solid var(--danger-light) !important;
+        color: var(--danger-light) !important;
       };
 
       &:active {
