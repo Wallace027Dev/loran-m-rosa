@@ -1,8 +1,8 @@
 import PropTypes from 'prop-types';
-import ReactDOM from 'react-dom';
 
 import { OverLay, Container, Footer } from './styles';
 import Button from '../Button';
+import ReactPortal from '../ReactPortal';
 
 export default function Modal({
   danger,
@@ -17,8 +17,10 @@ export default function Modal({
 }) {
   if (!visible) {
     return null;
-  } else {
-    return ReactDOM.createPortal(
+  }
+
+  return (
+    <ReactPortal containerId='modal-root'>
       <OverLay>
         <Container danger={danger}>
           <h1>{title}</h1>
@@ -46,10 +48,9 @@ export default function Modal({
             </Button>
           </Footer>
         </Container>
-      </OverLay >,
-      document.getElementById('modal-root'),
-    );
-  }
+      </OverLay >
+    </ReactPortal>
+  )
 }
 
 Modal.propTypes = {
