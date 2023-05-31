@@ -7,6 +7,7 @@ import Loader from '../../components/Loader'
 
 import UsersService from '../../services/UsersService';
 import toast from '../../utils/toast'
+import useIsMounted from '../../hooks/useIsMounted'
 
 export default function EditUser() {
   const [isLoading, setIsLoading] = useState(true);
@@ -16,6 +17,7 @@ export default function EditUser() {
 
   const { id } = useParams();
   const navigate = useNavigate();
+  const isMounted = useIsMounted();
 
 
   useEffect(() => {
@@ -25,21 +27,26 @@ export default function EditUser() {
           id,
         );
 
-        userFormRef.current.setFieldsValues(user);
+        if (isMounted().current) {
+          userFormRef.current.setFieldsValues(user);
 
-        setIsLoading(false);
-        setUserName(user.name);
+          setIsLoading(false);
+          setUserName(user.name);
+        }
+
       } catch {
-        navigate('../../users');
-        toast({
-          type: 'danger',
-          text: 'Usuário não encontrado!',
-        });
+        if (isMounted().current) {
+          navigate('../../users');
+          toast({
+            type: 'danger',
+            text: 'Usuário não encontrado!',
+          });
+        }
       }
     }
 
     loadUsers()
-  }, [id, navigate])
+  }, [id, navigate, isMounted])
 
 
   async function handleSubmit(formData) {
