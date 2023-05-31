@@ -32,6 +32,8 @@ export default function Users() {
   const [searchTerm, setSearchTerm] = useState('');
   const [isLoading, setIsLoading] = useState(true);
   const [hasError, setHasError] = useState(false);
+  const [isDeleteModalVisible, setIsDeleteModalVisible] = useState(false);
+  const [userBeingDeleted, setUserBeingDeleted] = useState(null);
 
   const filteredUsers = useMemo(() => users.filter((user) => (
     user.name.toLowerCase().includes(searchTerm.toLowerCase())
@@ -70,22 +72,32 @@ export default function Users() {
     loadUsers();
   };
 
+  function handleDeleteUser(user) {
+    setUserBeingDeleted(user);
+    setIsDeleteModalVisible(true);
+  }
+
+  function handleCloseDeleteModal() {
+    setIsDeleteModalVisible(false);
+  }
+
+  function handleConfirmDeleteUser() {
+    console.log(userBeingDeleted.id)
+  }
+
   return (
     <Container>
       <Loader isLoading={isLoading} />
-
       <Modal
         danger
-        title={`Tem certeza que deseja remover o usuário ${name}?`}
+        visible={isDeleteModalVisible}
+        title={`Tem certeza que deseja remover o usuário "${userBeingDeleted?.name}"?`}
         confirmLabel={"Deletar"}
-        onCancel={() => alert('Cancelou')}
-        onConfirm={() => alert('Confirmou')}
+        onCancel={handleCloseDeleteModal}
+        onConfirm={handleConfirmDeleteUser}
       >
-        <h1>Olá 2</h1>
-        <p>Olá mundo</p>
-
+        <p>Esta ação não poderá ser desfeita!</p>
       </Modal>
-
 
 
 
@@ -181,7 +193,10 @@ export default function Users() {
                   <Link to={`../../user/edit/${user.id}`}>
                     <img src={edit} alt="Edit" />
                   </Link>
-                  <button type="button">
+                  <button
+                    type="button"
+                    onClick={() => handleDeleteUser(user)}
+                  >
                     <img src={trash} alt="Delete" />
                   </button>
                 </div>
