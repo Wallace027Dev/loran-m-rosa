@@ -16,6 +16,10 @@ class UsersService {
   createUser(user) {
     return this.HttpClient.post('/users', { body: user });
   };
+
+  updateUser(id, user) {
+    return this.HttpClient.put(`/users/${id}`, { body: user });
+  };
 };
 
 export default new UsersService();

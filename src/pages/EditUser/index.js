@@ -42,8 +42,32 @@ export default function EditUser() {
   }, [id, navigate])
 
 
-  function handleSubmit(formData) {
-    //
+  async function handleSubmit(formData) {
+    try {
+      const user = {
+        name: formData.name,
+        email: formData.email,
+        phone: formData.phone,
+        category_id: formData.categoryId,
+      };
+
+      const userData = await UsersService.updateUser(
+        id,
+        user,
+      );
+
+      setUserName(userData.name);
+      toast({
+        type: 'success',
+        text: 'Usuário editado com sucesso!',
+      });
+
+    } catch {
+      toast({
+        type: 'danger',
+        text: 'Ocorreu um erro ao editar o usuário!',
+      });
+    }
   };
 
   return (
