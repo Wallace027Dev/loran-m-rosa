@@ -19,6 +19,7 @@ export const Container = styled.main`
 
   button {
     margin-top: 5rem;
+    width: 100%;
   }
 
   .spc-betwn {

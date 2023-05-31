@@ -14,7 +14,7 @@ export const StyledButton = styled.button`
   font-weight: bold;
   height: 4rem;
   max-width: 50rem;
-  width: 100%;
+  padding: 0 1.6rem;
   transition: 0.2s ease-in;
   appearance: none;
 

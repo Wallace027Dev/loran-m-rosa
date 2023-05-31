@@ -3,7 +3,7 @@ import styled from 'styled-components';
 export const OverLay = styled.div`
   background: rgba(0, 0, 0, 0.6);
   backdrop-filter: blur(4px);
-  position: absolute;
+  position: fixed;
   width: 100%;
   height: 100%;
   left: 0;
@@ -20,13 +20,13 @@ export const Container = styled.div`
   border-radius: 15px;
   padding: 2.4rem;
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
-  h1 {
+  > h1 {
     font-size: 2.4rem;
     color: ${({ danger }) => (danger ? 'var(--danger)' : 'var(--primary)')};
   }
 
-  p {
-    margin-top: 0.8rem;
+  .modal-body {
+    margin-top: 3.2rem;
   }
 `;
 
@@ -39,7 +39,7 @@ export const Footer = styled.footer`
   .cancel-button {
     background: transparent;
     border: none;
-    margin-right: 0.8rem;
+    margin-right: 2.4rem;
     color: var(--tertiary);
     font-size: 1.2rem;
   }

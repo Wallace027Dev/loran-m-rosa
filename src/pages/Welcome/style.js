@@ -12,4 +12,8 @@ export const Container = styled.main`
 
 export const Buttons = styled.div`
   margin-top: 25vh;
+  button {
+    width: 100%;
+    margin-bottom: 0.8rem;
+  }
 `;
