@@ -79,6 +79,7 @@ export default function EditUser() {
 
       <PageHeader
         title={isLoading ? 'Carregando...' : `Editar ${userName}`}
+        path={"../../users"}
       />
       <UserForm
         ref={userFormRef}

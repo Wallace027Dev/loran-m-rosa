@@ -8,6 +8,7 @@ import Users from '../pages/Users';
 import NewUser from '../pages/NewUser';
 import EditUser from '../pages/EditUser';
 import Home from '../pages/Home';
+import { Payment } from '../pages/Payment';
 
 function AppRoutes() {
   return (
@@ -20,9 +21,11 @@ function AppRoutes() {
 
       <Route path="/user" element={<User />} />
       <Route path="/user/new" element={<NewUser />} />
-      <Route path="/user/edit/:id" element={<EditUser />} />
-
       <Route path="/users" element={<Users />} />
+
+      <Route path="/user/edit/:id" element={<EditUser />} />
+      <Route path="/user/id/payment" element={<Payment />} />
+
 
       <Route
         path="/"

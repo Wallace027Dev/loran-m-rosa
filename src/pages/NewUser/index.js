@@ -37,6 +37,7 @@ export default function NewUser() {
     <>
       <PageHeader
         title="Novo Usuário"
+        path={"../../users"}
       />
 
       <UserForm
