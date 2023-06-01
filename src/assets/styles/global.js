@@ -22,6 +22,7 @@ export default createGlobalStyle`
     --bg: #f6f5fc;
     --font: #303030;
 
+    --primary-dark: #7818f1;
     --primary: #9102d4;
     --secondary: #edebeb;
     --tertiary: #bfbfbf;
