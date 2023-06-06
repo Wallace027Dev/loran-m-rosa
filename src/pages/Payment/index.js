@@ -1,12 +1,14 @@
 import PageHeader from "../../components/PageHeader";
+import PaymentCard from "../../components/PaymentCard";
 import { ToggleSwitch } from "../../components/ToggleSwitch";
-import { Container, Paragraph } from "./styles";
+
+import { ToggleButtons, Paragraph } from "./styles";
 
 export function Payment() {
   return (
     <>
       <PageHeader
-        title='Pagamento'
+        title="Pagamento"
         path={"../../"}
       />
       <Paragraph>
@@ -15,7 +17,8 @@ export function Payment() {
         Seus anúncios serão exibidos por <b>sete </b>
         dias, e você poderá estender por mais dias.
       </Paragraph>
-      <Container>
+
+      <ToggleButtons>
         <ToggleSwitch
           adName="Reconhecimento"
           inputName="recognition"
@@ -51,11 +54,13 @@ export function Payment() {
           inputName="sales"
           inputId="boost-publication"
         />
-      </Container>
+      </ToggleButtons>
 
       <Paragraph>
         Para liberar cadastros e vendar é preciso usar a plataforma por alguns dias, após será liberado um pixel para adicionar ao seu site.
       </Paragraph>
+
+      <PaymentCard />
     </>
   )
 }

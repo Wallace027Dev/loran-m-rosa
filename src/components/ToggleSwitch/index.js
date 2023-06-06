@@ -15,6 +15,6 @@ export function ToggleSwitch({ adName, inputName, inputId }) {
 
 ToggleSwitch.propTypes = {
   adName: PropTypes.string.isRequired,
-  inputName: PropTypes.object.isRequired,
-  inputId: PropTypes.object.isRequired,
+  inputName: PropTypes.string.isRequired,
+  inputId: PropTypes.string.isRequired,
 };

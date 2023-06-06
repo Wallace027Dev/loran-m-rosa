@@ -13,6 +13,7 @@ h1 {
   width: 100%;
   padding: 0.8rem;
   border-radius: 1.6rem;
+  font-size: 1.6rem;
 }
 
 /* The switch - the box around the slider */
