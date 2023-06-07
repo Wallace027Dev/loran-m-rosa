@@ -1,14 +1,17 @@
 import { useState } from "react";
 import PropTypes from "prop-types";
 
-import { Container } from "./styles";
-import Input from "../Input";
+import pixCode from "../../assets/images/pixCode.png";
 
+import { CardContainer, PixContainer } from "./styles";
+
+import Input from "../Input";
 import FormGroup from "../FormGroup";
+import Button from "../Button";
+
 import useErrors from "../../hooks/useErrors";
 import isCardNumberValid from "../../utils/isCardNumberValid";
 import isCvvNumberValid from "../../utils/isCvvNumberValid";
-import Button from "../Button";
 
 export default function PaymentCard() {
   const [name, setName] = useState("");
@@ -73,9 +76,8 @@ export default function PaymentCard() {
 
   return (
     <>
-      <h2>Faça seu Pagamento no cartão</h2>
-
-      <Container>
+      <CardContainer>
+        <h2>Faça seu Pagamento no cartão...</h2>
         <form noValidate onSubmit={handleSubmit}>
           <div className="card-inputs">
             <label>Nome no cartão</label>
@@ -122,7 +124,18 @@ export default function PaymentCard() {
             Pagar
           </Button>
         </form>
-      </Container>
+      </CardContainer>
+
+      <PixContainer>
+        <h2>Ou pague no pix</h2>
+
+        <div className="pix">
+          <img src={pixCode} alt="Pix" />
+          <p>Se preferir:</p>
+          <strong>NOSSA CHAVE</strong>
+          <h2>(27) 99999-9999</h2>
+        </div>
+      </PixContainer>
     </>
   );
 }
@@ -130,21 +143,3 @@ export default function PaymentCard() {
 PaymentCard.propTypes = {
   onSubmit: PropTypes.func.isRequired,
 };
-
-/* 
-<Button
-        type="submit"
-        disabled={!isFormValid}
-        isLoading={isSubmitting}
-      >
-        {buttonLabel}
-      </Button>
-    </Form>
-  );
-
-});
-
-UserForm.propTypes = {
-  buttonLabel: PropTypes.string.isRequired,
-  onSubmit: PropTypes.func.isRequired,
-}; */
