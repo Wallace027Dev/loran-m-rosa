@@ -3,7 +3,8 @@ import Welcome from '../pages/Welcome';
 import Login from '../pages/Login';
 import Signup from '../pages/Signup';
 import Forgot from '../pages/Forgot';
-import User from '../pages/User';
+import Categories from '../pages/Categories';
+import NewCategory from '../pages/NewCategory';
 import Users from '../pages/Users';
 import NewUser from '../pages/NewUser';
 import EditUser from '../pages/EditUser';
@@ -19,10 +20,12 @@ function AppRoutes() {
       <Route path="/signup" element={<Signup />} />
       <Route path="/forgot" element={<Forgot />} />
 
-      <Route path="/user" element={<User />} />
-      <Route path="/user/new" element={<NewUser />} />
-      <Route path="/users" element={<Users />} />
+      <Route path="/categories" element={<Categories />} />
+      <Route path="/categorie/new" element={<NewCategory />} />
+      <Route path="/categorie/edit/:id" element={<EditUser />} />
 
+      <Route path="/users" element={<Users />} />
+      <Route path="/user/new" element={<NewUser />} />
       <Route path="/user/edit/:id" element={<EditUser />} />
       <Route path="/user/id/payment" element={<Payment />} />
 
