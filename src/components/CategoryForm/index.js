@@ -20,11 +20,11 @@ const CategoryForm = forwardRef(({ buttonLabel, onSubmit, }, ref) => {
     getErrorMessageByFieldName
   } = useErrors();
 
-  const isFormValid = (name && useErrors.length === 0);
+  const isFormValid = (name && errors.length === 0);
 
   useImperativeHandle(ref, () => ({
     setFieldsValues: (category) => {
-      category(category.name ?? '');
+      setName(category.name ?? '');
     },
 
     resetFields: () => {

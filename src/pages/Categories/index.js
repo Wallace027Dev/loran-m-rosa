@@ -211,10 +211,7 @@ export default function Categories() {
                 <div className="info">
                   <div className="category-name">
                     <strong>{category.name}</strong>
-                    {category.category_name && <small>{category.category_name}</small>}
                   </div>
-                  <span>{category.email}</span>
-                  <span>{category.phone}</span>
                 </div>
                 <div className="actions">
                   <Link to={`../../category/edit/${category.id}`}>

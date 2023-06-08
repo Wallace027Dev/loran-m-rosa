@@ -9,7 +9,7 @@ class CategoriesService {
     return this.HttpClient.get(`/categories?orderBy=${orderBy}`);
   };
 
-  getUserById(id) {
+  getCategoryById(id) {
     return this.HttpClient.get(`/categories/${id}`);
   };
 
