@@ -5,13 +5,25 @@ class CategoriesService {
     this.HttpClient = new HttpClient('http://localhost:3001');
   };
 
-  listCategories() {
-    return this.HttpClient.get('/categories');
+  listCategories(orderBy = 'asc') {
+    return this.HttpClient.get(`/categories?orderBy=${orderBy}`);
   };
 
-  createUser(categories) {
-    return this.HttpClient.post('/categories', categories);
+  getUserById(id) {
+    return this.HttpClient.get(`/categories/${id}`);
   };
+
+  createCategory(category) {
+    return this.HttpClient.post('/categories', { body: category });
+  };
+
+  updateCategory(id, category) {
+    return this.HttpClient.put(`/categories/${id}`, { body: category });
+  };
+
+  deleteCategory(id) {
+    return this.HttpClient.delete(`/categories/${id}`);
+  }
 };
 
 export default new CategoriesService();
