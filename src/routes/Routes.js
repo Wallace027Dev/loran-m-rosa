@@ -21,8 +21,8 @@ function AppRoutes() {
       <Route path="/forgot" element={<Forgot />} />
 
       <Route path="/categories" element={<Categories />} />
-      <Route path="/categorie/new" element={<NewCategory />} />
-      <Route path="/categorie/edit/:id" element={<EditUser />} />
+      <Route path="/category/new" element={<NewCategory />} />
+      <Route path="/category/edit/:id" element={<EditUser />} />
 
       <Route path="/users" element={<Users />} />
       <Route path="/user/new" element={<NewUser />} />
