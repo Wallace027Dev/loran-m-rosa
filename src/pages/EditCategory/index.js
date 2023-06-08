@@ -35,7 +35,7 @@ export default function EditCategory() {
         navigate('../../categories');
         toast({
           type: 'danger',
-          text: 'Categoria não encontrado!',
+          text: 'Categoria não encontrada!',
         });
 
       }
@@ -59,7 +59,7 @@ export default function EditCategory() {
       setCategoryName(categoryData.name);
       toast({
         type: 'success',
-        text: 'Categoria editado com sucesso!',
+        text: 'Categoria editada com sucesso!',
       });
 
     } catch {

@@ -99,12 +99,12 @@ export default function Categories() {
 
       toast({
         type: 'success',
-        text: 'Categoria deletado com sucesso!',
+        text: 'Categoria deletada com sucesso!',
       });
     } catch {
       toast({
         type: 'danger',
-        text: 'Ocorreu um erro ao deletar o categoria!',
+        text: 'Ocorreu um erro ao deletar a categoria!',
       });
     } finally {
       setIsLoadingDelete(false);
@@ -118,7 +118,7 @@ export default function Categories() {
         danger
         isLoading={isLoadingDelete}
         visible={isDeleteModalVisible}
-        title={`Tem certeza que deseja remover o categoria "${categoryBeingDeleted?.name}"?`}
+        title={`Tem certeza que deseja remover a categoria "${categoryBeingDeleted?.name}"?`}
         confirmLabel={"Deletar"}
         onCancel={handleCloseDeleteModal}
         onConfirm={handleConfirmDeleteCategory}
@@ -164,7 +164,7 @@ export default function Categories() {
             <img src={sad} alt="Sad Status" />
 
             <div className='datails'>
-              <strong>Ocorreu um erro ao obter os seus categorias.</strong>
+              <strong>Ocorreu um erro ao obter as suas categorias.</strong>
 
               <Button type='button' onClick={handleTryAgain}>
                 Tentar novamente
@@ -181,7 +181,7 @@ export default function Categories() {
               <EmptyListContainer>
                 <img src={emptyBox} alt="Empty box" />
                 <p>
-                  Você ainda não tem nenhuma categoria cadastrado!
+                  Você ainda não tem nenhuma categoria cadastrada!
                   Clique no botão <strong>”Nova categoria</strong> à cima para cadastrar a sua primeira!
                 </p>
               </EmptyListContainer>
