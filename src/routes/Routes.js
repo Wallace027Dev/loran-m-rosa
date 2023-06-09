@@ -28,11 +28,10 @@ function AppRoutes() {
       <Route path="/users" element={<Users />} />
       <Route path="/user/new" element={<NewUser />} />
       <Route path="/user/edit/:id" element={<EditUser />} />
-      <Route path="/user/id/payment" element={<Payment />} />
 
-
+      <Route path="/:id/payment" element={<Payment />} />
       <Route
-        path="/dashboard/:id"
+        path="/:id/dashboard"
         element={
           /* <ProtectedRoute> */
           <Dashboard />

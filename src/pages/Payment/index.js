@@ -1,18 +1,16 @@
-import PageHeader from "../../components/PageHeader";
-import PaymentCard from "../../components/PaymentCard";
-import { ToggleSwitch } from "../../components/ToggleSwitch";
+import PageHeader from '../../components/PageHeader';
+import PaymentCard from '../../components/PaymentCard';
+import { ToggleSwitch } from '../../components/ToggleSwitch';
 
-import { ToggleButtons, Paragraph } from "./styles";
+import { ToggleButtons, Paragraph } from './styles';
 
 export default function Payment() {
   return (
     <>
-      <PageHeader
-        title="Pagamento"
-        path={"../../"}
-      />
+      <PageHeader title="Pagamento" path={'../user/dashboard'} />
       <Paragraph>
-        Escolha quais anúncios quer veicular, e seu orçamento escolhido será dividido entre eles.
+        Escolha quais anúncios quer veicular, e seu orçamento escolhido será
+        dividido entre eles.
         <br />
         Seus anúncios serão exibidos por <b>sete </b>
         dias, e você poderá estender por mais dias.
@@ -24,11 +22,7 @@ export default function Payment() {
           inputName="recognition"
           inputId="recognition"
         />
-        <ToggleSwitch
-          adName="Tráfego"
-          inputName="traffic"
-          inputId="traffic"
-        />
+        <ToggleSwitch adName="Tráfego" inputName="traffic" inputId="traffic" />
         <ToggleSwitch
           adName="Mensagens Recebidas"
           inputName="receive-messages"
@@ -57,10 +51,11 @@ export default function Payment() {
       </ToggleButtons>
 
       <Paragraph>
-        Para liberar cadastros e vendar é preciso usar a plataforma por alguns dias, após será liberado um pixel para adicionar ao seu site.
+        Para liberar cadastros e vendar é preciso usar a plataforma por alguns
+        dias, após será liberado um pixel para adicionar ao seu site.
       </Paragraph>
 
       <PaymentCard />
     </>
-  )
+  );
 }

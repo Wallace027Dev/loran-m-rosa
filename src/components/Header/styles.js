@@ -60,6 +60,18 @@ export const Container = styled.header`
     display: none;
   }
 
+  .banner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 4.8rem;
+    margin-bottom: 7.2rem;
+
+    img {
+      width: 25rem;
+    }
+  }
+
   @media screen and (max-width: 730px) {
     .nav-bar {
       padding: 1.5rem 4rem;
