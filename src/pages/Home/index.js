@@ -1,41 +1,28 @@
-import styled from 'styled-components';
-import BarChart from '../../charts/BarChart';
-import PieChart from '../../charts/PieCharts';
-import RadarChart from '../../charts/RadarCharts';
+import { Link } from 'react-router-dom';
+import { Container, Buttons } from './style';
+import Button from '../../components/Button';
 
-const Main = styled.main`
-  display: flex;
-  flex-direction: column;
-`;
-
-function Home() {
-
-
+function Welcome() {
   return (
-    <Main className="center">
-
-      <div>
-        <h1>Gráfico Barra</h1>
-        <div>
-          <BarChart />
-        </div>
-      </div>
-
-      <div>
-        <h1>Gráfico Pizza</h1>
-        <div>
-          <PieChart />
-        </div>
-      </div>
-
-      <div>
-        <h1>Gráfico Radar</h1>
-        <div>
-          <RadarChart />
-        </div>
-      </div>
-    </Main>
+    <Container>
+      <p>
+        Crie a sua conta para anunciar com a
+        {' '}
+        <u>Bakoads</u>
+        {' '}
+        e mostre seus
+        produtos e serviços para milhares de pessoas
+      </p>
+      <Buttons>
+        <Link className="lnk" to="/signup">
+          <Button>Inscreva-se</Button>
+        </Link>
+        <Link className="lnk txt-center" to="/login">
+          Entrar com Email e senha
+        </Link>
+      </Buttons>
+    </Container>
   );
 }
 
-export default Home;
+export default Welcome;

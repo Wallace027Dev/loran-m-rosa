@@ -4,7 +4,7 @@ import { ToggleSwitch } from "../../components/ToggleSwitch";
 
 import { ToggleButtons, Paragraph } from "./styles";
 
-export function Payment() {
+export default function Payment() {
   return (
     <>
       <PageHeader

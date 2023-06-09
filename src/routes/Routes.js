@@ -1,5 +1,4 @@
 import { Routes, Route } from 'react-router-dom';
-import Welcome from '../pages/Welcome';
 import Login from '../pages/Login';
 import Signup from '../pages/Signup';
 import Forgot from '../pages/Forgot';
@@ -10,12 +9,13 @@ import Users from '../pages/Users';
 import NewUser from '../pages/NewUser';
 import EditUser from '../pages/EditUser';
 import Home from '../pages/Home';
-import { Payment } from '../pages/Payment';
+import Dashboard from '../pages/Dashboard';
+import Payment from '../pages/Payment';
 
 function AppRoutes() {
   return (
     <Routes>
-      <Route path="/welcome" element={<Welcome />} />
+      <Route path="/" element={<Home />} />
 
       <Route path="/login" element={<Login />} />
       <Route path="/signup" element={<Signup />} />
@@ -32,10 +32,10 @@ function AppRoutes() {
 
 
       <Route
-        path="/"
+        path="/dashboard/:id"
         element={
           /* <ProtectedRoute> */
-          <Home />
+          <Dashboard />
           /* </ProtectedRoute> */
         }
       />
