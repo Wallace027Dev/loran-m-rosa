@@ -17,8 +17,8 @@ function App() {
 
         <ToastContainer />
 
+        <Header />
         <Container>
-          <Header />
           <AppRoutes />
         </Container>
       </BrowserRouter>
