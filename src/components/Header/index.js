@@ -1,9 +1,10 @@
+import { useLocation } from 'react-router-dom';
+
 import { Container } from './styles';
 
 import bakoads from '../../assets/images/bakoads.png';
 import menu from '../../assets/images/icons/menuMobile.svg';
 import xCirclePrimary from '../../assets/images/icons/xCirclePrimary.svg';
-import { useLocation } from 'react-router-dom';
 
 export default function Header() {
   const location = useLocation();

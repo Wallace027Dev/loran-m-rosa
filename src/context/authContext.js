@@ -1,6 +1,4 @@
-import React, {
-  createContext, useState, useEffect, useContext,
-} from 'react';
+import React, { createContext, useState, useEffect, useContext } from 'react';
 import {
   createUserWithEmailAndPassword,
   onAuthStateChanged,
@@ -30,6 +28,10 @@ export function AuthProvider({ children }) {
   function signIn(email, password, token) {
     localStorage.setItem('token', token);
     setCurrentUser({ token });
+
+    console.log(auth);
+    console.log(token);
+
     return signInWithEmailAndPassword(auth, email, password);
   }
 

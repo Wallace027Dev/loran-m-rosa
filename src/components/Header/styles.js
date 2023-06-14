@@ -6,7 +6,7 @@ export const Container = styled.header`
     align-items: center;
     justify-content: space-between;
     background: var(--secondary);
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.04);
+    box-shadow: 0px 0px 4px 10px rgba(0, 0, 0, 0.04);
     padding: 1.5rem 6rem;
   }
   .logo {
@@ -37,21 +37,6 @@ export const Container = styled.header`
     }
   }
 
-  .login-button {
-    button {
-      border: none;
-      background: var(--primary);
-      padding: 1rem 1.5rem;
-      border-radius: 1.5rem;
-    }
-
-    a {
-      text-decoration: none;
-      color: var(--bg);
-      font-size: 1.2rem;
-    }
-  }
-
   .mobile-menu-icon {
     display: none;
   }
@@ -77,8 +62,7 @@ export const Container = styled.header`
       padding: 1.5rem 4rem;
     }
 
-    .nav-item,
-    .login-button {
+    .nav-item {
       display: none;
     }
 
@@ -102,15 +86,6 @@ export const Container = styled.header`
         .nav-item {
           display: block !important;
           padding-top: 1.2rem;
-        }
-      }
-
-      .login-button {
-        display: block !important;
-        padding: 1rem 2rem;
-
-        button {
-          width: 100%;
         }
       }
     }
