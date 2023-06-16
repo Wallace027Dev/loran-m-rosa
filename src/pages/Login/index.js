@@ -3,7 +3,6 @@ import { Link, useNavigate } from 'react-router-dom';
 
 import isEmailValid from '../../utils/isEmailValid';
 import useErrors from '../../hooks/useErrors';
-import { useAuth } from '../../context/authContext';
 
 import { Container } from './styles';
 
@@ -12,7 +11,6 @@ import Button from '../../components/Button';
 import FormGroup from '../../components/FormGroup';
 
 function Login() {
-  const { signIn } = useAuth();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false);
@@ -21,8 +19,6 @@ function Login() {
 
   function handleEmailChange(e) {
     setEmail(e.target.value);
-    // Checks if the user has typed something in the
-    // 'email' field and validates using regex
     if ((e.target.value && !e.target.value) || !isEmailValid(e.target.value)) {
       setError({ field: 'email', message: 'E-mail inválido.' });
     } else {
@@ -33,13 +29,10 @@ function Login() {
   function handlePasswordChange(e) {
     setPassword(e.target.value);
 
-    // check if it has 6 characters or more
-    // check if you have a number
-    // check if it has a capital letter
     if (
-      !e.target.value.match(/.{6,}/)
-      || !e.target.value.match(/[0-9]{1,}/)
-      || !e.target.value.match(/[A-Z]{1,}/)
+      !e.target.value.match(/.{6,}/) ||
+      !e.target.value.match(/[0-9]{1,}/) ||
+      !e.target.value.match(/[A-Z]{1,}/)
     ) {
       setError({
         field: 'password',
@@ -57,7 +50,8 @@ function Login() {
     setLoading(true);
 
     try {
-      await signIn(email, password);
+      const { email, password } = req.body;
+
       navigate('/');
     } catch (error) {
       console.log(error);

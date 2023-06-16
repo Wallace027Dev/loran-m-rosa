@@ -1,67 +1,30 @@
 import PropTypes from 'prop-types';
-import { useState, useEffect, forwardRef, useImperativeHandle } from 'react';
+import { useState } from 'react';
 
 import isEmailValid from '../../utils/isEmailValid';
 import formatPhone from '../../utils/formatPhone';
 import useErrors from '../../hooks/useErrors';
-import CategoriesService from '../../services/CategoriesService'
 
 import { Form } from './styles';
 
 import FormGroup from '../FormGroup';
 import Input from '../Input';
-import Select from '../Select';
 import Button from '../Button';
 
-const UserForm = forwardRef(({ buttonLabel, onSubmit, }, ref) => {
+export default function UserForm({ buttonLabel, onSubmit }) {
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const [name, setName] = useState('');
+  const [instagram, setInstagram] = useState('');
+  const [facebook, setFacebook] = useState('');
   const [email, setEmail] = useState('');
   const [phone, setPhone] = useState('');
-  const [categoryId, setCategoryId] = useState('');
-  const [categories, setCategories] = useState([]);
-  const [isLoadingCategories, setIsLoadingCategories] = useState(true);
-  const [isSubmitting, setIsSubmitting] = useState(false)
+  const [password, setPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
 
-  const {
-    errors,
-    setError,
-    removeError,
-    getErrorMessageByFieldName
-  } = useErrors();
+  const { errors, setError, removeError, getErrorMessageByFieldName } =
+    useErrors();
 
-  const isFormValid = (name && errors.length === 0);
-
-  useImperativeHandle(ref, () => ({
-    setFieldsValues: (user) => {
-      setName(user.name ?? '');
-      setEmail(user.email ?? '');
-      setPhone(formatPhone(user.phone) ?? '');
-      setCategoryId(user.category_id ?? '');
-    },
-
-    resetFields: () => {
-      setName('');
-      setEmail('');
-      setPhone('');
-      setCategoryId('');
-    }
-  }), []);
-
-  useEffect(() => {
-    async function loadCategories() {
-      try {
-        const categoriesList = await CategoriesService.listCategories();
-
-        setCategories(categoriesList);
-      } catch {
-        //
-      } finally {
-        setIsLoadingCategories(false);
-      }
-    }
-
-    loadCategories();
-  }, [setCategories]);
+  const isFormValid = name && errors.length === 0;
 
   function handleNameChange(e) {
     setName(e.target.value);
@@ -69,22 +32,49 @@ const UserForm = forwardRef(({ buttonLabel, onSubmit, }, ref) => {
       setError({ field: 'name', message: 'Nome é obrigatório.' });
     } else {
       removeError('name');
-    };
-  };
+    }
+  }
+
+  function handleInstagramChange(e) {
+    setInstagram(e.target.value);
+  }
+
+  function handleFacebookChange(e) {
+    setFacebook(e.target.value);
+  }
 
   function handleEmailChange(e) {
     setEmail(e.target.value);
-    // Checks if the user has typed something in the
-    // 'email' field and validates using regex
     if (e.target.value && !isEmailValid(e.target.value)) {
       setError({ field: 'email', message: 'E-mail inválido.' });
     } else {
       removeError('email');
-    };
-  };
+    }
+  }
 
   function handlePhoneChange(e) {
-    setPhone(formatPhone(e.target.value));
+    setPhone(e.target.value);
+  }
+
+  function handlePasswordChange(e) {
+    setPassword(e.target.value);
+    if (
+      !e.target.value.match(/.{6,}/) ||
+      !e.target.value.match(/[0-9]{1,}/) ||
+      !e.target.value.match(/[A-Z]{1,}/)
+    ) {
+      setError({
+        field: 'password',
+        message:
+          'Senha deve conter mais de 6 caracteres, número, letra maíuscula e minúscula.',
+      });
+    } else {
+      removeError('password');
+    }
+  }
+
+  function handleConfirmPasswordChange(e) {
+    setConfirmPassword(e.target.value);
   }
 
   async function handleSubmit(e) {
@@ -93,11 +83,16 @@ const UserForm = forwardRef(({ buttonLabel, onSubmit, }, ref) => {
     setIsSubmitting(true);
 
     await onSubmit({
-      name, email, phone, categoryId,
-    })
+      name,
+      instagram,
+      facebook,
+      email,
+      phone,
+      password,
+    });
 
     setIsSubmitting(false);
-  };
+  }
 
   return (
     <Form noValidate onSubmit={handleSubmit}>
@@ -109,6 +104,26 @@ const UserForm = forwardRef(({ buttonLabel, onSubmit, }, ref) => {
           onChange={handleNameChange}
           error={getErrorMessageByFieldName('name')}
           disabled={isSubmitting}
+        />
+      </FormGroup>
+
+      <FormGroup>
+        <Input
+          type="text"
+          value={instagram}
+          disabled={isSubmitting}
+          onChange={handleInstagramChange}
+          placeholder="Insira o nome de seu instagram.."
+        />
+      </FormGroup>
+
+      <FormGroup>
+        <Input
+          type="text"
+          value={facebook}
+          disabled={isSubmitting}
+          onChange={handleFacebookChange}
+          placeholder="Insira o nome de seu facebook.."
         />
       </FormGroup>
 
@@ -134,37 +149,34 @@ const UserForm = forwardRef(({ buttonLabel, onSubmit, }, ref) => {
         />
       </FormGroup>
 
-      <FormGroup isLoading={isLoadingCategories}>
-        <Select
-          value={categoryId}
-          onChange={(e) => setCategoryId(e.target.value)}
-          disabled={isLoadingCategories || isSubmitting}
-        >
-          <option value="">Sem categoria</option>
-
-          {categories.map((category) => (
-            <option key={category.id} value={category.id}>
-              {category.name}
-            </option>
-          ))};
-        </Select>
+      <FormGroup error={getErrorMessageByFieldName('password')}>
+        <Input
+          type="password"
+          value={password}
+          onChange={handlePasswordChange}
+          placeholder="Insira sua senha..."
+          error={getErrorMessageByFieldName('password')}
+        />
       </FormGroup>
 
-      <Button
-        type="submit"
-        disabled={!isFormValid}
-        isLoading={isSubmitting}
-      >
+      <FormGroup error={getErrorMessageByFieldName('confirmPassword')}>
+        <Input
+          type="password"
+          value={confirmPassword}
+          placeholder="Insira sua senha novamente..."
+          onChange={handleConfirmPasswordChange}
+          error={getErrorMessageByFieldName('confirmPassword')}
+        />
+      </FormGroup>
+
+      <Button type="submit" disabled={!isFormValid} isLoading={isSubmitting}>
         {buttonLabel}
       </Button>
     </Form>
   );
-
-});
+}
 
 UserForm.propTypes = {
   buttonLabel: PropTypes.string.isRequired,
   onSubmit: PropTypes.func.isRequired,
 };
-
-export default UserForm;

@@ -8,6 +8,7 @@ export const Container = styled.main`
     flex-direction: column;
     justify-content: left;
     label {
+      margin-top: 0.8rem;
       color: var(--primary);
       font-weight: bold;
       font-size: 1.6rem;

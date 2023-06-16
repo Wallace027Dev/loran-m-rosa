@@ -9,7 +9,7 @@ export default function Button({
   isLoading,
   children,
   danger,
-  onClick
+  onClick,
 }) {
   return (
     <StyledButton
@@ -21,7 +21,7 @@ export default function Button({
       {!isLoading && children}
       {isLoading && <Spinner size={16} />}
     </StyledButton>
-  )
+  );
 }
 
 Button.propTypes = {
