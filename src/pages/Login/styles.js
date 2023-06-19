@@ -24,12 +24,12 @@ export const Container = styled.main`
     margin-top: 4.5rem;
     width: 100%;
   }
+`;
 
-  .spc-betwn {
-    margin-top: 0.8rem;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    flex-direction: row;
-  }
+export const OthersOptions = styled.div`
+  margin-top: 0.8rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-direction: row;
 `;

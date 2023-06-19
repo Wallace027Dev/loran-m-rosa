@@ -1,13 +1,13 @@
 import { Link, useNavigate } from 'react-router-dom';
-import { forwardRef, useRef } from 'react';
+import { useRef } from 'react';
 
-import { Container } from './styles';
+import { Container, OthersOptions } from './styles';
 
 import UserForm from '../../components/UserForm';
 import UsersService from '../../services/UsersService';
 import toast from '../../utils/toast';
 
-const Signup = forwardRef((props, ref) => {
+export default function Signup() {
   const userFormRef = useRef(null);
   const navigate = useNavigate();
 
@@ -23,9 +23,6 @@ const Signup = forwardRef((props, ref) => {
       };
 
       await UsersService.createUser(user);
-
-      userFormRef.current;
-      console.log(userFormRef.current);
 
       toast({
         type: 'success',
@@ -44,16 +41,14 @@ const Signup = forwardRef((props, ref) => {
 
   return (
     <Container>
-      <UserForm ref={ref} onSubmit={handleSubmit} buttonLabel="Cadastrar" />
+      <UserForm onSubmit={handleSubmit} buttonLabel="Cadastrar" />
 
-      <div>
+      <OthersOptions>
         <span>Já tem uma conta?</span>
         <Link className="lnk" to="/login">
           Logue-se
         </Link>
-      </div>
+      </OthersOptions>
     </Container>
   );
-});
-
-export default Signup;
+}

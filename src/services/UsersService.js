@@ -17,6 +17,10 @@ class UsersService {
     return this.HttpClient.post('/auth/signup', { body: user });
   }
 
+  loginUser(user) {
+    return this.HttpClient.post('/auth/signin', { body: user });
+  }
+
   updateUser(id, user) {
     return this.HttpClient.put(`/users/${id}`, { body: user });
   }

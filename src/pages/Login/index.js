@@ -4,11 +4,13 @@ import { Link, useNavigate } from 'react-router-dom';
 import isEmailValid from '../../utils/isEmailValid';
 import useErrors from '../../hooks/useErrors';
 
-import { Container } from './styles';
+import { Container, OthersOptions } from './styles';
 
 import Input from '../../components/Input';
 import Button from '../../components/Button';
 import FormGroup from '../../components/FormGroup';
+import UsersService from '../../services/UsersService';
+import toast from '../../utils/toast';
 
 function Login() {
   const [email, setEmail] = useState('');
@@ -47,12 +49,20 @@ function Login() {
   async function handleSubmit(e) {
     e.preventDefault();
 
-    setLoading(true);
-
     try {
-      const { email, password } = req.body;
+      const user = {
+        email,
+        password,
+      };
 
-      navigate('/');
+      await UsersService.loginUser(user);
+
+      toast({
+        type: 'success',
+        text: 'Usuário cadastrado com sucesso!',
+      });
+
+      navigate(`../${user.id}/dashboard`);
     } catch (error) {
       console.log(error);
       setError({
@@ -60,16 +70,13 @@ function Login() {
         message: 'Algo está incorreto.',
       });
     }
-
-    setLoading(false);
   }
 
   return (
     <Container>
       <p>Administre a sua conta</p>
-      <form noValidate onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit}>
         <label>Email</label>
-
         <FormGroup error={getErrorMessageByFieldName('email')}>
           <Input
             type="email"
@@ -81,12 +88,12 @@ function Login() {
           />
         </FormGroup>
 
-        <div className="spc-betwn">
+        <OthersOptions>
           <label>Senha</label>
           <Link className="lnk" to="/forgot">
             Esqueceu sua senha?
           </Link>
-        </div>
+        </OthersOptions>
 
         <FormGroup error={getErrorMessageByFieldName('password')}>
           <Input
@@ -97,15 +104,17 @@ function Login() {
             error={getErrorMessageByFieldName('password')}
           />
         </FormGroup>
-        <Button disable={loading}>Login</Button>
+        <Button type="submit" disable={loading}>
+          Login
+        </Button>
       </form>
 
-      <div className="spc-betwn">
-        <span style={{ color: 'var(--tertiary)' }}>Não tem uma conta?</span>
+      <OthersOptions>
+        <span>Não tem uma conta?</span>
         <Link className="lnk" to="/signup">
           Inscreva-se
         </Link>
-      </div>
+      </OthersOptions>
     </Container>
   );
 }
