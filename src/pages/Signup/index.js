@@ -1,5 +1,4 @@
 import { Link, useNavigate } from 'react-router-dom';
-import { useRef } from 'react';
 
 import { Container, OthersOptions } from './styles';
 
@@ -9,7 +8,6 @@ import toast from '../../utils/toast';
 import { useAuth } from '../../context/authContext';
 
 export default function Signup() {
-  const userFormRef = useRef(null);
   const navigate = useNavigate();
   const { signUp } = useAuth();
 

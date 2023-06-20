@@ -20,7 +20,7 @@ class UsersService {
   }
 
   createUser(user) {
-    return this.HttpClient.post('/auth/signup', { body: user });
+    return this.HttpClient.post('/auth/signup', { body: user, headers });
   }
 
   loginUser(user) {

@@ -92,6 +92,13 @@ export default function UserForm({ buttonLabel, onSubmit }) {
     });
 
     setIsSubmitting(false);
+
+    setName('');
+    setInstagram('');
+    setFacebook('');
+    setEmail('');
+    setPhone('');
+    setPassword('');
   }
 
   return (

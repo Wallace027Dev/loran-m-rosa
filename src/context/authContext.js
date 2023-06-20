@@ -1,12 +1,5 @@
 import React, { createContext, useState, useEffect, useContext } from 'react';
 
-import {
-  createUserWithEmailAndPassword,
-  onAuthStateChanged,
-} from 'firebase/auth';
-
-import { auth } from '../services/firebase';
-
 import UsersService from '../services/UsersService';
 
 const AuthContext = createContext();
@@ -49,13 +42,6 @@ export function AuthProvider({ children }) {
     if (token) {
       setCurrentUser({ token });
     }
-  }, []);
-
-  useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, (user) => {
-      setCurrentUser(user);
-    });
-    return unsubscribe;
   }, []);
 
   return (

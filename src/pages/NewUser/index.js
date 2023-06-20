@@ -1,11 +1,11 @@
-import { useRef } from 'react';
 import PageHeader from '../../components/PageHeader';
 import UserForm from '../../components/UserForm';
-import UsersService from '../../services/UsersService';
 import toast from '../../utils/toast';
 
+import { useAuth } from '../../context/authContext';
+
 export default function NewUser() {
-  const userFormRef = useRef(null);
+  const { signUp } = useAuth();
 
   async function handleSubmit(formData) {
     try {
@@ -13,13 +13,12 @@ export default function NewUser() {
         name: formData.name,
         instagram: formData.instagram,
         facebook: formData.facebook,
-        phone: formData.phone,
         email: formData.email,
+        phone: formData.phone,
+        password: formData.password,
       };
 
-      await UsersService.createUser(user);
-
-      userFormRef.current.resetFields();
+      await signUp(user);
 
       toast({
         type: 'success',
@@ -37,11 +36,7 @@ export default function NewUser() {
     <>
       <PageHeader title="Novo Usuário" path={'../../users'} />
 
-      <UserForm
-        ref={userFormRef}
-        onSubmit={handleSubmit}
-        buttonLabel="Cadastrar"
-      />
+      <UserForm onSubmit={handleSubmit} buttonLabel="Cadastrar" />
     </>
   );
 }
