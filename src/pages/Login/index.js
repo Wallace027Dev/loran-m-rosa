@@ -3,19 +3,20 @@ import { Link, useNavigate } from 'react-router-dom';
 
 import isEmailValid from '../../utils/isEmailValid';
 import useErrors from '../../hooks/useErrors';
+import { useAuth } from '../../context/authContext';
 
 import { Container, OthersOptions } from './styles';
 
 import Input from '../../components/Input';
 import Button from '../../components/Button';
 import FormGroup from '../../components/FormGroup';
-import UsersService from '../../services/UsersService';
 import toast from '../../utils/toast';
 
 function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false);
+  const { signIn } = useAuth();
   const { setError, removeError, getErrorMessageByFieldName } = useErrors();
   const navigate = useNavigate();
 
@@ -50,24 +51,19 @@ function Login() {
     e.preventDefault();
 
     try {
-      const user = {
-        email,
-        password,
-      };
-
-      await UsersService.loginUser(user);
+      await signIn(email, password);
 
       toast({
         type: 'success',
-        text: 'Usuário cadastrado com sucesso!',
+        text: 'Usuário logado com sucesso!',
       });
 
-      navigate(`../${user.id}/dashboard`);
+      navigate(`../admin/dashboard`);
     } catch (error) {
       console.log(error);
-      setError({
-        field: 'password',
-        message: 'Algo está incorreto.',
+      toast({
+        type: 'danger',
+        text: 'Ocorreu um erro ao tentar logar com o usuário!',
       });
     }
   }

@@ -4,12 +4,14 @@ import { useRef } from 'react';
 import { Container, OthersOptions } from './styles';
 
 import UserForm from '../../components/UserForm';
-import UsersService from '../../services/UsersService';
 import toast from '../../utils/toast';
+
+import { useAuth } from '../../context/authContext';
 
 export default function Signup() {
   const userFormRef = useRef(null);
   const navigate = useNavigate();
+  const { signUp } = useAuth();
 
   async function handleSubmit(formData) {
     try {
@@ -22,7 +24,7 @@ export default function Signup() {
         password: formData.password,
       };
 
-      await UsersService.createUser(user);
+      await signUp(user);
 
       toast({
         type: 'success',

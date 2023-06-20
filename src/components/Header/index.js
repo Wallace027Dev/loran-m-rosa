@@ -10,8 +10,8 @@ export default function Header() {
   const location = useLocation();
 
   const showLinks =
-    location.pathname === `/user/dashboard` ||
-    location.pathname === `/user/account`;
+    location.pathname === `/admin/dashboard` ||
+    location.pathname === `/admin/account`;
 
   function menuShow() {
     let menuMobile = document.querySelector('.mobile-menu');
@@ -48,17 +48,11 @@ export default function Header() {
                     </a>
                   </li>
                   <li className="nav-item">
-                    <a href="./payment" className="nav-link">
-                      Meus dados
+                    <a href="../../users" className="nav-link">
+                      Usuários
                     </a>
                   </li>
                 </ul>
-              </div>
-
-              <div className="login-button">
-                <button>
-                  <a href="">Entrar</a>
-                </button>
               </div>
 
               <div className="mobile-menu-icon">
@@ -76,17 +70,11 @@ export default function Header() {
                   </a>
                 </li>
                 <li className="nav-item">
-                  <a href="./payment" className="nav-link">
-                    Meus dados
+                  <a href="../../users" className="nav-link">
+                    Usuários
                   </a>
                 </li>
               </ul>
-
-              <div className="login-button">
-                <button>
-                  <a href="">Entrar</a>
-                </button>
-              </div>
             </div>
           </>
         ) : (

@@ -8,33 +8,34 @@ export const Container = styled.header`
     background: var(--secondary);
     box-shadow: 0px 0px 4px 10px rgba(0, 0, 0, 0.04);
     padding: 1.5rem 6rem;
-  }
-  .logo {
-    img {
-      width: 16rem;
+
+    .logo {
+      img {
+        width: 16rem;
+      }
     }
-  }
 
-  .nav-list {
-    display: flex;
-    align-items: center;
-
-    ul {
+    .nav-list {
       display: flex;
-      justify-content: center;
-      list-style: none;
+      align-items: center;
 
-      .nav-item {
-        margin: 0 1.5rem;
+      ul {
+        display: flex;
+        justify-content: center;
+        list-style: none;
 
-        .nav-link {
-          color: var(--primary);
-          text-decoration: none;
-          font-size: 1.6rem;
-          font-weight: bold;
+        .nav-item {
+          margin: 0 1.5rem;
         }
       }
     }
+  }
+
+  .nav-link {
+    color: var(--primary);
+    text-decoration: none;
+    font-size: 1.6rem;
+    font-weight: bold;
   }
 
   .mobile-menu-icon {

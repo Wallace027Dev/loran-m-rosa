@@ -46,6 +46,7 @@ class HttpClient {
         headers.append(name, value);
       });
     }
+
     const response = await fetch(`${this.baseURL}${path}`, {
       method: options.method,
       body: JSON.stringify(options.body),

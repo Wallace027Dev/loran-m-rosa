@@ -1,12 +1,13 @@
 import React, { createContext, useState, useEffect, useContext } from 'react';
+
 import {
   createUserWithEmailAndPassword,
   onAuthStateChanged,
-  signInWithEmailAndPassword,
-  sendPasswordResetEmail,
-  signOut,
 } from 'firebase/auth';
+
 import { auth } from '../services/firebase';
+
+import UsersService from '../services/UsersService';
 
 const AuthContext = createContext();
 
@@ -18,31 +19,30 @@ export function AuthProvider({ children }) {
   const [currentUser, setCurrentUser] = useState();
 
   function logOut() {
-    return signOut(auth);
+    localStorage.removeItem('token');
+    setCurrentUser(null);
   }
 
-  function signUp(email, password) {
-    return createUserWithEmailAndPassword(auth, email, password);
+  async function signUp(user) {
+    await UsersService.createUser(user);
   }
 
-  function signIn(email, password, token) {
+  async function signIn(email, password) {
+    const user = {
+      email,
+      password,
+    };
+
+    const { token } = await UsersService.loginUser(user);
+
     localStorage.setItem('token', token);
     setCurrentUser({ token });
-
-    console.log(auth);
-    console.log(token);
-
-    return signInWithEmailAndPassword(auth, email, password);
   }
 
-  function resetPassword(newEmail) {
-    return sendPasswordResetEmail(auth, newEmail);
-  }
-
-  const isAuthenticated = () => {
+  function isAuthenticated() {
     const token = localStorage.getItem('token');
     return !!token;
-  };
+  }
 
   useEffect(() => {
     const token = localStorage.getItem('token');
@@ -61,12 +61,11 @@ export function AuthProvider({ children }) {
   return (
     <AuthContext.Provider
       value={{
-        resetPassword,
-        signUp,
-        signIn,
-        logOut,
-        currentUser,
-        isAuthenticated,
+        signUp: signUp,
+        signIn: signIn,
+        logOut: logOut,
+        isAuthenticated: isAuthenticated,
+        currentUser: currentUser,
       }}
     >
       {children}
