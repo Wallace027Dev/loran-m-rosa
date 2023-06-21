@@ -3,10 +3,10 @@ import { useEffect, useRef, useState } from 'react';
 
 import PageHeader from '../../components/PageHeader';
 import UserForm from '../../components/UserForm';
-import Loader from '../../components/Loader'
+import Loader from '../../components/Loader';
 
 import UsersService from '../../services/UsersService';
-import toast from '../../utils/toast'
+import toast from '../../utils/toast';
 
 export default function EditUser() {
   const [isLoading, setIsLoading] = useState(true);
@@ -17,61 +17,53 @@ export default function EditUser() {
   const { id } = useParams();
   const navigate = useNavigate();
 
-
   useEffect(() => {
     async function loadUsers() {
       try {
-        const user = await UsersService.getUserById(
-          id,
-        );
+        const user = await UsersService.getUserById(id);
 
         userFormRef.current.setFieldsValues(user);
 
         setIsLoading(false);
         setUserName(user.name);
-
-
       } catch {
         navigate('../../users');
         toast({
           type: 'danger',
           text: 'Usuário não encontrado!',
         });
-
       }
     }
 
-    loadUsers()
-  }, [id, navigate])
-
+    loadUsers();
+  }, [id, navigate]);
 
   async function handleSubmit(formData) {
     try {
       const user = {
         name: formData.name,
+        instagram: formData.instagram,
+        facebook: formData.facebook,
         email: formData.email,
         phone: formData.phone,
-        category_id: formData.categoryId,
       };
 
-      const userData = await UsersService.updateUser(
-        id,
-        user,
-      );
+      await UsersService.updateUser(id, user);
 
-      setUserName(userData.name);
+      console.log(user);
+
       toast({
         type: 'success',
         text: 'Usuário editado com sucesso!',
       });
-
-    } catch {
+    } catch (error) {
+      console.log(error);
       toast({
         type: 'danger',
         text: 'Ocorreu um erro ao editar o usuário!',
       });
     }
-  };
+  }
 
   return (
     <>
@@ -79,7 +71,7 @@ export default function EditUser() {
 
       <PageHeader
         title={isLoading ? 'Carregando...' : `Editar ${userName}`}
-        path={"../../users"}
+        path={'../../users'}
       />
       <UserForm
         ref={userFormRef}
@@ -88,4 +80,4 @@ export default function EditUser() {
       />
     </>
   );
-};
+}

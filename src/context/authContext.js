@@ -18,6 +18,7 @@ export function AuthProvider({ children }) {
 
   async function signUp(user) {
     await UsersService.createUser(user);
+    console.log(user);
   }
 
   async function signIn(email, password) {

@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import { useState } from 'react';
+import { forwardRef, useImperativeHandle, useState } from 'react';
 
 import isEmailValid from '../../utils/isEmailValid';
 import formatPhone from '../../utils/formatPhone';
@@ -11,7 +11,7 @@ import FormGroup from '../FormGroup';
 import Input from '../Input';
 import Button from '../Button';
 
-export default function UserForm({ buttonLabel, onSubmit }) {
+const UserForm = forwardRef(({ buttonLabel, onSubmit }, ref) => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [name, setName] = useState('');
   const [instagram, setInstagram] = useState('');
@@ -25,6 +25,21 @@ export default function UserForm({ buttonLabel, onSubmit }) {
     useErrors();
 
   const isFormValid = name && errors.length === 0;
+
+  useImperativeHandle(
+    ref,
+    () => ({
+      setFieldsValues: (user) => {
+        setName(user.name || '');
+        setInstagram(user.instagram || '');
+        setFacebook(user.facebook || '');
+        setEmail(user.email || '');
+        setPhone(user.phone || '');
+        setPassword(user.password || '');
+      },
+    }),
+    []
+  );
 
   function handleNameChange(e) {
     setName(e.target.value);
@@ -53,7 +68,7 @@ export default function UserForm({ buttonLabel, onSubmit }) {
   }
 
   function handlePhoneChange(e) {
-    setPhone(e.target.value);
+    setPhone(formatPhone(e.target.value));
   }
 
   function handlePasswordChange(e) {
@@ -87,18 +102,11 @@ export default function UserForm({ buttonLabel, onSubmit }) {
       instagram,
       facebook,
       email,
-      phone,
+      phone: phone.replace(/\D/g, ''),
       password,
     });
 
     setIsSubmitting(false);
-
-    setName('');
-    setInstagram('');
-    setFacebook('');
-    setEmail('');
-    setPhone('');
-    setPassword('');
   }
 
   return (
@@ -181,9 +189,11 @@ export default function UserForm({ buttonLabel, onSubmit }) {
       </Button>
     </Form>
   );
-}
+});
 
 UserForm.propTypes = {
   buttonLabel: PropTypes.string.isRequired,
   onSubmit: PropTypes.func.isRequired,
 };
+
+export default UserForm;
