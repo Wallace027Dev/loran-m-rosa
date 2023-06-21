@@ -32,6 +32,7 @@ export default function Signup() {
       navigate('../login');
     } catch (error) {
       console.log(error);
+
       toast({
         type: 'danger',
         text: 'Ocorreu um erro ao cadastrar o usuário!',

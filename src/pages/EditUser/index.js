@@ -50,8 +50,6 @@ export default function EditUser() {
 
       await UsersService.updateUser(id, user);
 
-      console.log(user);
-
       toast({
         type: 'success',
         text: 'Usuário editado com sucesso!',

@@ -54,7 +54,7 @@ function AppRoutes() {
         }
       />
       <Route
-        path="/:id/dashboard"
+        path="/dashboard/:id"
         element={
           <PrivateRoutes>
             <Dashboard />

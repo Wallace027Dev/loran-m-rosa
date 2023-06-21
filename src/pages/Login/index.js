@@ -11,14 +11,19 @@ import Input from '../../components/Input';
 import Button from '../../components/Button';
 import FormGroup from '../../components/FormGroup';
 import toast from '../../utils/toast';
+import UsersService from '../../services/UsersService';
 
 function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false);
   const { signIn } = useAuth();
-  const { setError, removeError, getErrorMessageByFieldName } = useErrors();
+
+  const { errors, setError, removeError, getErrorMessageByFieldName } =
+    useErrors();
   const navigate = useNavigate();
+
+  const isFormValid = email && errors.length === 0;
 
   function handleEmailChange(e) {
     setEmail(e.target.value);
@@ -49,16 +54,24 @@ function Login() {
 
   async function handleSubmit(e) {
     e.preventDefault();
+    setLoading(true);
 
     try {
-      await signIn(email, password);
+      const user = {
+        email,
+        password,
+      };
+
+      await signIn(user);
 
       toast({
         type: 'success',
         text: 'Usuário logado com sucesso!',
       });
 
-      navigate(`../admin/dashboard`);
+      const { token } = await UsersService.loginUser(user);
+
+      navigate(`../dashboard/${token}`);
     } catch (error) {
       console.log(error);
       toast({
@@ -66,6 +79,8 @@ function Login() {
         text: 'Ocorreu um erro ao tentar logar com o usuário!',
       });
     }
+
+    setLoading(false);
   }
 
   return (
@@ -77,7 +92,6 @@ function Login() {
           <Input
             type="email"
             value={email}
-            style={{ marginBottom: 12 }}
             onChange={handleEmailChange}
             placeholder="Insira seu email..."
             error={getErrorMessageByFieldName('email')}
@@ -100,7 +114,7 @@ function Login() {
             error={getErrorMessageByFieldName('password')}
           />
         </FormGroup>
-        <Button type="submit" disable={loading}>
+        <Button type="submit" disable={!isFormValid} isLoading={loading}>
           Login
         </Button>
       </form>

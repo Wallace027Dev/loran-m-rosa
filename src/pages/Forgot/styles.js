@@ -1,25 +1,15 @@
 import styled from 'styled-components';
 
 export const Container = styled.main`
-  form {
-    margin-top: 13rem;
-    display: flex;
-    flex-direction: column;
-    justify-content: left;
-
-    label {
-      color: var(--primary);
-      font-weight: bold;
-      font-size: 1.6rem;
-    }
+  h2 {
+    color: var(--primary);
+    font-weight: bold;
+    margin-bottom: 18rem;
+    text-align: center;
   }
+
   span {
     color: var(--tertiary);
-  }
-
-  button {
-    margin-top: 5rem;
-    width: 100%;
   }
 
   .spc-betwn {

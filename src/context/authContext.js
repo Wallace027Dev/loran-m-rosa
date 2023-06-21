@@ -21,12 +21,7 @@ export function AuthProvider({ children }) {
     console.log(user);
   }
 
-  async function signIn(email, password) {
-    const user = {
-      email,
-      password,
-    };
-
+  async function signIn(user) {
     const { token } = await UsersService.loginUser(user);
 
     localStorage.setItem('token', token);
