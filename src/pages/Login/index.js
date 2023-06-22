@@ -71,7 +71,9 @@ function Login() {
 
       const { token } = await UsersService.loginUser(user);
 
-      navigate(`../dashboard/${token}`);
+      user.email === 'admin@mail.com'
+        ? navigate(`../users`)
+        : navigate(`../dashboard/${token}`);
     } catch (error) {
       console.log(error);
       toast({
