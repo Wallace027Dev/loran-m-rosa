@@ -10,6 +10,7 @@ import Home from '../pages/Home';
 import Dashboard from '../pages/Dashboard';
 import Payment from '../pages/Payment';
 import PrivateRoutes from '../components/PrivateRoutes';
+import Adverts from '../pages/Adverts';
 
 function AppRoutes() {
   return (
@@ -20,6 +21,14 @@ function AppRoutes() {
       <Route path="/signup" element={<Signup />} />
       <Route path="/forgot" element={<Forgot />} />
 
+      <Route
+        path="/adverts"
+        element={
+          <PrivateRoutes>
+            <Adverts />
+          </PrivateRoutes>
+        }
+      />
       <Route
         path="/users"
         element={

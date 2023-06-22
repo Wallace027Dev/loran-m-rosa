@@ -6,12 +6,12 @@ export const Container = styled.header`
     flex-direction: column;
     align-items: center;
     margin-top: 4.8rem;
-    margin-bottom: 7.2rem;
 
     img {
       width: 25rem;
     }
   }
+  margin-bottom: 7.2rem;
 `;
 
 export const HeaderForUsers = styled.div`
