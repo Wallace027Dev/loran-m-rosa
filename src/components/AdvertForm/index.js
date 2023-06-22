@@ -5,23 +5,14 @@ import { Form } from './styles';
 
 import FormGroup from '../FormGroup';
 import Select from '../Select';
+import AdvertInputOptions from '../AdvertInputOptions';
 
-const AdvertForm = forwardRef(({ buttonLabel, onSubmit }, ref) => {
+const AdvertForm = forwardRef(({ buttonLabel, onSubmit }, ref, props) => {
   const [isSubmitting, setIsSubmitting] = useState('');
 
   const [userName, setUserName] = useState('');
   const [advertTypeId, setAdvertTypeId] = useState('');
   const [advertTypeName, setAdvertTypeName] = useState('');
-  const [reportId, setReportId] = useState('');
-  const [reportName, setReportName] = useState('');
-  const [reportDate, setReportDate] = useState('');
-  const [createdAt, setCreatedAt] = useState('');
-  const [likes, setLikes] = useState('');
-  const [valueUsed, setValueUsed] = useState('');
-  const [views, setViews] = useState('');
-  const [linkClicks, setLinkClicks] = useState('');
-  const [costPerResult, setCostPerResult] = useState('');
-  const [recordsStarted, setRecordsStarted] = useState('');
 
   useImperativeHandle(
     ref,
@@ -30,16 +21,6 @@ const AdvertForm = forwardRef(({ buttonLabel, onSubmit }, ref) => {
         setUserName(adverts.userName || '');
         setAdvertTypeId(adverts.advertTypeId || '');
         setAdvertTypeName(adverts.advertTypeName || '');
-        setReportId(adverts.reportId || '');
-        setReportName(adverts.reportName || '');
-        setReportDate(adverts.reportDate || '');
-        setCreatedAt(adverts.createdAt || '');
-        setLikes(adverts.likes || '');
-        setValueUsed(adverts.valueUsed || '');
-        setViews(adverts.views || '');
-        setLinkClicks(adverts.linkClicks || '');
-        setCostPerResult(adverts.costPerResult || '');
-        setRecordsStarted(adverts.recordsStarted || '');
       },
     }),
     []
@@ -61,6 +42,7 @@ const AdvertForm = forwardRef(({ buttonLabel, onSubmit }, ref) => {
           <option value="RECORDS">Registros</option>
           <option value="SALES">Vendas</option>
         </Select>
+        <AdvertInputOptions advertTypeName={advertTypeName} />
       </FormGroup>
     </Form>
   );
