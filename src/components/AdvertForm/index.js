@@ -5,7 +5,9 @@ import { Form } from './styles';
 
 import FormGroup from '../FormGroup';
 import Select from '../Select';
+import Button from '../Button';
 import AdvertInputOptions from '../AdvertInputOptions';
+import Input from '../Input';
 
 const AdvertForm = forwardRef(({ buttonLabel, onSubmit }, ref, props) => {
   const [isSubmitting, setIsSubmitting] = useState('');
@@ -13,6 +15,8 @@ const AdvertForm = forwardRef(({ buttonLabel, onSubmit }, ref, props) => {
   const [userName, setUserName] = useState('');
   const [advertTypeId, setAdvertTypeId] = useState('');
   const [advertTypeName, setAdvertTypeName] = useState('');
+
+  const notExistAdvertType = !advertTypeName;
 
   useImperativeHandle(
     ref,
@@ -29,6 +33,7 @@ const AdvertForm = forwardRef(({ buttonLabel, onSubmit }, ref, props) => {
   return (
     <Form>
       <FormGroup>
+        <Input type="date" />
         <Select
           value={advertTypeName}
           onChange={(e) => setAdvertTypeName(e.target.value)}
@@ -43,6 +48,14 @@ const AdvertForm = forwardRef(({ buttonLabel, onSubmit }, ref, props) => {
           <option value="SALES">Vendas</option>
         </Select>
         <AdvertInputOptions advertTypeName={advertTypeName} />
+
+        <Button
+          type="submit"
+          disabled={notExistAdvertType}
+          isLoading={isSubmitting}
+        >
+          {buttonLabel}
+        </Button>
       </FormGroup>
     </Form>
   );
