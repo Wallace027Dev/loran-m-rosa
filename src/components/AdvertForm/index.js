@@ -8,6 +8,7 @@ import Select from '../Select';
 import Button from '../Button';
 import AdvertInputOptions from '../AdvertInputOptions';
 import Input from '../Input';
+import useErrors from '../../hooks/useErrors';
 
 const AdvertForm = forwardRef(({ buttonLabel, onSubmit }, ref, props) => {
   const [isSubmitting, setIsSubmitting] = useState('');
@@ -15,8 +16,21 @@ const AdvertForm = forwardRef(({ buttonLabel, onSubmit }, ref, props) => {
   const [userName, setUserName] = useState('');
   const [advertTypeId, setAdvertTypeId] = useState('');
   const [advertTypeName, setAdvertTypeName] = useState('');
+  const [date, setDate] = useState(null);
 
   const notExistAdvertType = !advertTypeName;
+
+  const { errors, setError, removeError, getErrorMessageByFieldName } =
+    useErrors();
+
+  function handleDate(e) {
+    setDate(e.target.value);
+    if (!e.target.value) {
+      setError({ field: 'input-date-error', message: 'Valor inválido.' });
+    } else {
+      removeError('input-date-error');
+    }
+  }
 
   useImperativeHandle(
     ref,
@@ -32,9 +46,17 @@ const AdvertForm = forwardRef(({ buttonLabel, onSubmit }, ref, props) => {
 
   return (
     <Form>
-      <FormGroup>
-        <Input type="date" />
+      <FormGroup error={getErrorMessageByFieldName('form-invalid-error')}>
+        <FormGroup error={getErrorMessageByFieldName('input-date-error')}>
+          <Input
+            type="date"
+            value={date}
+            onChange={handleDate}
+            error={getErrorMessageByFieldName('input-date-error')}
+          />
+        </FormGroup>
         <Select
+          className="select-type"
           value={advertTypeName}
           onChange={(e) => setAdvertTypeName(e.target.value)}
         >
@@ -47,7 +69,6 @@ const AdvertForm = forwardRef(({ buttonLabel, onSubmit }, ref, props) => {
           <option value="RECORDS">Registros</option>
           <option value="SALES">Vendas</option>
         </Select>
-        <AdvertInputOptions advertTypeName={advertTypeName} />
 
         <Button
           type="submit"

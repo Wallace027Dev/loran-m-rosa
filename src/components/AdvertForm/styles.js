@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 export const Form = styled.form`
-  input {
-    margin-bottom: 0.8rem;
+  .select-type {
+    margin-top: 1.6rem;
   }
 `;

@@ -1,6 +1,7 @@
 import { forwardRef, useImperativeHandle, useState } from 'react';
 import Input from '../Input';
 import FormGroup from '../FormGroup';
+import useErrors from '../../hooks/useErrors';
 
 const AdvertInputOptions = forwardRef((props, ref) => {
   const [reportId, setReportId] = useState('');
@@ -14,8 +15,20 @@ const AdvertInputOptions = forwardRef((props, ref) => {
   const [costPerResult, setCostPerResult] = useState('');
   const [recordsStarted, setRecordsStarted] = useState('');
 
+  const { errors, setError, removeError, getErrorMessageByFieldName } =
+    useErrors();
+
   const advertTypeName = props.advertTypeName;
   const notExistAdvertType = !advertTypeName;
+
+  function handleValueUsed(e) {
+    setValueUsed(e.target.value);
+    if (!e.target.value) {
+      setError({ field: 'valueUsed', message: 'Valor inválido.' });
+    } else {
+      removeError('valueUsed');
+    }
+  }
 
   useImperativeHandle(
     ref,
@@ -39,18 +52,21 @@ const AdvertInputOptions = forwardRef((props, ref) => {
   if (advertTypeName === 'RECOGNITION') {
     return (
       <div>
-        <FormGroup>
+        <FormGroup error={getErrorMessageByFieldName('valueUsed')}>
           <Input
             type="text"
             value={valueUsed}
+            onChange={handleValueUsed}
             placeholder="Valor usado..."
             disabled={notExistAdvertType}
+            error={getErrorMessageByFieldName('valueUsed')}
           />
         </FormGroup>
         <FormGroup>
           <Input
             type="text"
             value={views}
+            onChange={(e) => setViews(e.target.value)}
             placeholder="Visualizações do anúncio..."
             disabled={notExistAdvertType}
           />
@@ -59,6 +75,7 @@ const AdvertInputOptions = forwardRef((props, ref) => {
           <Input
             type="text"
             value={views}
+            onChange={(e) => setViews(e.target.value)}
             placeholder="Visualizaram o Anúncio..."
             disabled={notExistAdvertType}
           />
@@ -74,6 +91,7 @@ const AdvertInputOptions = forwardRef((props, ref) => {
           <Input
             type="text"
             value={valueUsed}
+            onChange={(e) => setValueUsed(e.target.value)}
             placeholder="Valor usado..."
             disabled={notExistAdvertType}
           />
@@ -83,6 +101,7 @@ const AdvertInputOptions = forwardRef((props, ref) => {
             type="text"
             value={views}
             placeholder="Visualizações do anúncio..."
+            onChange={(e) => linkClicks(e.target.value)}
             disabled={notExistAdvertType}
           />
         </FormGroup>
@@ -90,6 +109,7 @@ const AdvertInputOptions = forwardRef((props, ref) => {
           <Input
             type="text"
             value={linkClicks}
+            onChange={(e) => linkClicks(e.target.value)}
             placeholder="Cliques no link..."
             disabled={notExistAdvertType}
           />
@@ -104,6 +124,7 @@ const AdvertInputOptions = forwardRef((props, ref) => {
           <Input
             type="text"
             value={valueUsed}
+            onChange={(e) => setValueUsed(e.target.value)}
             placeholder="Valor usado..."
             disabled={notExistAdvertType}
           />
@@ -112,6 +133,7 @@ const AdvertInputOptions = forwardRef((props, ref) => {
           <Input
             type="text"
             value={views}
+            onChange={(e) => setViews(e.target.value)}
             placeholder="Visualizações do anúncio..."
             disabled={notExistAdvertType}
           />
@@ -120,6 +142,7 @@ const AdvertInputOptions = forwardRef((props, ref) => {
           <Input
             type="text"
             value={linkClicks}
+            onChange={(e) => setLinkClicks(e.target.value)}
             placeholder="Mensagens iníciadas..."
             disabled={notExistAdvertType}
           />
@@ -134,6 +157,7 @@ const AdvertInputOptions = forwardRef((props, ref) => {
           <Input
             type="text"
             value={valueUsed}
+            onChange={(e) => setValueUsed(e.target.value)}
             placeholder="Valor usado..."
             disabled={notExistAdvertType}
           />
@@ -142,6 +166,7 @@ const AdvertInputOptions = forwardRef((props, ref) => {
           <Input
             type="text"
             value={views}
+            onChange={(e) => setViews(e.target.value)}
             placeholder="Visualizações do anúncio..."
             disabled={notExistAdvertType}
           />
@@ -150,6 +175,7 @@ const AdvertInputOptions = forwardRef((props, ref) => {
           <Input
             type="text"
             value={linkClicks}
+            onChange={(e) => setLinkClicks(e.target.value)}
             placeholder="Curtidas..."
             disabled={notExistAdvertType}
           />
@@ -164,6 +190,7 @@ const AdvertInputOptions = forwardRef((props, ref) => {
           <Input
             type="text"
             value={valueUsed}
+            onChange={(e) => setValueUsed(e.target.value)}
             placeholder="Valor usado..."
             disabled={notExistAdvertType}
           />
@@ -172,6 +199,7 @@ const AdvertInputOptions = forwardRef((props, ref) => {
           <Input
             type="text"
             value={views}
+            onChange={(e) => setViews(e.target.value)}
             placeholder="Visualizações do anúncio..."
             disabled={notExistAdvertType}
           />
@@ -180,6 +208,7 @@ const AdvertInputOptions = forwardRef((props, ref) => {
           <Input
             type="text"
             value={linkClicks}
+            onChange={(e) => setLinkClicks(e.target.value)}
             placeholder="Engajamento..."
             disabled={notExistAdvertType}
           />
@@ -188,6 +217,7 @@ const AdvertInputOptions = forwardRef((props, ref) => {
           <Input
             type="text"
             value={views}
+            onChange={(e) => setViews(e.target.value)}
             placeholder="Curtidas na publicação..."
             disabled={notExistAdvertType}
           />
@@ -196,6 +226,7 @@ const AdvertInputOptions = forwardRef((props, ref) => {
           <Input
             type="text"
             value={linkClicks}
+            onChange={(e) => setLinkClicks(e.target.value)}
             placeholder="Comentários..."
             disabled={notExistAdvertType}
           />
@@ -210,6 +241,7 @@ const AdvertInputOptions = forwardRef((props, ref) => {
           <Input
             type="text"
             value={valueUsed}
+            onChange={(e) => setValueUsed(e.target.value)}
             placeholder="Valor usado..."
             disabled={notExistAdvertType}
           />
@@ -218,6 +250,7 @@ const AdvertInputOptions = forwardRef((props, ref) => {
           <Input
             type="text"
             value={views}
+            onChange={(e) => setViews(e.target.value)}
             placeholder="Visualizações do anúncio..."
             disabled={notExistAdvertType}
           />
@@ -226,6 +259,7 @@ const AdvertInputOptions = forwardRef((props, ref) => {
           <Input
             type="text"
             value={linkClicks}
+            onChange={(e) => setLinkClicks(e.target.value)}
             placeholder="Cadastros iniciados..."
             disabled={notExistAdvertType}
           />
@@ -240,6 +274,7 @@ const AdvertInputOptions = forwardRef((props, ref) => {
           <Input
             type="text"
             value={valueUsed}
+            onChange={(e) => setValueUsed(e.target.value)}
             placeholder="Valor usado..."
             disabled={notExistAdvertType}
           />
@@ -248,6 +283,7 @@ const AdvertInputOptions = forwardRef((props, ref) => {
           <Input
             type="text"
             value={views}
+            onChange={(e) => setViews(e.target.value)}
             placeholder="Custos por resultado..."
             disabled={notExistAdvertType}
           />
@@ -256,6 +292,7 @@ const AdvertInputOptions = forwardRef((props, ref) => {
           <Input
             type="text"
             value={linkClicks}
+            onChange={(e) => setLinkClicks(e.target.value)}
             placeholder="Visualizarações do anúncio..."
             disabled={notExistAdvertType}
           />
@@ -264,6 +301,7 @@ const AdvertInputOptions = forwardRef((props, ref) => {
           <Input
             type="text"
             value={valueUsed}
+            onChange={(e) => setValueUsed(e.target.value)}
             placeholder="Visualizações de conteúdo..."
             disabled={notExistAdvertType}
           />
@@ -272,6 +310,7 @@ const AdvertInputOptions = forwardRef((props, ref) => {
           <Input
             type="text"
             value={views}
+            onChange={(e) => setViews(e.target.value)}
             placeholder="Cliques no link..."
             disabled={notExistAdvertType}
           />
@@ -280,6 +319,7 @@ const AdvertInputOptions = forwardRef((props, ref) => {
           <Input
             type="text"
             value={linkClicks}
+            onChange={(e) => setLinkClicks(e.target.value)}
             placeholder="Adições ao carrinho..."
             disabled={notExistAdvertType}
           />
@@ -288,6 +328,7 @@ const AdvertInputOptions = forwardRef((props, ref) => {
           <Input
             type="text"
             value={views}
+            onChange={(e) => setViews(e.target.value)}
             placeholder="Compras iniciadas..."
             disabled={notExistAdvertType}
           />
@@ -296,6 +337,7 @@ const AdvertInputOptions = forwardRef((props, ref) => {
           <Input
             type="text"
             value={linkClicks}
+            onChange={(e) => setLinkClicks(e.target.value)}
             placeholder="Total de vendas..."
             disabled={notExistAdvertType}
           />
@@ -310,6 +352,7 @@ const AdvertInputOptions = forwardRef((props, ref) => {
           <Input
             type="text"
             value={valueUsed}
+            onChange={(e) => setValueUsed(e.target.value)}
             placeholder="Valor usado..."
             disabled={notExistAdvertType}
           />
@@ -318,6 +361,7 @@ const AdvertInputOptions = forwardRef((props, ref) => {
           <Input
             type="text"
             value={views}
+            onChange={(e) => setViews(e.target.value)}
             placeholder="Visualizações do anúncio..."
             disabled={notExistAdvertType}
           />
@@ -326,6 +370,7 @@ const AdvertInputOptions = forwardRef((props, ref) => {
           <Input
             type="text"
             value={linkClicks}
+            onChange={(e) => setLinkClicks(e.target.value)}
             placeholder="Cliques no link"
             disabled={notExistAdvertType}
           />
