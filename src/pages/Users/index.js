@@ -28,7 +28,6 @@ import toast from '../../utils/toast';
 
 export default function Users() {
   const [users, setUsers] = useState([]);
-  const [orderBy, setOrderBy] = useState('asc');
   const [searchTerm, setSearchTerm] = useState('');
   const [isLoading, setIsLoading] = useState(true);
   const [hasError, setHasError] = useState(false);
@@ -50,7 +49,7 @@ export default function Users() {
     try {
       setIsLoading(true);
 
-      const usersList = await UsersService.listUsers(orderBy);
+      const usersList = await UsersService.listUsers();
       setUsers(usersList);
 
       setHasError(false);
@@ -59,7 +58,7 @@ export default function Users() {
     } finally {
       setIsLoading(false);
     }
-  }, [orderBy]);
+  }, []);
 
   useEffect(() => {
     loadUsers();

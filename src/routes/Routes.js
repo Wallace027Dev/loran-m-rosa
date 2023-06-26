@@ -10,7 +10,7 @@ import Home from '../pages/Home';
 import Dashboard from '../pages/Dashboard';
 import Payment from '../pages/Payment';
 import PrivateRoutes from '../components/PrivateRoutes';
-import NewAdverts from '../pages/NewAdverts';
+import Adverts from '../pages/Adverts';
 
 function AppRoutes() {
   return (
@@ -25,7 +25,7 @@ function AppRoutes() {
         path="/adverts"
         element={
           <PrivateRoutes>
-            <NewAdverts />
+            <Adverts />
           </PrivateRoutes>
         }
       />

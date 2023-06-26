@@ -9,13 +9,13 @@ import xCirclePrimary from '../../assets/images/icons/xCirclePrimary.svg';
 export default function Header() {
   const location = useLocation();
 
-  const userIsLogged =
-    location.pathname === `/dashboard` || location.pathname === `/account`;
-
   const adminIsLogged =
     location.pathname === '/adverts' ||
     location.pathname === '/users' ||
     location.pathname === '/user';
+
+  const userIsLogged =
+    location.pathname === `/dashboard` || location.pathname === `/account`;
 
   function menuShow() {
     let menuMobile = document.querySelector('.mobile-menu');
@@ -129,13 +129,13 @@ export default function Header() {
             <div className="mobile-menu nav-list">
               <ul>
                 <li className="nav-item">
-                  <a href="./dashboard" className="nav-link">
-                    Início
+                  <a href="./users" className="nav-link">
+                    Usuários
                   </a>
                 </li>
                 <li className="nav-item">
-                  <a href="../../users" className="nav-link">
-                    Usuários
+                  <a href="../adverts" className="nav-link">
+                    Anúncios
                   </a>
                 </li>
               </ul>

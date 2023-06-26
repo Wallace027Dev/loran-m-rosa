@@ -1,21 +1,47 @@
 import { useState } from 'react';
-import { Container } from './styles';
 
 import PageHeader from '../../components/PageHeader';
 import AdvertForm from '../../components/AdvertForm';
 
+import AdvertsServices from '../../services/AdvertsServices';
+import toast from '../../utils/toast';
+
 export default function NewAdverts() {
   const [isLoading, setIsLoading] = useState(false);
-  function handleSubmit() {
-    console.log('Clicou!');
+
+  async function handleSubmit(formData) {
+    setIsLoading(true);
+
+    try {
+      const advert = {
+        userId: formData.userId,
+        typeList: formData.typeList,
+        createdAt: formData.createdAt,
+      };
+
+      await AdvertsServices.createAdvert(advert);
+
+      toast({
+        type: 'success',
+        text: 'Usuário cadastrado com sucesso!',
+      });
+    } catch {
+      toast({
+        type: 'danger',
+        text: 'Ocorreu um erro ao cadastrar o usuário!',
+      });
+    }
+
+    setIsLoading(false);
   }
+
   return (
-    <Container>
+    <>
       <PageHeader
         title={isLoading ? 'Carregando...' : `Criar anúncio para userName `}
         path={'../../users'}
       />
-      <AdvertForm buttonLabel="Criar Anúncio" onClick={handleSubmit} />
-    </Container>
+      <AdvertForm onSubmit={handleSubmit} buttonLabel="Criar Anúncio" />
+    </>
   );
 }
