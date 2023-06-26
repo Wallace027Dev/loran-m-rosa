@@ -203,32 +203,158 @@ export default function Adverts() {
                       <small>Reconhecimento</small>
                       <div className="card-info">
                         <div>
+                          <strong>{advert.valueUsed}</strong>
+                          <span>Valor usado</span>
+                        </div>
+                        <div>
+                          <strong>{advert.contentViews}</strong>
+                          <span>Visualizações do anúncio</span>
+                        </div>
+                        <div>
                           <strong>0</strong>
-                          <p>Conversas por mensagens iniciadas</p>
-                        </div>
-                        <div>
-                          <strong>R$0,00</strong>
-                          <p>Custo por conversas por mensagens iniciadas</p>
-                        </div>
-                        <div>
-                          <strong>R$16,14</strong>
-                          <p>Valor Usado</p>
+                          <span>Visualizaram o anúncio</span>
                         </div>
                       </div>
                     </div>
                   )}
-                  {advert.type === 'TRAFFIC' && <small>Tráfego</small>}
+                  {advert.type === 'TRAFFIC' && (
+                    <div>
+                      <small>Tráfego</small>
+                      <div className="card-info">
+                        <div>
+                          <strong>{advert.valueUsed}</strong>
+                          <span>Valor usado</span>
+                        </div>
+                        <div>
+                          <strong>{advert.contentViews}</strong>
+                          <span>Visualizações do anúncio</span>
+                        </div>
+                        <div>
+                          <strong>{advert.linkClicks}</strong>
+                          <span>Cliques no anúncio</span>
+                        </div>
+                      </div>
+                    </div>
+                  )}
                   {advert.type === 'RECEIVE_MESSAGES' && (
-                    <small>Mensagens recebidas</small>
+                    <div>
+                      <small>Mensagens recebidas</small>
+                      <div className="card-info">
+                        <div>
+                          <strong>{advert.valueUsed}</strong>
+                          <span>Valor usado</span>
+                        </div>
+                        <div>
+                          <strong>{advert.contentViews}</strong>
+                          <span>Visualizações do anúncio</span>
+                        </div>
+                        <div>
+                          <strong>{advert.linkClicks}</strong>
+                          <span>Mensagens iniciadas</span>
+                        </div>
+                      </div>
+                    </div>
                   )}
                   {advert.type === 'GET_PAGE_LIKES' && (
-                    <small>Receber curtidas na página</small>
+                    <div>
+                      <small>Receber curtidas na página</small>
+                      <div className="card-info">
+                        <div>
+                          <strong>{advert.valueUsed}</strong>
+                          <span>Valor usado</span>
+                        </div>
+                        <div>
+                          <strong>{advert.contentViews}</strong>
+                          <span>Visualizações do anúncio</span>
+                        </div>
+                        <div>
+                          <strong>{advert.likes}</strong>
+                          <span>Curtidas</span>
+                        </div>
+                      </div>
+                    </div>
                   )}
                   {advert.type === 'BOOST_PUBLICATION' && (
-                    <small>Turbinar</small>
+                    <div>
+                      <small>Turbinar publicação</small>
+                      <div className="card-info">
+                        <div>
+                          <strong>{advert.valueUsed}</strong>
+                          <span>Valor usado</span>
+                        </div>
+                        <div>
+                          <strong>{advert.contentViews}</strong>
+                          <span>Visualizações do anúncio</span>
+                        </div>
+                        <div>
+                          <strong>{advert.engagement}</strong>
+                          <span>Engajamento</span>
+                        </div>
+                        <div>
+                          <strong>{advert.likes}</strong>
+                          <span>Curtidas</span>
+                        </div>
+                        <div>
+                          <strong>{advert.recordsStarted}</strong>
+                          <span>Comentários</span>
+                        </div>
+                      </div>
+                    </div>
                   )}
-                  {advert.type === 'RECORDS' && <small>Cadastro</small>}
-                  {advert.type === 'SALES' && <small>Vendas</small>}
+                  {advert.type === 'RECORDS' && (
+                    <div>
+                      <small>Cadastros</small>
+                      <div className="card-info">
+                        <div>
+                          <strong>{advert.valueUsed}</strong>
+                          <p>Valor usado</p>
+                        </div>
+                        <div>
+                          <strong>{advert.contentViews}</strong>
+                          <p>Visualizações do anúncio</p>
+                        </div>
+                        <div>
+                          <strong>{advert.recordsStarted}</strong>
+                          <p>Cadstros</p>
+                        </div>
+                      </div>
+                    </div>
+                  )}
+                  {advert.type === 'SALES' && (
+                    <div>
+                      <small>Vendas</small>
+                      <div className="card-info">
+                        <div>
+                          <strong>{advert.valueUsed}</strong>
+                          <span>Valor usado</span>
+                        </div>
+                        <div>
+                          <strong>{advert.costPerResult}</strong>
+                          <span>Custo por resultado</span>
+                        </div>
+                        <div>
+                          <strong>{advert.contentViews}</strong>
+                          <span>Visualizações do anúncio</span>
+                        </div>
+                        <div>
+                          <strong>{advert.linkClicks}</strong>
+                          <span>Cliques no link</span>
+                        </div>
+                        <div>
+                          <strong>{advert.engagement}</strong>
+                          <span>Adições no carrinho</span>
+                        </div>
+                        <div>
+                          <strong>{advert.recordsStarted}</strong>
+                          <span>Compras iniciadas</span>
+                        </div>
+                        <div>
+                          <strong>{advert.views}</strong>
+                          <span>Total de vendas</span>
+                        </div>
+                      </div>
+                    </div>
+                  )}
                 </div>
               </div>
 

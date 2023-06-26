@@ -109,6 +109,7 @@ export const Card = styled.div`
         div {
           margin-top: 0.8rem;
           max-width: 16rem;
+          text-align: center;
         }
       }
     }
