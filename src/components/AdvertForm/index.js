@@ -13,6 +13,7 @@ import useErrors from '../../hooks/useErrors';
 const AdvertForm = forwardRef(({ buttonLabel, onSubmit }, ref) => {
   const [isSubmitting, setIsSubmitting] = useState(false);
 
+  const [userId, setUserId] = useState('');
   const [typeList, setTypeList] = useState('');
   const [createdAt, setCreatedAt] = useState(null);
 
@@ -25,6 +26,7 @@ const AdvertForm = forwardRef(({ buttonLabel, onSubmit }, ref) => {
     ref,
     () => ({
       setFieldsValues: (advert) => {
+        setUserId(advert.userId || '');
         setTypeList(advert.typeList || '');
         setCreatedAt(advert.createdAt || '');
       },
@@ -42,7 +44,7 @@ const AdvertForm = forwardRef(({ buttonLabel, onSubmit }, ref) => {
   }
 
   function handleTypeList(e) {
-    setAdvertTypeName(e.target.value);
+    setTypeList(e.target.value);
   }
 
   async function handleSubmit(e) {
@@ -51,6 +53,7 @@ const AdvertForm = forwardRef(({ buttonLabel, onSubmit }, ref) => {
     setIsSubmitting(true);
 
     await onSubmit({
+      userId,
       typeList,
       createdAt,
     });

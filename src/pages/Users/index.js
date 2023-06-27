@@ -190,7 +190,9 @@ export default function Users() {
             <Card key={user.id}>
               <div className="info">
                 <div className="user-name">
-                  <strong>{user.name}</strong>
+                  <Link to={`../../advert/new/${user.id}`}>
+                    <strong>{user.name}</strong>
+                  </Link>
                   {user.category_name && <small>{user.category_name}</small>}
                 </div>
                 <span>{user.email}</span>

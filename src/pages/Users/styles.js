@@ -78,6 +78,11 @@ export const Card = styled.div`
       display: flex;
       align-items: center;
 
+      a {
+        text-decoration: none;
+        color: #222;
+      }
+
       strong {
         font-size: 1.6rem;
       }

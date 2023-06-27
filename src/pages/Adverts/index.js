@@ -88,9 +88,9 @@ export default function Adverts() {
     try {
       setIsLoadingDelete(true);
 
-      await AdvertsService.deleteAdvert(advertBeingDeleted.id);
+      await AdvertsServices.deleteAdvert(advertBeingDeleted.id);
 
-      setAdvert((prevState) =>
+      setAdverts((prevState) =>
         prevState.filter((advert) => advert.id !== advertBeingDeleted.id)
       );
 
@@ -200,6 +200,7 @@ export default function Adverts() {
                 <div className="advert-name">
                   {advert.type === 'RECOGNITION' && (
                     <div>
+                      <strong>{advert.reportDate}</strong>
                       <small>Reconhecimento</small>
                       <div className="card-info">
                         <div>
@@ -307,15 +308,15 @@ export default function Adverts() {
                       <div className="card-info">
                         <div>
                           <strong>{advert.valueUsed}</strong>
-                          <p>Valor usado</p>
+                          <span>Valor usado</span>
                         </div>
                         <div>
                           <strong>{advert.contentViews}</strong>
-                          <p>Visualizações do anúncio</p>
+                          <span>Visualizações do anúncio</span>
                         </div>
                         <div>
                           <strong>{advert.recordsStarted}</strong>
-                          <p>Cadstros</p>
+                          <span>Cadstros</span>
                         </div>
                       </div>
                     </div>

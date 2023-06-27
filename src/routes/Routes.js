@@ -3,14 +3,19 @@ import { Routes, Route } from 'react-router-dom';
 import Login from '../pages/Login';
 import Signup from '../pages/Signup';
 import Forgot from '../pages/Forgot';
+
 import Users from '../pages/Users';
 import NewUser from '../pages/NewUser';
 import EditUser from '../pages/EditUser';
+
 import Home from '../pages/Home';
 import Dashboard from '../pages/Dashboard';
 import Payment from '../pages/Payment';
-import PrivateRoutes from '../components/PrivateRoutes';
+
 import Adverts from '../pages/Adverts';
+import NewAdverts from '../pages/NewAdverts';
+
+import PrivateRoutes from '../components/PrivateRoutes';
 
 function AppRoutes() {
   return (
@@ -26,6 +31,14 @@ function AppRoutes() {
         element={
           <PrivateRoutes>
             <Adverts />
+          </PrivateRoutes>
+        }
+      />
+      <Route
+        path="/advert/new/:id"
+        element={
+          <PrivateRoutes>
+            <NewAdverts />
           </PrivateRoutes>
         }
       />
