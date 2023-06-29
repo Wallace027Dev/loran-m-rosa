@@ -11,7 +11,8 @@ import ReportForm from '../../components/ReportForm';
 
 export default function EditAdvert() {
   const [isLoading, setIsLoading] = useState(true);
-  const [type, setType] = useState(true);
+  const [typeName, setTypeName] = useState('');
+  const [advertTypeName, setAdvertTypeName] = useState('');
 
   const { id } = useParams();
   const navigate = useNavigate();
@@ -23,8 +24,7 @@ export default function EditAdvert() {
       try {
         const advert = await AdvertsServices.getAdvertById(id);
 
-        setType(advert.type);
-        console.log(advert);
+        setAdvertTypeName(advert.type);
 
         advertFormRef.current.setFieldsValues(advert);
 
@@ -41,6 +41,36 @@ export default function EditAdvert() {
 
     loadAdvert();
   }, [id, navigate]);
+
+  useEffect(() => {
+    switch (advertTypeName) {
+      case 'RECOGNITION':
+        setTypeName('reconhecimento');
+        break;
+      case 'TRAFFIC':
+        setTypeName('tráfego');
+        break;
+      case 'RECEIVE_MESSAGES':
+        setTypeName('mensagens recebidas');
+        break;
+      case 'GET_PAGE_LIKES':
+        setTypeName('curtidas na página');
+        break;
+      case 'BOOST_PUBLICATION':
+        setTypeName('turbinar');
+        break;
+      case 'RECORDS':
+        setTypeName('cadastros');
+        break;
+      case 'SALES':
+        setTypeName('vendas');
+        break;
+
+      default:
+        setTypeName('');
+        break;
+    }
+  }, [advertTypeName]);
 
   async function handleSubmit(formData) {
     try {
@@ -67,7 +97,7 @@ export default function EditAdvert() {
     <>
       <Loader isLoading={isLoading} />
       <PageHeader
-        title={'Atualizar informações do anúncio'}
+        title={`Atualizar informações do anúncio de ${typeName}`}
         path={'../../adverts'}
       />
 
@@ -75,7 +105,7 @@ export default function EditAdvert() {
         ref={advertFormRef}
         onSubmit={handleSubmit}
         buttonLabel="Atualizar anúncio"
-        typeList={type}
+        typeList={advertTypeName}
       />
     </>
   );

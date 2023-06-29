@@ -83,7 +83,6 @@ const AdvertInputOptions = forwardRef((props, ref) => {
       </div>
     );
   }
-
   if (advertTypeName === 'TRAFFIC') {
     return (
       <div>
@@ -339,39 +338,6 @@ const AdvertInputOptions = forwardRef((props, ref) => {
             value={linkClicks}
             onChange={(e) => setLinkClicks(e.target.value)}
             placeholder="Total de vendas..."
-            disabled={notExistAdvertType}
-          />
-        </FormGroup>
-      </div>
-    );
-  }
-  if (advertTypeName === 'RECOGNITION') {
-    return (
-      <div>
-        <FormGroup>
-          <Input
-            type="text"
-            value={valueUsed}
-            onChange={(e) => setValueUsed(e.target.value)}
-            placeholder="Valor usado..."
-            disabled={notExistAdvertType}
-          />
-        </FormGroup>
-        <FormGroup>
-          <Input
-            type="text"
-            value={views}
-            onChange={(e) => setViews(e.target.value)}
-            placeholder="Visualizações do anúncio..."
-            disabled={notExistAdvertType}
-          />
-        </FormGroup>
-        <FormGroup>
-          <Input
-            type="text"
-            value={linkClicks}
-            onChange={(e) => setLinkClicks(e.target.value)}
-            placeholder="Cliques no link"
             disabled={notExistAdvertType}
           />
         </FormGroup>
