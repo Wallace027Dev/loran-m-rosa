@@ -15,18 +15,12 @@ class AdvertsService {
     return this.HttpClient.get(`/adverts`, { headers });
   }
 
-  getAdvertById(
-    userId,
-    initYear,
-    initMonth,
-    initDay,
-    endYear,
-    endMonth,
-    endDay
-  ) {
+  getAdvertById(id) {
     return this.HttpClient.get(
-      `/adverts/${id}/${userId}/?initDate=${initYear}-${initMonth}-${initDay}/&endDate=${endYear}-${endMonth}-${endDay}}`,
+      `/adverts/${id}`,
       { headers }
+
+      /* /?initDate=${initYear}-${initMonth}-${initDay}/&endDate=${endYear}-${endMonth}-${endDay} */
     );
   }
 

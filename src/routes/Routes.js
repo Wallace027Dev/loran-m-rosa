@@ -17,6 +17,7 @@ import UserAds from '../pages/UserAds';
 import NewAdverts from '../pages/NewAdverts';
 
 import PrivateRoutes from '../components/PrivateRoutes';
+import EditAdvert from '../pages/EditAdvert';
 
 function AppRoutes() {
   return (
@@ -40,6 +41,14 @@ function AppRoutes() {
         element={
           <PrivateRoutes>
             <UserAds />
+          </PrivateRoutes>
+        }
+      />
+      <Route
+        path="/advert/edit/:id"
+        element={
+          <PrivateRoutes>
+            <EditAdvert />
           </PrivateRoutes>
         }
       />
@@ -75,8 +84,9 @@ function AppRoutes() {
           </PrivateRoutes>
         }
       />
+
       <Route
-        path="/paymen/:idt"
+        path="/paymen/:id"
         element={
           <PrivateRoutes>
             <Payment />

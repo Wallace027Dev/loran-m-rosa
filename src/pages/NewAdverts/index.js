@@ -1,13 +1,14 @@
 import { useEffect, useRef, useState } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
 
 import PageHeader from '../../components/PageHeader';
 import AdvertForm from '../../components/AdvertForm';
+import Loader from '../../components/Loader';
 
 import AdvertsServices from '../../services/AdvertsServices';
-import toast from '../../utils/toast';
-import { useNavigate, useParams } from 'react-router-dom';
 import UsersService from '../../services/UsersService';
-import Loader from '../../components/Loader';
+
+import toast from '../../utils/toast';
 
 export default function NewAdverts() {
   const [isLoading, setIsLoading] = useState(true);
@@ -66,6 +67,7 @@ export default function NewAdverts() {
 
   return (
     <>
+      <Loader isLoading={isLoading} />
       <PageHeader title={`anúncio para ${userName} `} path={'../../adverts'} />
 
       <AdvertForm
