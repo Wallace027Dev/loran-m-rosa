@@ -7,6 +7,7 @@ import Loader from '../../components/Loader';
 
 import UsersService from '../../services/UsersService';
 import toast from '../../utils/toast';
+import Container from './styles';
 
 export default function EditUser() {
   const [isLoading, setIsLoading] = useState(true);
@@ -64,7 +65,7 @@ export default function EditUser() {
   }
 
   return (
-    <>
+    <Container>
       <Loader isLoading={isLoading} />
 
       <PageHeader
@@ -76,6 +77,6 @@ export default function EditUser() {
         onSubmit={handleSubmit}
         buttonLabel="Salvar Alterações"
       />
-    </>
+    </Container>
   );
 }

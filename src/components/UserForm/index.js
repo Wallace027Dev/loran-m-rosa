@@ -176,6 +176,7 @@ const UserForm = forwardRef(({ buttonLabel, onSubmit }, ref) => {
 
       <FormGroup error={getErrorMessageByFieldName('confirmPassword')}>
         <Input
+          className="confirm-password"
           type="password"
           value={confirmPassword}
           placeholder="Insira sua senha novamente..."

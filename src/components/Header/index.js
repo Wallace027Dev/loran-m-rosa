@@ -1,13 +1,16 @@
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 import { Container, HeaderForUsers } from './styles';
 
 import bakoads from '../../assets/images/bakoads.png';
 import menu from '../../assets/images/icons/menuMobile.svg';
 import xCirclePrimary from '../../assets/images/icons/xCirclePrimary.svg';
+import { useAuth } from '../../context/authContext';
 
 export default function Header() {
   const location = useLocation();
+  const navigate = useNavigate();
+  const { logOut } = useAuth;
 
   const adminIsLogged =
     location.pathname === '/adverts' ||
@@ -32,6 +35,12 @@ export default function Header() {
         icon.src = xCirclePrimary;
       }
     }
+  }
+
+  function handleLogout() {
+    logOut;
+    console.log('clicou');
+    navigate('./');
   }
 
   {
@@ -60,7 +69,9 @@ export default function Header() {
               </div>
 
               <div className="logout-button">
-                <button>Logout</button>
+                <button type="button" onClick={handleLogout}>
+                  Logout
+                </button>
               </div>
 
               <div className="mobile-menu-icon">
@@ -85,7 +96,9 @@ export default function Header() {
               </ul>
 
               <div className="logout-button">
-                <button>Logout</button>
+                <button type="button" onClick={handleLogout}>
+                  Logout
+                </button>
               </div>
             </div>
           </HeaderForUsers>
@@ -116,7 +129,9 @@ export default function Header() {
               </div>
 
               <div className="logout-button">
-                <button>Logout</button>
+                <button type="button" onClick={handleLogout}>
+                  Logout
+                </button>
               </div>
 
               <div className="mobile-menu-icon">
@@ -141,7 +156,9 @@ export default function Header() {
               </ul>
 
               <div className="logout-button">
-                <button>Logout</button>
+                <button type="button" onClick={handleLogout}>
+                  Logout
+                </button>
               </div>
             </div>
           </HeaderForUsers>

@@ -1,5 +1,5 @@
-import { Link } from 'react-router-dom';
-import { useEffect, useCallback, useMemo, useState } from 'react';
+import { Link, useParams } from 'react-router-dom';
+import { useEffect, useCallback, useMemo, useState, useRef } from 'react';
 
 import {
   Container,
@@ -24,9 +24,8 @@ import Modal from '../../components/Modal';
 import AdvertsServices from '../../services/AdvertsServices';
 import UsersService from '../../services/UsersService';
 
-export default function Adverts() {
+export default function UserAds() {
   const [adverts, setAdverts] = useState([]);
-  const [users, setUsers] = useState([]);
   const [searchTerm, setSearchTerm] = useState('');
   const [isLoading, setIsLoading] = useState(true);
   const [hasError, setHasError] = useState(false);
@@ -44,15 +43,18 @@ export default function Adverts() {
     );
   }, [adverts, searchTerm]);
 
+  const userFormRef = useRef(null);
+
+  const { id } = useParams();
+  const userId = id;
+
   const loadAdverts = useCallback(async () => {
     try {
       setIsLoading(true);
 
-      const advertsList = await AdvertsServices.listAdverts();
-      const usersList = await UsersService.listUsers();
+      const advertsList = await AdvertsServices.listAdverts(userId);
 
       setAdverts(advertsList);
-      setUsers(usersList);
 
       setHasError(false);
     } catch {
@@ -151,6 +153,7 @@ export default function Adverts() {
             {filteredAdverts.length === 1 ? ' anúncio' : ' anúncios'}
           </strong>
         )}
+        <Link to="../advert/new">Novo Anúncio</Link>
       </Header>
 
       {hasError && (

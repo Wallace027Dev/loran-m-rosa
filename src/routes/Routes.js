@@ -13,6 +13,7 @@ import Dashboard from '../pages/Dashboard';
 import Payment from '../pages/Payment';
 
 import Adverts from '../pages/Adverts';
+import UserAds from '../pages/UserAds';
 import NewAdverts from '../pages/NewAdverts';
 
 import PrivateRoutes from '../components/PrivateRoutes';
@@ -31,6 +32,14 @@ function AppRoutes() {
         element={
           <PrivateRoutes>
             <Adverts />
+          </PrivateRoutes>
+        }
+      />
+      <Route
+        path="/adverts/:id"
+        element={
+          <PrivateRoutes>
+            <UserAds />
           </PrivateRoutes>
         }
       />
