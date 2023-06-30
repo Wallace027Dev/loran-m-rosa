@@ -1,5 +1,11 @@
 import PropTypes from 'prop-types';
-import { forwardRef, useState, useImperativeHandle } from 'react';
+import {
+  forwardRef,
+  useState,
+  useImperativeHandle,
+  useEffect,
+  useCallback,
+} from 'react';
 
 import { Form } from './styles';
 
@@ -9,13 +15,16 @@ import Button from '../Button';
 import Input from '../Input';
 
 import useErrors from '../../hooks/useErrors';
+import UsersService from '../../services/UsersService';
 
 const AdvertForm = forwardRef(({ buttonLabel, onSubmit }, ref) => {
   const [isSubmitting, setIsSubmitting] = useState(false);
-
+  const [isLoading, setIsLoading] = useState(true);
   const [userId, setUserId] = useState('');
+  const [users, setUsers] = useState([]);
   const [typeList, setTypeList] = useState('');
   const [createdAt, setCreatedAt] = useState(null);
+  const [hasError, setHasError] = useState(false);
 
   const { errors, setError, removeError, getErrorMessageByFieldName } =
     useErrors();
@@ -33,6 +42,20 @@ const AdvertForm = forwardRef(({ buttonLabel, onSubmit }, ref) => {
     }),
     []
   );
+
+  useEffect(() => {
+    setIsLoading(true);
+    async function loadUsers() {
+      const usersList = await UsersService.listUsers();
+
+      setUsers(usersList);
+      console.log('loadUsers');
+    }
+    console.log('useEffect');
+    loadUsers();
+
+    setIsLoading(false);
+  }, []);
 
   function handleReportDate(e) {
     setCreatedAt(e.target.value);
@@ -85,6 +108,19 @@ const AdvertForm = forwardRef(({ buttonLabel, onSubmit }, ref) => {
           <option value="BOOST_PUBLICATION">Impulsionamento</option>
           <option value="RECORDS">Registros</option>
           <option value="SALES">Vendas</option>
+        </Select>
+
+        <Select
+          className="select-type"
+          value={userId}
+          onChange={(e) => setUserId(e.target.value)}
+        >
+          <option value="">Usuários</option>
+          {users.map((user) => (
+            <option key={user.id} value={user.id}>
+              {user.name}
+            </option>
+          ))}
         </Select>
 
         <Button type="submit" disabled={!isFormValid} isLoading={isSubmitting}>

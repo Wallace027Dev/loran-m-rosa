@@ -110,6 +110,7 @@ export const Card = styled.div`
           margin-top: 0.8rem;
           max-width: 16rem;
           text-align: center;
+          padding: 0.8rem;
         }
       }
     }

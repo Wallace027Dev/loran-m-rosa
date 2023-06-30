@@ -1,22 +1,18 @@
-import { useEffect, useRef, useState } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useRef, useState } from 'react';
 
 import PageHeader from '../../components/PageHeader';
 import AdvertForm from '../../components/AdvertForm';
 import Loader from '../../components/Loader';
 
 import AdvertsServices from '../../services/AdvertsServices';
-import UsersService from '../../services/UsersService';
 
 import toast from '../../utils/toast';
 
 export default function NewAdverts() {
-  const [isLoading, setIsLoading] = useState(true);
-  const [userName, setUserName] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
 
   const userFormRef = useRef(null);
-
-  const { id } = useParams();
+  /* 
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -39,25 +35,27 @@ export default function NewAdverts() {
     }
 
     loadUsers();
-  }, [id, navigate]);
+  }, [id, navigate]); */
 
   async function handleSubmit(formData) {
     try {
       const advert = {
-        userId: id,
+        userId: formData.userId,
         typeList: [formData.typeList],
         createdAt: formData.createdAt,
       };
 
       console.log(advert);
 
-      await AdvertsServices.createAdvert(advert);
+      const id = await AdvertsServices.createAdvert(advert);
+      console.log('Adverts Id : ', id);
 
       toast({
         type: 'success',
         text: 'Anúncio cadastrado com sucesso!',
       });
-    } catch {
+    } catch (error) {
+      console.log(error);
       toast({
         type: 'danger',
         text: 'Ocorreu um erro ao cadastrar o anúncio!',
@@ -68,7 +66,7 @@ export default function NewAdverts() {
   return (
     <>
       <Loader isLoading={isLoading} />
-      <PageHeader title={`anúncio para ${userName} `} path={'../../adverts'} />
+      <PageHeader title={`Criar novo anúncio`} path={'../../adverts'} />
 
       <AdvertForm
         ref={userFormRef}

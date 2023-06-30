@@ -21,6 +21,7 @@ import Loader from '../../components/Loader';
 import Input from '../../components/Input';
 import Button from '../../components/Button';
 import Modal from '../../components/Modal';
+
 import AdvertsServices from '../../services/AdvertsServices';
 import UsersService from '../../services/UsersService';
 
@@ -340,6 +341,8 @@ export default function Adverts() {
                           <strong>{advert.linkClicks}</strong>
                           <span>Cliques no link</span>
                         </div>
+                      </div>
+                      <div className="card-info">
                         <div>
                           <strong>{advert.engagement}</strong>
                           <span>Adições no carrinho</span>

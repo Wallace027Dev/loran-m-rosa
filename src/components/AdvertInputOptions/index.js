@@ -21,29 +21,20 @@ const AdvertInputOptions = forwardRef((props, ref) => {
   const advertTypeName = props.advertTypeName;
   const notExistAdvertType = !advertTypeName;
 
-  function handleValueUsed(e) {
-    setValueUsed(e.target.value);
-    if (!e.target.value) {
-      setError({ field: 'valueUsed', message: 'Valor inválido.' });
-    } else {
-      removeError('valueUsed');
-    }
-  }
-
   useImperativeHandle(
     ref,
     () => ({
       setFieldsValues: (adverts) => {
-        setReportId(adverts.reportId || '');
-        setReportName(adverts.reportName || '');
-        setReportDate(adverts.reportDate || '');
-        setCreatedAt(adverts.createdAt || '');
-        setLikes(adverts.likes || '');
-        setValueUsed(adverts.valueUsed || '');
-        setViews(adverts.views || '');
-        setLinkClicks(adverts.linkClicks || '');
-        setCostPerResult(adverts.costPerResult || '');
-        setRecordsStarted(adverts.recordsStarted || '');
+        setReportId(adverts.reportId || 0);
+        setReportName(adverts.reportName || 0);
+        setReportDate(adverts.reportDate || 0);
+        setCreatedAt(adverts.createdAt || 0);
+        setLikes(adverts.likes || 0);
+        setValueUsed(adverts.valueUsed || 0);
+        setViews(adverts.views || 0);
+        setLinkClicks(adverts.linkClicks || 0);
+        setCostPerResult(adverts.costPerResult || 0);
+        setRecordsStarted(adverts.recordsStarted || 0);
       },
     }),
     []
@@ -56,7 +47,7 @@ const AdvertInputOptions = forwardRef((props, ref) => {
           <Input
             type="text"
             value={valueUsed}
-            onChange={handleValueUsed}
+            onChange={(e) => setValueUsed(e.target.value)}
             placeholder="Valor usado..."
             disabled={notExistAdvertType}
             error={getErrorMessageByFieldName('valueUsed')}
@@ -100,7 +91,7 @@ const AdvertInputOptions = forwardRef((props, ref) => {
             type="text"
             value={views}
             placeholder="Visualizações do anúncio..."
-            onChange={(e) => linkClicks(e.target.value)}
+            onChange={(e) => setViews(e.target.value)}
             disabled={notExistAdvertType}
           />
         </FormGroup>
@@ -108,7 +99,7 @@ const AdvertInputOptions = forwardRef((props, ref) => {
           <Input
             type="text"
             value={linkClicks}
-            onChange={(e) => linkClicks(e.target.value)}
+            onChange={(e) => setLinkClicks(e.target.value)}
             placeholder="Cliques no link..."
             disabled={notExistAdvertType}
           />
@@ -299,18 +290,9 @@ const AdvertInputOptions = forwardRef((props, ref) => {
         <FormGroup>
           <Input
             type="text"
-            value={valueUsed}
-            onChange={(e) => setValueUsed(e.target.value)}
+            value={likes}
+            onChange={(e) => setLikes(e.target.value)}
             placeholder="Visualizações de conteúdo..."
-            disabled={notExistAdvertType}
-          />
-        </FormGroup>
-        <FormGroup>
-          <Input
-            type="text"
-            value={views}
-            onChange={(e) => setViews(e.target.value)}
-            placeholder="Cliques no link..."
             disabled={notExistAdvertType}
           />
         </FormGroup>
@@ -319,6 +301,15 @@ const AdvertInputOptions = forwardRef((props, ref) => {
             type="text"
             value={linkClicks}
             onChange={(e) => setLinkClicks(e.target.value)}
+            placeholder="Cliques no link..."
+            disabled={notExistAdvertType}
+          />
+        </FormGroup>
+        <FormGroup>
+          <Input
+            type="text"
+            value={costPerResult}
+            onChange={(e) => setCostPerResult(e.target.value)}
             placeholder="Adições ao carrinho..."
             disabled={notExistAdvertType}
           />
@@ -326,8 +317,8 @@ const AdvertInputOptions = forwardRef((props, ref) => {
         <FormGroup>
           <Input
             type="text"
-            value={views}
-            onChange={(e) => setViews(e.target.value)}
+            value={recordsStarted}
+            onChange={(e) => setRecordsStarted(e.target.value)}
             placeholder="Compras iniciadas..."
             disabled={notExistAdvertType}
           />
