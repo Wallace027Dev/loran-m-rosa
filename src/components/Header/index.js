@@ -39,7 +39,6 @@ export default function Header() {
 
   function handleLogout() {
     logOut;
-    console.log('clicou');
     navigate('./');
   }
 

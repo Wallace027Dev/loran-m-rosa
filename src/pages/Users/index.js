@@ -60,9 +60,10 @@ export default function Users() {
     }
   }, []);
 
+  const token = localStorage.getItem('token');
   useEffect(() => {
     loadUsers();
-  }, [loadUsers]);
+  }, [loadUsers, token]);
 
   function handleChangeSearchTerm(e) {
     setSearchTerm(e.target.value);

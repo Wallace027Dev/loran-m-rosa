@@ -12,32 +12,10 @@ export default function NewAdverts() {
   const [isLoading, setIsLoading] = useState(false);
 
   const userFormRef = useRef(null);
-  /* 
-  const navigate = useNavigate();
-
-  useEffect(() => {
-    async function loadUsers() {
-      try {
-        const user = await UsersService.getUserById(id);
-        console.log(user);
-
-        userFormRef.current.setFieldsValues(user);
-
-        setIsLoading(false);
-        setUserName(user.name);
-      } catch {
-        navigate('../../users');
-        toast({
-          type: 'danger',
-          text: 'Usuário não encontrado!',
-        });
-      }
-    }
-
-    loadUsers();
-  }, [id, navigate]); */
 
   async function handleSubmit(formData) {
+    setIsLoading(true);
+
     try {
       const advert = {
         userId: formData.userId,
@@ -45,10 +23,7 @@ export default function NewAdverts() {
         createdAt: formData.createdAt,
       };
 
-      console.log(advert);
-
       const id = await AdvertsServices.createAdvert(advert);
-      console.log('Adverts Id : ', id);
 
       toast({
         type: 'success',
@@ -61,6 +36,8 @@ export default function NewAdverts() {
         text: 'Ocorreu um erro ao cadastrar o anúncio!',
       });
     }
+
+    setIsLoading(false);
   }
 
   return (

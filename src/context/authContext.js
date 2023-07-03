@@ -18,12 +18,10 @@ export function AuthProvider({ children }) {
 
   async function signUp(user) {
     await UsersService.createUser(user);
-    console.log(user);
   }
 
   async function signIn(user) {
     const { token } = await UsersService.loginUser(user);
-    console.log(token);
 
     localStorage.setItem('token', token);
     setCurrentUser({ token });

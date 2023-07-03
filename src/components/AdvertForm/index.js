@@ -49,9 +49,7 @@ const AdvertForm = forwardRef(({ buttonLabel, onSubmit }, ref) => {
       const usersList = await UsersService.listUsers();
 
       setUsers(usersList);
-      console.log('loadUsers');
     }
-    console.log('useEffect');
     loadUsers();
 
     setIsLoading(false);
