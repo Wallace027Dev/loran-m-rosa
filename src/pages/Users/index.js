@@ -9,6 +9,7 @@ import {
   ErrorContainer,
   EmptyListContainer,
   SeachNotFoundContainer,
+  LinkStyle,
 } from './styles';
 
 import edit from '../../assets/images/icons/edit.svg';
@@ -146,7 +147,9 @@ export default function Users() {
             {filteredUsers.length === 1 ? ' usuário' : ' usuários'}
           </strong>
         )}
-        <Link to="../user/new">Novo Usuário</Link>
+        <LinkStyle>
+          <Link to="../user/new">Novo Usuário</Link>
+        </LinkStyle>
       </Header>
 
       {hasError && (
@@ -191,15 +194,17 @@ export default function Users() {
             <Card key={user.id}>
               <div className="info">
                 <div className="user-name">
-                  <Link to={`../../advert/new/${user.id}`}>
-                    <strong>{user.name}</strong>
-                  </Link>
-                  {user.category_name && <small>{user.category_name}</small>}
+                  {user && <strong>{user.name}</strong>}
+                  {user.instagram && <small>{user.instagram}</small>}
+                  {user.facebook && <small>{user.facebook}</small>}
                 </div>
                 <span>{user.email}</span>
                 <span>{user.phone}</span>
               </div>
               <div className="actions">
+                <LinkStyle>
+                  <Link to={`../../advert/new/${user.id}`}>Novo Anúncio</Link>
+                </LinkStyle>
                 <Link to={`../../user/edit/${user.id}`}>
                   <img src={edit} alt="Edit" />
                 </Link>

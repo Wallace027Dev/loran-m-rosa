@@ -11,13 +11,16 @@ class AdvertsService {
     this.HttpClient = new HttpClient('http://localhost:3001');
   }
 
-  listAdverts() {
-    return this.HttpClient.get(`/adverts`, { headers });
+  listAdverts(initDate = '2023-01-01', endDate = '2023-12-31') {
+    return this.HttpClient.get(
+      `/adverts?initDate=${initDate}/&endDate=${endDate}`,
+      { headers }
+    );
   }
 
-  getAdvertById(id, initDate, endDate) {
+  getAdvertById(id, initDate = '2023-01-01', endDate = '2023-12-31') {
     return this.HttpClient.get(
-      `/adverts/${id}/?initDate=${initDate}/&endDate=${endDate}`,
+      `/adverts/${id}?initDate=${initDate}&endDate=${endDate}`,
       { headers }
     );
   }

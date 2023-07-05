@@ -7,9 +7,12 @@ import Loader from '../../components/Loader';
 import AdvertsServices from '../../services/AdvertsServices';
 
 import toast from '../../utils/toast';
+import { useNavigate } from 'react-router-dom';
 
 export default function NewAdverts() {
   const [isLoading, setIsLoading] = useState(false);
+
+  const navigate = useNavigate();
 
   const userFormRef = useRef(null);
 
@@ -23,12 +26,15 @@ export default function NewAdverts() {
         createdAt: formData.createdAt,
       };
 
-      const id = await AdvertsServices.createAdvert(advert);
+      const { id } = await AdvertsServices.createAdvert(advert);
+      console.log(advert);
 
       toast({
         type: 'success',
         text: 'Anúncio cadastrado com sucesso!',
       });
+
+      navigate(`../adverts`);
     } catch (error) {
       console.log(error);
       toast({
@@ -43,7 +49,7 @@ export default function NewAdverts() {
   return (
     <>
       <Loader isLoading={isLoading} />
-      <PageHeader title={`Criar novo anúncio`} path={'../../adverts'} />
+      <PageHeader title={`Criar novo anúncio`} path={'../../users'} />
 
       <AdvertForm
         ref={userFormRef}

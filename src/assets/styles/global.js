@@ -31,6 +31,8 @@ export default createGlobalStyle`
     --danger-light: #f97171;
 
     --success: #51ca73;
+
+    --edit:#5061FC;
   };
 
   strong {

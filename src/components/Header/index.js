@@ -8,9 +8,10 @@ import xCirclePrimary from '../../assets/images/icons/xCirclePrimary.svg';
 import { useAuth } from '../../context/authContext';
 
 export default function Header() {
+  const { logOut } = useAuth;
   const location = useLocation();
   const navigate = useNavigate();
-  const { logOut } = useAuth;
+  const token = localStorage.getItem('token');
 
   const adminIsLogged =
     location.pathname === '/adverts' ||
@@ -18,7 +19,8 @@ export default function Header() {
     location.pathname === '/user';
 
   const userIsLogged =
-    location.pathname === `/dashboard` || location.pathname === `/account`;
+    location.pathname === `/dashboard/${token}` ||
+    location.pathname === `/account`;
 
   function menuShow() {
     let menuMobile = document.querySelector('.mobile-menu');

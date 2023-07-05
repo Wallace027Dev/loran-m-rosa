@@ -1,19 +1,58 @@
 import styled from 'styled-components';
 
-export const Header = styled.header`
+export const Container = styled.div`
+  position: relative;
+`;
+
+export const InputSearchContainer = styled.div`
   small {
-    margin-right: 0.8rem;
     font-size: 1.6rem;
+    margin-right: 0.8rem;
   }
 
-  & option,
-  select {
-    font-size: 1.2rem;
+  div {
+    display: flex;
+    max-width: 100%;
+
+    input:first-child {
+      margin-right: 5rem;
+    }
   }
+`;
+
+export const Header = styled.header`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 3.2rem;
+  border-bottom: 2px solid var(--secondary);
+  padding-bottom: 1.6rem;
 
   h1 {
     color: var(--primary);
-    margin: 3.6rem 0 1.2rem 0;
+  }
+`;
+
+export const ListHeader = styled.header`
+  margin-top: 2.4rem;
+  margin-bottom: 0.8rem;
+  button {
+    background: transparent;
+    border: none;
+    display: flex;
+    align-items: center;
+  }
+
+  span {
+    margin-right: 0.5rem;
+    font-weight: bold;
+    color: var(--primary);
+  }
+
+  img {
+    transform: ${({ orderBy }) =>
+      orderBy === 'asc' ? 'rotate(180deg)' : 'rotate(0deg)'};
+    transition: transform 0.2s ease-in;
   }
 `;
 
@@ -24,47 +63,122 @@ export const Card = styled.div`
   border-radius: 4px;
   display: flex;
   align-items: center;
-  justify-content: center;
-  flex-direction: column;
+  justify-content: space-between;
 
-  .ad-name {
-    display: flex;
-    align-items: center;
+  & + & {
+    margin-top: 1.6rem;
+  }
 
-    small {
-      background: var(--tertiary);
-      color: var(--primary);
-      font-weight: bold;
-      text-transform: uppercase;
-      padding: 0.4rem;
-      border-radius: 0.4rem;
-      margin-right: 1.2rem;
-      font-size: 1.3rem;
+  .info {
+    .advert-name {
+      display: flex;
+      align-items: center;
+
+      strong {
+        font-size: 1.6rem;
+      }
+
+      small {
+        background: var(--tertiary);
+        color: var(--primary);
+        font-weight: bold;
+        text-transform: uppercase;
+        padding: 0.4rem;
+        border-radius: 0.4rem;
+        font-size: 1.3rem;
+      }
+
+      .card-info {
+        flex-direction: row;
+        display: flex;
+        justify-content: space-between;
+        color: var(--tertiary);
+
+        strong {
+          font-size: 1.3rem;
+        }
+
+        p {
+          font-size: 1rem;
+        }
+
+        div {
+          margin-top: 0.8rem;
+          max-width: 16rem;
+          text-align: center;
+          padding: 0.8rem;
+        }
+      }
     }
 
-    h1 {
-      font-size: 1.6rem;
-      max-width: 30rem;
+    span {
+      display: block;
+      color: var(--tertiary);
+      font-size: 1.3rem;
     }
   }
 
-  .card-info {
-    flex-direction: row;
+  .actions {
     display: flex;
-    justify-content: space-between;
-    color: var(--tertiary);
+    align-items: center;
+    button {
+      background: transparent;
+      border: none;
+      margin-left: 0.8rem;
+    }
+  }
+`;
+
+export const ErrorContainer = styled.div`
+  margin-top: 1.6rem;
+  display: flex;
+  align-items: center;
+
+  .datails {
+    margin-left: 2.4rem;
 
     strong {
-      font-size: 1.3rem;
+      color: var(--danger);
+      display: block;
     }
 
-    p {
-      font-size: 1rem;
-    }
-
-    div {
+    button {
+      max-width: 15rem;
       margin-top: 0.8rem;
-      max-width: 16rem;
     }
+  }
+`;
+
+export const EmptyListContainer = styled.div`
+  margin-top: 1.6rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  p {
+    color: var(--tertiary);
+    text-align: center;
+    margin-top: 0.8rem;
+
+    strong {
+      font-size: 1.6rem;
+      color: var(--primary);
+    }
+  }
+`;
+
+export const SeachNotFoundContainer = styled.div`
+  margin-top: 1.6rem;
+  display: flex;
+  align-items: flex-start;
+
+  span {
+    color: var(--tertiary);
+    margin-left: 2.4rem;
+    word-break: break-word;
+  }
+  span,
+  strong {
+    font-size: 1.6rem;
   }
 `;

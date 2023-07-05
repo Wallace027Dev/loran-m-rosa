@@ -21,13 +21,19 @@ export const Header = styled.header`
   }
 
   a {
-    color: var(--primary);
-    text-decoration: none;
-    font-weight: bold;
     font-size: 1.6rem;
-    border: 2px solid var(--primary);
     padding: 0.5rem 1rem;
+  }
+`;
+
+export const LinkStyle = styled.div`
+  a {
+    border: 2px solid var(--primary);
     border-radius: 4px;
+    color: var(--primary);
+    font-weight: bold;
+    padding: 0.25rem 0.5rem;
+    text-decoration: none;
     transition: all 0.2s ease-in;
 
     &:hover {
@@ -79,7 +85,6 @@ export const Card = styled.div`
       align-items: center;
 
       a {
-        text-decoration: none;
         color: #222;
       }
 
@@ -112,7 +117,16 @@ export const Card = styled.div`
     button {
       background: transparent;
       border: none;
-      margin-left: 0.8rem;
+    }
+    a {
+      margin-right: 0.8rem;
+      font-size: 0.8rem;
+      color: var(--edit);
+      border-color: var(--edit);
+      &:hover:not(:has(img)) {
+        background: var(--edit);
+        color: var(--bg);
+      }
     }
   }
 `;
