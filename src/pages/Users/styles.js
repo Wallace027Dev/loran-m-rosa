@@ -69,63 +69,80 @@ export const ListHeader = styled.header`
 export const Card = styled.div`
   background: var(--secondary);
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.04);
-  padding: 1.6rem;
+  padding: 3.2rem 1.6rem;
   border-radius: 4px;
   display: flex;
+  flex-direction: column;
   align-items: center;
-  justify-content: space-between;
+  justify-content: center;
 
   & + & {
     margin-top: 1.6rem;
   }
 
   .info {
-    .user-name {
-      display: flex;
-      align-items: center;
+    width: 100%;
 
-      a {
-        color: #222;
-      }
+    display: flex;
+    align-items: center;
+    margin-bottom: 0.8rem;
 
-      strong {
-        font-size: 1.6rem;
-      }
-
-      small {
-        background: var(--tertiary);
-        color: var(--primary);
-        font-weight: bold;
-        text-transform: uppercase;
-        padding: 0.4rem;
-        border-radius: 0.4rem;
-        margin-left: 0.8rem;
-        font-size: 1.3rem;
-      }
+    a {
+      color: #222;
     }
 
-    span {
-      display: block;
-      color: var(--tertiary);
+    strong {
+      font-size: 1.6rem;
+    }
+
+    small {
+      background: var(--tertiary);
+      color: var(--primary);
+      font-weight: bold;
+      text-transform: uppercase;
+      padding: 0.4rem;
+      border-radius: 0.4rem;
+      margin-left: 0.8rem;
       font-size: 1.3rem;
     }
   }
 
-  .actions {
+  .action-div {
+    width: 100%;
     display: flex;
-    align-items: center;
-    button {
-      background: transparent;
-      border: none;
+    justify-content: space-between;
+    align-items: end;
+
+    .user-contact {
+      display: flex;
+      flex-direction: column;
+
+      span {
+        display: block;
+        color: var(--tertiary);
+        font-size: 1.3rem;
+      }
     }
-    a {
-      margin-right: 0.8rem;
-      font-size: 0.8rem;
-      color: var(--edit);
-      border-color: var(--edit);
-      &:hover:not(:has(img)) {
-        background: var(--edit);
-        color: var(--bg);
+
+    .actions {
+      display: flex;
+      align-items: center;
+
+      button {
+        background: transparent;
+        border: none;
+      }
+
+      a {
+        margin-right: 0.8rem;
+        font-size: 0.8rem;
+        color: var(--edit);
+        border-color: var(--edit);
+
+        &:hover:not(:has(img)) {
+          background: var(--edit);
+          color: var(--bg);
+        }
       }
     }
   }

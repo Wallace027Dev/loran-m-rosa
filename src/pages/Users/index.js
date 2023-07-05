@@ -193,24 +193,27 @@ export default function Users() {
           {filteredUsers.map((user) => (
             <Card key={user.id}>
               <div className="info">
-                <div className="user-name">
-                  {user && <strong>{user.name}</strong>}
-                  {user.instagram && <small>{user.instagram}</small>}
-                  {user.facebook && <small>{user.facebook}</small>}
-                </div>
-                <span>{user.email}</span>
-                <span>{user.phone}</span>
+                {user && <strong>{user.name}</strong>}
+                {user.instagram && <small>{user.instagram}</small>}
+                {user.facebook && <small>{user.facebook}</small>}
               </div>
-              <div className="actions">
-                <LinkStyle>
-                  <Link to={`../../advert/new/${user.id}`}>Novo Anúncio</Link>
-                </LinkStyle>
-                <Link to={`../../user/edit/${user.id}`}>
-                  <img src={edit} alt="Edit" />
-                </Link>
-                <button type="button" onClick={() => handleDeleteUser(user)}>
-                  <img src={trash} alt="Delete" />
-                </button>
+
+              <div className="action-div">
+                <div className="user-contact">
+                  <span>{user.email}</span>
+                  <span>{user.phone}</span>
+                </div>
+                <div className="actions">
+                  <LinkStyle>
+                    <Link to={`../../advert/new/${user.id}`}>Novo Anúncio</Link>
+                  </LinkStyle>
+                  <Link to={`../../user/edit/${user.id}`}>
+                    <img src={edit} alt="Edit" />
+                  </Link>
+                  <button type="button" onClick={() => handleDeleteUser(user)}>
+                    <img src={trash} alt="Delete" />
+                  </button>
+                </div>
               </div>
             </Card>
           ))}
