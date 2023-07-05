@@ -26,8 +26,7 @@ export default function NewAdverts() {
         createdAt: formData.createdAt,
       };
 
-      const { id } = await AdvertsServices.createAdvert(advert);
-      console.log(advert);
+      await AdvertsServices.createAdvert(advert);
 
       toast({
         type: 'success',

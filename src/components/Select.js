@@ -1,4 +1,4 @@
-import styled from 'styled-components'
+import styled, { css } from 'styled-components';
 
 export default styled.select`
   background: var(--secondary);
@@ -17,14 +17,14 @@ export default styled.select`
   width: 100%;
   transition: border-color 0.2s ease-in;
   appearance: none;
-  
+
   & option {
     font-size: 1.6rem;
   }
 
   &:focus {
     border: 2px solid var(--primary);
-  };
+  }
 
   &[disabled] {
     color: var(--tertiary);
@@ -32,4 +32,11 @@ export default styled.select`
     background-color: var(--secondary);
     opacity: 1;
   }
+
+  ${({ error }) =>
+    error &&
+    css`
+      color: var(--danger);
+      border-color: var(--danger) !important;
+    `};
 `;

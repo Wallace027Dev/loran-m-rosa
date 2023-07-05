@@ -6,7 +6,7 @@ export const Form = styled.form`
     width: 100%;
   }
 
-  .select-type {
-    margin-top: 1.6rem;
+  select {
+    margin-bottom: 0;
   }
 `;

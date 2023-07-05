@@ -24,12 +24,11 @@ const AdvertForm = forwardRef(({ buttonLabel, onSubmit }, ref) => {
   const [users, setUsers] = useState([]);
   const [typeList, setTypeList] = useState('');
   const [createdAt, setCreatedAt] = useState(null);
-  const [hasError, setHasError] = useState(false);
 
   const { errors, setError, removeError, getErrorMessageByFieldName } =
     useErrors();
 
-  const isFormValid = typeList && errors.length === 0;
+  const isFormValid = typeList && userId && createdAt && errors.length === 0;
 
   useImperativeHandle(
     ref,
@@ -66,6 +65,20 @@ const AdvertForm = forwardRef(({ buttonLabel, onSubmit }, ref) => {
 
   function handleTypeList(e) {
     setTypeList(e.target.value);
+    if (!e.target.value) {
+      setError({ field: 'select-type-error', message: 'Valor inválido.' });
+    } else {
+      removeError('select-type-error');
+    }
+  }
+
+  function handleUserId(e) {
+    setUserId(e.target.value);
+    if (!e.target.value) {
+      setError({ field: 'select-user-error', message: 'Valor inválido.' });
+    } else {
+      removeError('select-user-error');
+    }
   }
 
   async function handleSubmit(e) {
@@ -93,35 +106,44 @@ const AdvertForm = forwardRef(({ buttonLabel, onSubmit }, ref) => {
             error={getErrorMessageByFieldName('input-date-error')}
           />
         </FormGroup>
-        <Select
-          className="select-type"
-          value={typeList}
-          onChange={handleTypeList}
-        >
-          <option value="">Tipo do Anúncio</option>
-          <option value="RECOGNITION">Reconhecimento</option>
-          <option value="TRAFFIC">Tráfego</option>
-          <option value="RECEIVE_MESSAGES">Mensagens Recebidas</option>
-          <option value="GET_PAGE_LIKES">Curtidas</option>
-          <option value="BOOST_PUBLICATION">Impulsionamento</option>
-          <option value="RECORDS">Registros</option>
-          <option value="SALES">Vendas</option>
-        </Select>
+        <FormGroup error={getErrorMessageByFieldName('select-type-error')}>
+          <Select
+            className="select-type"
+            value={typeList}
+            onChange={handleTypeList}
+            error={getErrorMessageByFieldName('select-type-error')}
+          >
+            <option value="">Tipo do Anúncio</option>
+            <option value="RECOGNITION">Reconhecimento</option>
+            <option value="TRAFFIC">Tráfego</option>
+            <option value="RECEIVE_MESSAGES">Mensagens Recebidas</option>
+            <option value="GET_PAGE_LIKES">Curtidas</option>
+            <option value="BOOST_PUBLICATION">Impulsionamento</option>
+            <option value="RECORDS">Registros</option>
+            <option value="SALES">Vendas</option>
+          </Select>
+        </FormGroup>
+        <FormGroup error={getErrorMessageByFieldName('select-user-error')}>
+          <Select
+            className="select-type"
+            value={userId}
+            onChange={handleUserId}
+            error={getErrorMessageByFieldName('select-user-error')}
+          >
+            <option value="">Usuários</option>
+            {users.map((user) => (
+              <option key={user.id} value={user.id}>
+                {user.name}
+              </option>
+            ))}
+          </Select>
+        </FormGroup>
 
-        <Select
-          className="select-type"
-          value={userId}
-          onChange={(e) => setUserId(e.target.value)}
+        <Button
+          type="submit"
+          disabled={!isFormValid || isLoading}
+          isLoading={isSubmitting}
         >
-          <option value="">Usuários</option>
-          {users.map((user) => (
-            <option key={user.id} value={user.id}>
-              {user.name}
-            </option>
-          ))}
-        </Select>
-
-        <Button type="submit" disabled={!isFormValid} isLoading={isSubmitting}>
           {buttonLabel}
         </Button>
       </FormGroup>
