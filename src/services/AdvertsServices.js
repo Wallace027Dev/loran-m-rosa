@@ -33,7 +33,7 @@ class AdvertsService {
     return this.HttpClient.post(`/adverts/${id}`, { body: advert, headers });
   }
 
-  deleteAdverts(id) {
+  deleteAdvert(id) {
     return this.HttpClient.delete(`/adverts/${id}`, { headers });
   }
 }

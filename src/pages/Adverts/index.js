@@ -17,10 +17,11 @@ import Loader from '../../components/Loader';
 import Input from '../../components/Input';
 import Button from '../../components/Button';
 import Modal from '../../components/Modal';
+import { AdvertCard } from '../../components/AdvertCard';
+
+import toast from '../../utils/toast';
 
 import AdvertsServices from '../../services/AdvertsServices';
-import UsersService from '../../services/UsersService';
-import { AdvertCard } from '../../components/AdvertCard';
 
 export default function Adverts() {
   const [adverts, setAdverts] = useState([]);
@@ -69,11 +70,6 @@ export default function Adverts() {
     loadAdverts();
   }
 
-  function handleDeleteAdvert(advert) {
-    setAdvertBeingDeleted(advert);
-    setIsDeleteModalVisible(true);
-  }
-
   function handleCloseDeleteModal() {
     setIsDeleteModalVisible(false);
     setAdvertBeingDeleted(null);
@@ -95,7 +91,8 @@ export default function Adverts() {
         type: 'success',
         text: 'Anúncio deletado com sucesso!',
       });
-    } catch {
+    } catch (error) {
+      console.log(error);
       toast({
         type: 'danger',
         text: 'Ocorreu um erro ao deletar o anúncio!',
@@ -187,7 +184,12 @@ export default function Adverts() {
           )}
 
           {filteredAdverts.map((advert) => (
-            <AdvertCard key={advert.id} advert={advert} />
+            <AdvertCard
+              key={advert.id}
+              advert={advert}
+              setIsDeleteModalVisible={setIsDeleteModalVisible}
+              setAdvertBeingDeleted={setAdvertBeingDeleted}
+            />
           ))}
         </>
       )}

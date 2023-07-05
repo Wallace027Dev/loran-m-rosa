@@ -1,14 +1,18 @@
-import { Link } from 'react-router-dom';
 import { useCallback, useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 
-import { Card } from '../../pages/Adverts/styles';
+import { Constainer } from './styles';
 
 import edit from '../../assets/images/icons/edit.svg';
 import trash from '../../assets/images/icons/trash.svg';
-import UsersService from '../../services/UsersService';
-import { Constainer } from './styles';
 
-export function AdvertCard({ advert }) {
+import UsersService from '../../services/UsersService';
+
+export function AdvertCard({
+  advert,
+  setAdvertBeingDeleted,
+  setIsDeleteModalVisible,
+}) {
   const [user, setUser] = useState(null);
 
   const loadUsers = useCallback(async () => {
@@ -25,6 +29,11 @@ export function AdvertCard({ advert }) {
   useEffect(() => {
     loadUsers();
   }, [loadUsers]);
+
+  function handleDeleteAdvert(advert) {
+    setAdvertBeingDeleted(advert);
+    setIsDeleteModalVisible(true);
+  }
 
   return (
     <Constainer key={advert.id}>
