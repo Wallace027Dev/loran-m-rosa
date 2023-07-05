@@ -34,8 +34,9 @@ export const Constainer = styled.div`
       }
 
       .card-info {
-        flex-direction: row;
         display: flex;
+        flex-wrap: wrap;
+        flex-direction: row;
         justify-content: space-between;
         color: var(--tertiary);
 

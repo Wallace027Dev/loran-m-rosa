@@ -109,12 +109,15 @@ export default function Adverts() {
         danger
         isLoading={isLoadingDelete}
         visible={isDeleteModalVisible}
-        title={`Tem certeza que deseja remover o usuário "${advertBeingDeleted?.name}"?`}
+        title={'Tem certeza que deseja remover este anúncio?'}
         confirmLabel={'Deletar'}
         onCancel={handleCloseDeleteModal}
         onConfirm={handleConfirmDeleteAdvert}
       >
-        <p>Esta ação não poderá ser defeita!</p>
+        <p>
+          Esta ação não poderá ser defeita e todos os dados adicionados
+          anteriormente serão perdidos!
+        </p>
       </Modal>
 
       {adverts.length > 0 && (
@@ -165,9 +168,8 @@ export default function Adverts() {
             <EmptyListContainer>
               <img src={emptyBox} alt="Empty box" />
               <p>
-                Você ainda não tem nenhum anúncio cadastrado! Clique no botão{' '}
-                <strong>”Novo anúncio</strong> à cima para cadastrar o seu
-                primeiro!
+                Vá à página <strong>“Usuários”</strong>, escolha um usuário e
+                clique em <strong>“Novo anúncio”</strong>!
               </p>
             </EmptyListContainer>
           )}
