@@ -5,52 +5,55 @@ import { Form } from './styles';
 
 import Button from '../Button';
 
-import AdvertInputOptions from '../AdvertInputOptions';
+const ReportForm = forwardRef(
+  ({ buttonLabel, onSubmit, typeList, isLoading }, ref) => {
+    const [isSubmitting, setIsSubmitting] = useState(false);
 
-const ReportForm = forwardRef(({ buttonLabel, onSubmit }, ref) => {
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [createdAt, setCreatedAt] = useState('');
-  const [userId, setUserId] = useState('');
-  const [typeList, setTypeList] = useState('');
+    const [userId, setUserId] = useState('');
+    const [createdAt, setCreatedAt] = useState('');
+    const [advertId, setAdvertId] = useState('');
 
-  const isFormValid = typeList;
+    const isFormValid = typeList;
 
-  useImperativeHandle(
-    ref,
-    () => ({
-      setFieldsValues: (adverts) => {
-        setUserId(adverts.userId || '');
-        setTypeList(adverts.typeList || '');
-        setCreatedAt(adverts.createdAt || '');
-      },
-    }),
-    []
-  );
+    useImperativeHandle(
+      ref,
+      () => ({
+        setFieldsValues: (advert) => {
+          setUserId(advert.userId || '');
+          setCreatedAt(advert.createdAt || '');
+          setAdvertId(advert.advertId || '');
+        },
+      }),
+      []
+    );
 
-  async function handleSubmit(e) {
-    e.preventDefault();
+    async function handleSubmit(e) {
+      e.preventDefault();
 
-    setIsSubmitting(true);
+      setIsSubmitting(true);
 
-    await onSubmit({
-      userId,
-      typeList,
-      createdAt,
-    });
+      await onSubmit({
+        userId,
+        typeList,
+        createdAt,
+      });
 
-    setIsSubmitting(false);
+      setIsSubmitting(false);
+    }
+
+    return (
+      <Form noValidate onSubmit={handleSubmit}>
+        <Button
+          type="submit"
+          disabled={!isFormValid || isLoading}
+          isLoading={isSubmitting}
+        >
+          {buttonLabel}
+        </Button>
+      </Form>
+    );
   }
-
-  return (
-    <Form noValidate onSubmit={handleSubmit}>
-      <AdvertInputOptions advertTypeName={typeList} />
-
-      <Button type="submit" disabled={!isFormValid} isLoading={isSubmitting}>
-        {buttonLabel}
-      </Button>
-    </Form>
-  );
-});
+);
 
 ReportForm.propTypes = {
   buttonLabel: PropTypes.string.isRequired,

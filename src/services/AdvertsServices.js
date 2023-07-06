@@ -29,8 +29,11 @@ class AdvertsService {
     return this.HttpClient.post('/adverts', { body: advert, headers });
   }
 
-  createReport(advert, id) {
-    return this.HttpClient.post(`/adverts/${id}`, { body: advert, headers });
+  createReport(id, advert) {
+    return this.HttpClient.post(`/adverts/${id}/report`, {
+      body: advert,
+      headers,
+    });
   }
 
   deleteAdvert(id) {

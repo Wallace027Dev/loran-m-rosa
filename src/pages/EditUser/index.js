@@ -33,6 +33,7 @@ export default function EditUser() {
           type: 'danger',
           text: 'Usuário não encontrado!',
         });
+        setIsLoading(false);
       }
     }
 

@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const Constainer = styled.div`
+export const Container = styled.div`
   background: var(--secondary);
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.04);
   padding: 1.6rem;
@@ -30,7 +30,7 @@ export const Constainer = styled.div`
         text-transform: uppercase;
         padding: 0.4rem;
         border-radius: 0.4rem;
-        font-size: 1.3rem;
+        font-size: 1.2rem;
       }
 
       .card-info {
@@ -40,27 +40,22 @@ export const Constainer = styled.div`
         justify-content: space-between;
         color: var(--tertiary);
 
-        strong {
-          font-size: 1.3rem;
-        }
-
-        p {
-          font-size: 1rem;
-        }
-
         div {
           margin-top: 0.8rem;
-          max-width: 16rem;
           text-align: center;
-          padding: 0.8rem;
+          padding: 0.4rem;
+        }
+
+        strong {
+          font-size: 1.6rem;
+        }
+
+        span {
+          display: block;
+          color: var(--tertiary);
+          font-size: 1.1rem;
         }
       }
-    }
-
-    span {
-      display: block;
-      color: var(--tertiary);
-      font-size: 1.3rem;
     }
   }
 

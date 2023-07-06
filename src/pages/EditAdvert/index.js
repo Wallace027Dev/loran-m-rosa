@@ -3,31 +3,36 @@ import { useNavigate, useParams } from 'react-router-dom';
 
 import Loader from '../../components/Loader';
 import PageHeader from '../../components/PageHeader';
-import AdvertForm from '../../components/AdvertForm';
 
 import AdvertsServices from '../../services/AdvertsServices';
 import toast from '../../utils/toast';
 import ReportForm from '../../components/ReportForm';
+import AdvertInputOptions from '../../components/AdvertInputOptions';
+import Button from '../../components/Button';
+import { Form } from './styles';
 
 export default function EditAdvert() {
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
   const [isLoading, setIsLoading] = useState(true);
   const [typeName, setTypeName] = useState('');
-  const [advertTypeName, setAdvertTypeName] = useState('');
+  const [typeList, setTypeList] = useState([]);
+  const [advertData, setadvertData] = useState(null);
+
+  const advertFormRef = useRef(null);
 
   const { id } = useParams();
   const navigate = useNavigate();
-
-  const advertFormRef = useRef(null);
+  const isFormValid = typeList;
 
   useEffect(() => {
     async function loadAdvert() {
       try {
         const advert = await AdvertsServices.getAdvertById(id);
 
-        setAdvertTypeName(advert.type);
-
         advertFormRef.current.setFieldsValues(advert);
-
+        setadvertData(advert);
+        setTypeList(advert.type);
         setIsLoading(false);
       } catch (error) {
         console.log(error);
@@ -36,6 +41,7 @@ export default function EditAdvert() {
           type: 'danger',
           text: 'Usuário não encontrado!',
         });
+        setIsLoading(false);
       }
     }
 
@@ -43,7 +49,7 @@ export default function EditAdvert() {
   }, [id, navigate]);
 
   useEffect(() => {
-    switch (advertTypeName) {
+    switch (typeList) {
       case 'RECOGNITION':
         setTypeName('reconhecimento');
         break;
@@ -70,7 +76,7 @@ export default function EditAdvert() {
         setTypeName('');
         break;
     }
-  }, [advertTypeName]);
+  }, [typeList]);
 
   async function handleSubmit(formData) {
     try {
@@ -94,19 +100,26 @@ export default function EditAdvert() {
   }
 
   return (
-    <>
+    <Form noValidate onSubmit={handleSubmit}>
       <Loader isLoading={isLoading} />
       <PageHeader
-        title={`Atualizar informações do anúncio de ${typeName}`}
+        title={`Atualizar informações do anúncio de “${typeName}”`}
         path={'../../adverts'}
       />
 
-      <ReportForm
+      <AdvertInputOptions
         ref={advertFormRef}
-        onSubmit={handleSubmit}
-        buttonLabel="Atualizar anúncio"
-        typeList={advertTypeName}
+        typeList={typeList}
+        advertData={advertData}
       />
-    </>
+
+      <Button
+        type="submit"
+        disabled={!isFormValid || isLoading}
+        isLoading={isSubmitting}
+      >
+        Atualizar anúncio
+      </Button>
+    </Form>
   );
 }

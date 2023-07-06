@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 
-import { Constainer } from './styles';
+import { Container } from './styles';
 
 import edit from '../../assets/images/icons/edit.svg';
 import trash from '../../assets/images/icons/trash.svg';
@@ -36,7 +36,7 @@ export function AdvertCard({
   }
 
   return (
-    <Constainer key={advert.id}>
+    <Container key={advert.id}>
       <div className="info">
         {user && <strong>{user.name}</strong>}
         <div className="advert-name">
@@ -54,7 +54,7 @@ export function AdvertCard({
                   <span>Visualizações do anúncio</span>
                 </div>
                 <div>
-                  <strong>0</strong>
+                  <strong>{advert.views}</strong>
                   <span>Visualizaram o anúncio</span>
                 </div>
               </div>
@@ -92,7 +92,7 @@ export function AdvertCard({
                   <span>Visualizações do anúncio</span>
                 </div>
                 <div>
-                  <strong>{advert.linkClicks}</strong>
+                  <strong>{advert.recordsStarted}</strong>
                   <span>Mensagens iniciadas</span>
                 </div>
               </div>
@@ -158,7 +158,7 @@ export function AdvertCard({
                 </div>
                 <div>
                   <strong>{advert.recordsStarted}</strong>
-                  <span>Cadstros</span>
+                  <span>Cadastros</span>
                 </div>
               </div>
             </div>
@@ -184,19 +184,17 @@ export function AdvertCard({
                   <span>Cliques no link</span>
                 </div>
               </div>
-              <div className="card-info">
-                <div>
-                  <strong>{advert.engagement}</strong>
-                  <span>Adições no carrinho</span>
-                </div>
-                <div>
-                  <strong>{advert.recordsStarted}</strong>
-                  <span>Compras iniciadas</span>
-                </div>
-                <div>
-                  <strong>{advert.views}</strong>
-                  <span>Total de vendas</span>
-                </div>
+              <div>
+                <strong>{advert.engagement}</strong>
+                <span>Adições no carrinho</span>
+              </div>
+              <div>
+                <strong>{advert.recordsStarted}</strong>
+                <span>Compras iniciadas</span>
+              </div>
+              <div>
+                <strong>{advert.views}</strong>
+                <span>Total de vendas</span>
               </div>
             </div>
           )}
@@ -211,6 +209,6 @@ export function AdvertCard({
           <img src={trash} alt="Delete" />
         </button>
       </div>
-    </Constainer>
+    </Container>
   );
 }
