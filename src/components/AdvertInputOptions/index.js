@@ -1,34 +1,36 @@
-import { forwardRef, useImperativeHandle, useRef, useState } from 'react';
-import Input from '../Input';
-import FormGroup from '../FormGroup';
-import useErrors from '../../hooks/useErrors';
+import { forwardRef, useImperativeHandle, useState } from 'react';
 
-const AdvertInputOptions = forwardRef(({ typeList, advertData }, ref) => {
-  const [reportId, setReportId] = useState('');
+import Input from '../Input';
+import Button from '../Button';
+import { Form } from './styles';
+
+import useErrors from '../../hooks/useErrors';
+import FormGroup from '../FormGroup';
+
+const AdvertInputOptions = forwardRef(({ typeList, onSubmit }, ref) => {
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const [reportDate, setReportDate] = useState('');
-  const [createdAt, setCreatedAt] = useState('');
-  const [likes, setLikes] = useState('');
-  const [contentViews, setContentViews] = useState('');
-  const [valueUsed, setValueUsed] = useState('');
-  const [views, setViews] = useState('');
-  const [linkClicks, setLinkClicks] = useState('');
-  const [costPerResult, setCostPerResult] = useState('');
-  const [engagement, setEngagement] = useState('');
-  const [recordsStarted, setRecordsStarted] = useState('');
+  const [likes, setLikes] = useState(0);
+  const [contentViews, setContentViews] = useState(0);
+  const [valueUsed, setValueUsed] = useState(0);
+  const [views, setViews] = useState(0);
+  const [linkClicks, setLinkClicks] = useState(0);
+  const [costPerResult, setCostPerResult] = useState(0);
+  const [engagement, setEngagement] = useState(0);
+  const [recordsStarted, setRecordsStarted] = useState(0);
 
   const { errors, setError, removeError, getErrorMessageByFieldName } =
     useErrors();
 
-  const notExistAdvertType = !reportDate;
+  const isFormValid = reportDate && errors.length === 0;
 
   useImperativeHandle(
     ref,
     () => ({
       setFieldsValues: (advert) => {
-        setReportId(advert.id || 0);
-        setCreatedAt(advert.createdAt || 0);
+        setReportDate(advert.reportDate || 0);
         setLikes(advert.likes || 0);
-        setContentViews(advert.views || 0);
+        setContentViews(advert.contentViews || 0);
         setValueUsed(advert.valueUsed || 0);
         setViews(advert.views || 0);
         setLinkClicks(advert.linkClicks || 0);
@@ -40,210 +42,245 @@ const AdvertInputOptions = forwardRef(({ typeList, advertData }, ref) => {
     []
   );
 
-  if (typeList === 'RECOGNITION') {
-    return (
-      <div>
-        <Input
-          type="text"
-          value={valueUsed}
-          onChange={(e) => setValueUsed(e.target.value)}
-          placeholder="Valor usado..."
-        />
-        <Input
-          type="text"
-          value={contentViews}
-          onChange={(e) => setContentViews(e.target.value)}
-          placeholder="Visualizações do anúncio..."
-        />
-        <Input
-          type="text"
-          value={views}
-          onChange={(e) => setViews(e.target.value)}
-          placeholder="Visualizaram o Anúncio..."
-        />
-      </div>
-    );
+  function handleReportDate(e) {
+    setReportDate(e.target.value);
+    if (!e.target.value) {
+      setError({ field: 'input-date-error', message: 'Valor inválido.' });
+    } else {
+      removeError('input-date-error');
+    }
   }
-  if (typeList === 'TRAFFIC') {
-    return (
-      <div>
-        <Input
-          type="text"
-          value={valueUsed}
-          onChange={(e) => setValueUsed(e.target.value)}
-          placeholder="Valor usado..."
-        />
-        <Input
-          type="text"
-          value={views}
-          placeholder="Visualizações do anúncio..."
-          onChange={(e) => setViews(e.target.value)}
-        />
-        <Input
-          type="text"
-          value={linkClicks}
-          onChange={(e) => setLinkClicks(e.target.value)}
-          placeholder="Cliques no link..."
-        />
-      </div>
-    );
+
+  async function handleSubmit(e) {
+    e.preventDefault();
+
+    setIsSubmitting(true);
+
+    await onSubmit({
+      reportDate,
+      likes,
+      contentViews,
+      valueUsed,
+      views,
+      linkClicks,
+      costPerResult,
+      engagement,
+      recordsStarted,
+    });
+
+    setIsSubmitting(false);
   }
-  if (typeList === 'RECEIVE_MESSAGES') {
-    return (
-      <div>
+
+  return (
+    <Form noValidate onSubmit={handleSubmit}>
+      <FormGroup error={getErrorMessageByFieldName('input-date-error')}>
         <Input
-          type="text"
-          value={valueUsed}
-          onChange={(e) => setValueUsed(e.target.value)}
-          placeholder="Valor usado..."
+          type="date"
+          value={reportDate || ''}
+          onChange={handleReportDate}
+          error={getErrorMessageByFieldName('input-date-error')}
         />
-        <Input
-          type="text"
-          value={contentViews}
-          onChange={(e) => setContentViews(e.target.value)}
-          placeholder="Visualizações do anúncio..."
-        />
-        <Input
-          type="text"
-          value={recordsStarted}
-          onChange={(e) => setRecordsStarted(e.target.value)}
-          placeholder="Mensagens iníciadas..."
-        />
-      </div>
-    );
-  }
-  if (typeList === 'GET_PAGE_LIKES') {
-    return (
-      <div>
-        <Input
-          type="text"
-          value={valueUsed}
-          onChange={(e) => setValueUsed(e.target.value)}
-          placeholder="Valor usado..."
-        />
-        <Input
-          type="text"
-          value={contentViews}
-          onChange={(e) => setContentViews(e.target.value)}
-          placeholder="Visualizações do anúncio..."
-        />
-        <Input
-          type="text"
-          value={likes}
-          onChange={(e) => setLikes(e.target.value)}
-          placeholder="Curtidas..."
-        />
-      </div>
-    );
-  }
-  if (typeList === 'BOOST_PUBLICATION') {
-    return (
-      <div>
-        <Input
-          type="text"
-          value={valueUsed}
-          onChange={(e) => setValueUsed(e.target.value)}
-          placeholder="Valor usado..."
-        />
-        <Input
-          type="text"
-          value={views}
-          onChange={(e) => setViews(e.target.value)}
-          placeholder="Visualizações do anúncio..."
-        />
-        <Input
-          type="text"
-          value={engagement}
-          onChange={(e) => setEngagement(e.target.value)}
-          placeholder="Engajamento..."
-        />
-        <Input
-          type="text"
-          value={likes}
-          onChange={(e) => setLikes(e.target.value)}
-          placeholder="Curtidas na publicação..."
-        />
-        <Input
-          type="text"
-          value={recordsStarted}
-          onChange={(e) => setRecordsStarted(e.target.value)}
-          placeholder="Comentários..."
-        />
-      </div>
-    );
-  }
-  if (typeList === 'RECORDS') {
-    return (
-      <div>
-        <Input
-          type="text"
-          value={valueUsed}
-          onChange={(e) => setValueUsed(e.target.value)}
-          placeholder="Valor usado..."
-        />
-        <Input
-          type="text"
-          value={contentViews}
-          onChange={(e) => setContentViews(e.target.value)}
-          placeholder="Visualizações do anúncio..."
-        />
-        <Input
-          type="text"
-          value={recordsStarted}
-          onChange={(e) => setRecordsStarted(e.target.value)}
-          placeholder="Cadastros iniciados..."
-        />
-      </div>
-    );
-  }
-  if (typeList === 'SALES') {
-    return (
-      <div>
-        <Input
-          type="text"
-          value={valueUsed}
-          onChange={(e) => setValueUsed(e.target.value)}
-          placeholder="Valor usado..."
-        />
-        <Input
-          type="text"
-          value={costPerResult}
-          onChange={(e) => setCostPerResult(e.target.value)}
-          placeholder="Custos por resultado..."
-        />
-        <Input
-          type="text"
-          value={contentViews}
-          onChange={(e) => setContentViews(e.target.value)}
-          placeholder="Visualizarações do anúncio..."
-        />
-        <Input
-          type="text"
-          value={linkClicks}
-          onChange={(e) => setLinkClicks(e.target.value)}
-          placeholder="Visualizações de conteúdo..."
-        />
-        <Input
-          type="text"
-          value={engagement}
-          onChange={(e) => setEngagement(e.target.value)}
-          placeholder="Cliques no link..."
-        />
-        <Input
-          type="text"
-          value={recordsStarted}
-          onChange={(e) => setRecordsStarted(e.target.value)}
-          placeholder="Adições ao carrinho..."
-        />
-        <Input
-          type="text"
-          value={views}
-          onChange={(e) => setViews(e.target.value)}
-          placeholder="Compras iniciadas..."
-        />
-      </div>
-    );
-  }
+      </FormGroup>
+      {typeList === 'RECOGNITION' && (
+        <div>
+          <Input
+            type="number"
+            value={valueUsed}
+            onChange={(e) => setValueUsed(e.target.value)}
+            placeholder="Valor usado..."
+          />
+          <Input
+            type="number"
+            value={contentViews}
+            onChange={(e) => setContentViews(e.target.value)}
+            placeholder="Visualizações do anúncio..."
+          />
+          <Input
+            type="number"
+            value={views}
+            onChange={(e) => setViews(e.target.value)}
+            placeholder="Visualizaram o Anúncio..."
+          />
+        </div>
+      )}
+      {typeList === 'TRAFFIC' && (
+        <div>
+          <Input
+            type="text"
+            value={valueUsed}
+            onChange={(e) => setValueUsed(e.target.value)}
+            placeholder="Valor usado..."
+          />
+          <Input
+            type="text"
+            value={views}
+            placeholder="Visualizações do anúncio..."
+            onChange={(e) => setViews(e.target.value)}
+          />
+          <Input
+            type="text"
+            value={linkClicks}
+            onChange={(e) => setLinkClicks(e.target.value)}
+            placeholder="Cliques no link..."
+          />
+        </div>
+      )}
+      {typeList === 'RECEIVE_MESSAGES' && (
+        <div>
+          <Input
+            type="text"
+            value={valueUsed}
+            onChange={(e) => setValueUsed(e.target.value)}
+            placeholder="Valor usado..."
+          />
+          <Input
+            type="text"
+            value={contentViews}
+            onChange={(e) => setContentViews(e.target.value)}
+            placeholder="Visualizações do anúncio..."
+          />
+          <Input
+            type="text"
+            value={recordsStarted}
+            onChange={(e) => setRecordsStarted(e.target.value)}
+            placeholder="Mensagens iníciadas..."
+          />
+        </div>
+      )}
+      {typeList === 'GET_PAGE_LIKES' && (
+        <div>
+          <Input
+            type="text"
+            value={valueUsed}
+            onChange={(e) => setValueUsed(e.target.value)}
+            placeholder="Valor usado..."
+          />
+          <Input
+            type="text"
+            value={contentViews}
+            onChange={(e) => setContentViews(e.target.value)}
+            placeholder="Visualizações do anúncio..."
+          />
+          <Input
+            type="text"
+            value={likes}
+            onChange={(e) => setLikes(e.target.value)}
+            placeholder="Curtidas..."
+          />
+        </div>
+      )}
+      {typeList === 'BOOST_PUBLICATION' && (
+        <div>
+          <Input
+            type="text"
+            value={valueUsed}
+            onChange={(e) => setValueUsed(e.target.value)}
+            placeholder="Valor usado..."
+          />
+          <Input
+            type="text"
+            value={views}
+            onChange={(e) => setViews(e.target.value)}
+            placeholder="Visualizações do anúncio..."
+          />
+          <Input
+            type="text"
+            value={engagement}
+            onChange={(e) => setEngagement(e.target.value)}
+            placeholder="Engajamento..."
+          />
+          <Input
+            type="text"
+            value={likes}
+            onChange={(e) => setLikes(e.target.value)}
+            placeholder="Curtidas na publicação..."
+          />
+          <Input
+            type="text"
+            value={recordsStarted}
+            onChange={(e) => setRecordsStarted(e.target.value)}
+            placeholder="Comentários..."
+          />
+        </div>
+      )}
+      {typeList === 'RECORDS' && (
+        <div>
+          <Input
+            type="text"
+            value={valueUsed}
+            onChange={(e) => setValueUsed(e.target.value)}
+            placeholder="Valor usado..."
+          />
+          <Input
+            type="text"
+            value={contentViews}
+            onChange={(e) => setContentViews(e.target.value)}
+            placeholder="Visualizações do anúncio..."
+          />
+          <Input
+            type="text"
+            value={recordsStarted}
+            onChange={(e) => setRecordsStarted(e.target.value)}
+            placeholder="Cadastros iniciados..."
+          />
+        </div>
+      )}
+      {typeList === 'SALES' && (
+        <div>
+          <Input
+            type="text"
+            value={valueUsed}
+            onChange={(e) => setValueUsed(e.target.value)}
+            placeholder="Valor usado..."
+          />
+          <Input
+            type="text"
+            value={costPerResult}
+            onChange={(e) => setCostPerResult(e.target.value)}
+            placeholder="Custos por resultado..."
+          />
+          <Input
+            type="text"
+            value={contentViews}
+            onChange={(e) => setContentViews(e.target.value)}
+            placeholder="Visualizarações do anúncio..."
+          />
+          <Input
+            type="text"
+            value={linkClicks}
+            onChange={(e) => setLinkClicks(e.target.value)}
+            placeholder="Visualizações de conteúdo..."
+          />
+          <Input
+            type="text"
+            value={engagement}
+            onChange={(e) => setEngagement(e.target.value)}
+            placeholder="Cliques no link..."
+          />
+          <Input
+            type="text"
+            value={recordsStarted}
+            onChange={(e) => setRecordsStarted(e.target.value)}
+            placeholder="Adições ao carrinho..."
+          />
+          <Input
+            type="text"
+            value={views}
+            onChange={(e) => setViews(e.target.value)}
+            placeholder="Compras iniciadas..."
+          />
+        </div>
+      )}
+
+      <Button
+        type="submit"
+        disabled={!isFormValid || isSubmitting}
+        isLoading={isSubmitting}
+      >
+        Atualizar anúncio
+      </Button>
+    </Form>
+  );
 });
 
 export default AdvertInputOptions;

@@ -3,35 +3,30 @@ import { useNavigate, useParams } from 'react-router-dom';
 
 import Loader from '../../components/Loader';
 import PageHeader from '../../components/PageHeader';
+import AdvertInputOptions from '../../components/AdvertInputOptions';
 
 import AdvertsServices from '../../services/AdvertsServices';
 import toast from '../../utils/toast';
-import ReportForm from '../../components/ReportForm';
-import AdvertInputOptions from '../../components/AdvertInputOptions';
-import Button from '../../components/Button';
-import { Form } from './styles';
 
 export default function EditAdvert() {
-  const [isSubmitting, setIsSubmitting] = useState(false);
-
   const [isLoading, setIsLoading] = useState(true);
+  const [advertId, setAdvertId] = useState('');
   const [typeName, setTypeName] = useState('');
   const [typeList, setTypeList] = useState([]);
-  const [advertData, setadvertData] = useState(null);
 
   const advertFormRef = useRef(null);
 
   const { id } = useParams();
   const navigate = useNavigate();
-  const isFormValid = typeList;
 
   useEffect(() => {
     async function loadAdvert() {
       try {
+        setAdvertId(id);
         const advert = await AdvertsServices.getAdvertById(id);
 
         advertFormRef.current.setFieldsValues(advert);
-        setadvertData(advert);
+
         setTypeList(advert.type);
         setIsLoading(false);
       } catch (error) {
@@ -81,10 +76,19 @@ export default function EditAdvert() {
   async function handleSubmit(formData) {
     try {
       const advert = {
-        userId: formData.userId,
+        advertId: id,
+        reportDate: formData.reportDate,
+        valueUsed: parseInt(formData.valueUsed) || 0,
+        contentViews: parseInt(formData.contentViews) || 0,
+        linkClicks: parseInt(formData.linkClicks) || 0,
+        likes: parseInt(formData.likes) || 0,
+        views: parseInt(formData.views) || 0,
+        costPerResult: parseInt(formData.costPerResult) || 0,
+        engagement: parseInt(formData.engagement) || 0,
+        recordsStarted: parseInt(formData.recordsStarted) || 0,
       };
 
-      await AdvertsServices.createReport(advert, id);
+      await AdvertsServices.createReport(advertId, advert);
 
       toast({
         type: 'success',
@@ -97,10 +101,12 @@ export default function EditAdvert() {
         text: 'Ocorreu um erro ao editar o anúncio!',
       });
     }
+
+    setIsLoading(false);
   }
 
   return (
-    <Form noValidate onSubmit={handleSubmit}>
+    <>
       <Loader isLoading={isLoading} />
       <PageHeader
         title={`Atualizar informações do anúncio de “${typeName}”`}
@@ -110,16 +116,8 @@ export default function EditAdvert() {
       <AdvertInputOptions
         ref={advertFormRef}
         typeList={typeList}
-        advertData={advertData}
+        onSubmit={handleSubmit}
       />
-
-      <Button
-        type="submit"
-        disabled={!isFormValid || isLoading}
-        isLoading={isSubmitting}
-      >
-        Atualizar anúncio
-      </Button>
-    </Form>
+    </>
   );
 }
