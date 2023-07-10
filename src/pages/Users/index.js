@@ -59,7 +59,7 @@ export default function Users() {
     } finally {
       setIsLoading(false);
     }
-  }, []);
+  }, [setUsers]);
 
   const token = localStorage.getItem('token');
   useEffect(() => {
