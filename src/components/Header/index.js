@@ -62,8 +62,8 @@ export default function Header() {
                     </a>
                   </li>
                   <li className="nav-item">
-                    <a href="../../users" className="nav-link">
-                      Usuários
+                    <a href={`../../payment/${token}`} className="nav-link">
+                      Perfil
                     </a>
                   </li>
                 </ul>

@@ -26,7 +26,7 @@ export default function Dashboard() {
   const [isLoading, setIsLoading] = useState(false);
   const [hasError, setHasError] = useState(false);
   const [initDate, setInitDate] = useState('2023-01-01');
-  const [endDate, setEndDate] = useState('2099-01-01');
+  const [endDate, setEndDate] = useState('2030-01-01');
 
   const filteredAdverts = useMemo(() => {
     if (!Array.isArray(adverts)) {
@@ -40,9 +40,6 @@ export default function Dashboard() {
       setIsLoading(true);
 
       const advertsList = await AdvertsServices.listAdverts(initDate, endDate);
-
-      console.log('initDate', initDate);
-      console.log('endDate', endDate);
 
       setAdverts(advertsList);
 
@@ -60,11 +57,6 @@ export default function Dashboard() {
 
   function handleTryAgain() {
     loadAdverts();
-  }
-
-  function handleChangeSearchDate(e) {
-    setSearchDate(e.target.value);
-    console.log(searchDate);
   }
 
   return (
@@ -150,7 +142,6 @@ export default function Dashboard() {
                 <div className="advert-name">
                   {advert.type === 'RECOGNITION' && (
                     <div>
-                      {console.log('reportDate', adverts.reportDate)}
                       <strong>{advert.reportDate}</strong>
                       <small>Reconhecimento</small>
                       <div className="card-info">
@@ -163,7 +154,7 @@ export default function Dashboard() {
                           <span>Visualizações do anúncio</span>
                         </div>
                         <div>
-                          <strong>0</strong>
+                          <strong>{advert.views}</strong>
                           <span>Visualizaram o anúncio</span>
                         </div>
                       </div>

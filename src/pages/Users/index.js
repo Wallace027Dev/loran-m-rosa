@@ -36,6 +36,8 @@ export default function Users() {
   const [userBeingDeleted, setUserBeingDeleted] = useState(null);
   const [isLoadingDelete, setIsLoadingDelete] = useState(false);
 
+  const token = localStorage.getItem('token');
+
   const filteredUsers = useMemo(() => {
     if (!Array.isArray(users)) {
       return [];
@@ -47,24 +49,29 @@ export default function Users() {
   }, [users, searchTerm]);
 
   const loadUsers = useCallback(async () => {
-    try {
-      setIsLoading(true);
+    const user = await UsersService.showUser();
 
-      const usersList = await UsersService.listUsers();
-      setUsers(usersList);
+    if (user.is_admin) {
+      try {
+        setIsLoading(true);
 
-      setHasError(false);
-    } catch {
-      setHasError(true);
-    } finally {
-      setIsLoading(false);
+        const usersList = await UsersService.listUsers();
+        setUsers(usersList);
+
+        setHasError(false);
+      } catch {
+        setHasError(true);
+      } finally {
+        setIsLoading(false);
+      }
+    } else {
+      location.reload();
     }
   }, [setUsers]);
 
-  const token = localStorage.getItem('token');
   useEffect(() => {
     loadUsers();
-  }, [loadUsers, token]);
+  }, [loadUsers]);
 
   function handleChangeSearchTerm(e) {
     setSearchTerm(e.target.value);

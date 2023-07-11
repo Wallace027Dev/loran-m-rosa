@@ -86,7 +86,7 @@ function AppRoutes() {
       />
 
       <Route
-        path="/paymen/:id"
+        path="/payment/:id"
         element={
           <PrivateRoutes>
             <Payment />

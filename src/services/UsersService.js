@@ -11,6 +11,10 @@ class UsersService {
     this.HttpClient = new HttpClient('http://localhost:3001');
   }
 
+  showUser() {
+    return this.HttpClient.get(`/users/show`, { headers });
+  }
+
   listUsers() {
     return this.HttpClient.get(`/users`, { headers });
   }
