@@ -12,13 +12,13 @@ import {
 } from './styles';
 
 import AdvertsServices from '../../services/AdvertsServices';
-import UsersService from '../../services/UsersService';
 
 import sad from '../../assets/images/sad.svg';
 import emptyBox from '../../assets/images/emptyBox.svg';
 import magnifierQuestion from '../../assets/images/magnifierQuestion.svg';
 import Button from '../../components/Button';
 import Input from '../../components/Input';
+import UsersService from '../../services/UsersService';
 
 export default function Dashboard() {
   const [adverts, setAdverts] = useState([]);
@@ -32,22 +32,31 @@ export default function Dashboard() {
     if (!Array.isArray(adverts)) {
       return [];
     }
-    return adverts.filter((advert) => advert.type.includes(searchDate));
+    return adverts;
   }, [adverts, searchDate]);
 
   const loadAdverts = useCallback(async () => {
-    try {
-      setIsLoading(true);
+    const user = await UsersService.showUser();
 
-      const advertsList = await AdvertsServices.listAdverts(initDate, endDate);
+    if (!user.is_admin) {
+      try {
+        setIsLoading(true);
 
-      setAdverts(advertsList);
+        const advertsList = await AdvertsServices.listAdverts(
+          initDate,
+          endDate
+        );
 
-      setHasError(false);
-    } catch {
-      setHasError(true);
-    } finally {
-      setIsLoading(false);
+        setAdverts(advertsList);
+
+        setHasError(false);
+      } catch {
+        setHasError(true);
+      } finally {
+        setIsLoading(false);
+      }
+    } else {
+      location.reload();
     }
   }, [initDate, endDate]);
 
@@ -142,19 +151,18 @@ export default function Dashboard() {
                 <div className="advert-name">
                   {advert.type === 'RECOGNITION' && (
                     <div>
-                      <strong>{advert.reportDate}</strong>
                       <small>Reconhecimento</small>
                       <div className="card-info">
                         <div>
-                          <strong>{advert.valueUsed}</strong>
+                          <strong>{advert.valueUsed || 0}</strong>
                           <span>Valor usado</span>
                         </div>
                         <div>
-                          <strong>{advert.contentViews}</strong>
+                          <strong>{advert.contentViews || 0}</strong>
                           <span>Visualizações do anúncio</span>
                         </div>
                         <div>
-                          <strong>{advert.views}</strong>
+                          <strong>{advert.views || 0}</strong>
                           <span>Visualizaram o anúncio</span>
                         </div>
                       </div>
@@ -165,15 +173,15 @@ export default function Dashboard() {
                       <small>Tráfego</small>
                       <div className="card-info">
                         <div>
-                          <strong>{advert.valueUsed}</strong>
+                          <strong>{advert.valueUsed || 0}</strong>
                           <span>Valor usado</span>
                         </div>
                         <div>
-                          <strong>{advert.contentViews}</strong>
+                          <strong>{advert.contentViews || 0}</strong>
                           <span>Visualizações do anúncio</span>
                         </div>
                         <div>
-                          <strong>{advert.linkClicks}</strong>
+                          <strong>{advert.linkClicks || 0}</strong>
                           <span>Cliques no anúncio</span>
                         </div>
                       </div>
@@ -184,15 +192,15 @@ export default function Dashboard() {
                       <small>Mensagens recebidas</small>
                       <div className="card-info">
                         <div>
-                          <strong>{advert.valueUsed}</strong>
+                          <strong>{advert.valueUsed || 0}</strong>
                           <span>Valor usado</span>
                         </div>
                         <div>
-                          <strong>{advert.contentViews}</strong>
+                          <strong>{advert.contentViews || 0}</strong>
                           <span>Visualizações do anúncio</span>
                         </div>
                         <div>
-                          <strong>{advert.linkClicks}</strong>
+                          <strong>{advert.linkClicks || 0}</strong>
                           <span>Mensagens iniciadas</span>
                         </div>
                       </div>
@@ -203,15 +211,15 @@ export default function Dashboard() {
                       <small>Receber curtidas na página</small>
                       <div className="card-info">
                         <div>
-                          <strong>{advert.valueUsed}</strong>
+                          <strong>{advert.valueUsed || 0}</strong>
                           <span>Valor usado</span>
                         </div>
                         <div>
-                          <strong>{advert.contentViews}</strong>
+                          <strong>{advert.contentViews || 0}</strong>
                           <span>Visualizações do anúncio</span>
                         </div>
                         <div>
-                          <strong>{advert.likes}</strong>
+                          <strong>{advert.likes || 0}</strong>
                           <span>Curtidas</span>
                         </div>
                       </div>
@@ -222,23 +230,23 @@ export default function Dashboard() {
                       <small>Turbinar publicação</small>
                       <div className="card-info">
                         <div>
-                          <strong>{advert.valueUsed}</strong>
+                          <strong>{advert.valueUsed || 0}</strong>
                           <span>Valor usado</span>
                         </div>
                         <div>
-                          <strong>{advert.contentViews}</strong>
+                          <strong>{advert.contentViews || 0}</strong>
                           <span>Visualizações do anúncio</span>
                         </div>
                         <div>
-                          <strong>{advert.engagement}</strong>
+                          <strong>{advert.engagement || 0}</strong>
                           <span>Engajamento</span>
                         </div>
                         <div>
-                          <strong>{advert.likes}</strong>
+                          <strong>{advert.likes || 0}</strong>
                           <span>Curtidas</span>
                         </div>
                         <div>
-                          <strong>{advert.recordsStarted}</strong>
+                          <strong>{advert.recordsStarted || 0}</strong>
                           <span>Comentários</span>
                         </div>
                       </div>
@@ -249,15 +257,15 @@ export default function Dashboard() {
                       <small>Cadastros</small>
                       <div className="card-info">
                         <div>
-                          <strong>{advert.valueUsed}</strong>
+                          <strong>{advert.valueUsed || 0}</strong>
                           <span>Valor usado</span>
                         </div>
                         <div>
-                          <strong>{advert.contentViews}</strong>
+                          <strong>{advert.contentViews || 0}</strong>
                           <span>Visualizações do anúncio</span>
                         </div>
                         <div>
-                          <strong>{advert.recordsStarted}</strong>
+                          <strong>{advert.recordsStarted || 0}</strong>
                           <span>Cadstros</span>
                         </div>
                       </div>
@@ -268,33 +276,33 @@ export default function Dashboard() {
                       <small>Vendas</small>
                       <div className="card-info">
                         <div>
-                          <strong>{advert.valueUsed}</strong>
+                          <strong>{advert.valueUsed || 0}</strong>
                           <span>Valor usado</span>
                         </div>
                         <div>
-                          <strong>{advert.costPerResult}</strong>
+                          <strong>{advert.costPerResult || 0}</strong>
                           <span>Custo por resultado</span>
                         </div>
                         <div>
-                          <strong>{advert.contentViews}</strong>
+                          <strong>{advert.contentViews || 0}</strong>
                           <span>Visualizações do anúncio</span>
                         </div>
                         <div>
-                          <strong>{advert.linkClicks}</strong>
+                          <strong>{advert.linkClicks || 0}</strong>
                           <span>Cliques no link</span>
                         </div>
                       </div>
                       <div className="card-info">
                         <div>
-                          <strong>{advert.engagement}</strong>
+                          <strong>{advert.engagement || 0}</strong>
                           <span>Adições no carrinho</span>
                         </div>
                         <div>
-                          <strong>{advert.recordsStarted}</strong>
+                          <strong>{advert.recordsStarted || 0}</strong>
                           <span>Compras iniciadas</span>
                         </div>
                         <div>
-                          <strong>{advert.views}</strong>
+                          <strong>{advert.views || 0}</strong>
                           <span>Total de vendas</span>
                         </div>
                       </div>
