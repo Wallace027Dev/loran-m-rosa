@@ -56,8 +56,7 @@ export default function EditUser() {
         type: 'success',
         text: 'Usuário editado com sucesso!',
       });
-    } catch (error) {
-      console.log(error);
+    } catch {
       toast({
         type: 'danger',
         text: 'Ocorreu um erro ao editar o usuário!',

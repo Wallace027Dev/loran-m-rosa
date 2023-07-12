@@ -21,8 +21,8 @@ export function AdvertCard({
     try {
       const user = await UsersService.getUserById(id);
       setUser(user);
-    } catch (error) {
-      console.log(error);
+    } catch {
+      //
     }
   }, [advert.id]);
 

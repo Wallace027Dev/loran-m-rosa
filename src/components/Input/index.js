@@ -1,4 +1,4 @@
-import styled, { css } from 'styled-components'
+import styled, { css } from 'styled-components';
 
 export default styled.input`
   background-color: var(--secondary);
@@ -18,12 +18,12 @@ export default styled.input`
 
   &:focus {
     border: 2px solid var(--primary);
-  };
+  }
 
   &::placeholder {
     color: var(--tertiary);
     font-weight: bold;
-  };
+  }
 
   &[disabled] {
     color: var(--tertiary);
@@ -31,7 +31,9 @@ export default styled.input`
     background-color: var(--secondary);
   }
 
-  ${({ error }) => error && css`
+  ${({ error }) =>
+    error &&
+    css`
       color: var(--danger);
       border-color: var(--danger) !important;
     `};

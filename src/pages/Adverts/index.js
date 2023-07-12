@@ -21,7 +21,7 @@ import { AdvertCard } from '../../components/AdvertCard';
 
 import toast from '../../utils/toast';
 
-import AdvertsServices from '../../services/AdvertsServices';
+import AdvertsService from '../../services/AdvertsService';
 
 export default function Adverts() {
   const [adverts, setAdverts] = useState([]);
@@ -46,7 +46,7 @@ export default function Adverts() {
     try {
       setIsLoading(true);
 
-      const advertsList = await AdvertsServices.listAdverts();
+      const advertsList = await AdvertsService.listAdverts();
 
       setAdverts(advertsList);
 
@@ -79,7 +79,7 @@ export default function Adverts() {
     try {
       setIsLoadingDelete(true);
 
-      await AdvertsServices.deleteAdvert(advertBeingDeleted.id);
+      await AdvertsService.deleteAdvert(advertBeingDeleted.id);
 
       setAdverts((prevState) =>
         prevState.filter((advert) => advert.id !== advertBeingDeleted.id)
@@ -92,7 +92,6 @@ export default function Adverts() {
         text: 'Anúncio deletado com sucesso!',
       });
     } catch (error) {
-      console.log(error);
       toast({
         type: 'danger',
         text: 'Ocorreu um erro ao deletar o anúncio!',

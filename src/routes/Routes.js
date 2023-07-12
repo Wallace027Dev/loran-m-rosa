@@ -1,5 +1,7 @@
 import { Routes, Route } from 'react-router-dom';
 
+import Home from '../pages/Home';
+
 import Login from '../pages/Login';
 import Signup from '../pages/Signup';
 import Forgot from '../pages/Forgot';
@@ -8,16 +10,14 @@ import Users from '../pages/Users';
 import NewUser from '../pages/NewUser';
 import EditUser from '../pages/EditUser';
 
-import Home from '../pages/Home';
 import Dashboard from '../pages/Dashboard';
-import Payment from '../pages/Payment';
+import UserAds from '../pages/UserAds';
 
 import Adverts from '../pages/Adverts';
-import UserAds from '../pages/UserAds';
 import NewAdverts from '../pages/NewAdverts';
+import EditAdvert from '../pages/EditAdvert';
 
 import PrivateRoutes from '../components/PrivateRoutes';
-import EditAdvert from '../pages/EditAdvert';
 
 function AppRoutes() {
   return (
@@ -86,21 +86,12 @@ function AppRoutes() {
       />
 
       <Route
-        path="/payment/:id"
-        element={
-          <PrivateRoutes>
-            <Payment />
-          </PrivateRoutes>
-        }
-      />
-      <Route
         path="/dashboard/:id"
         element={
           <PrivateRoutes>
             <Dashboard />
           </PrivateRoutes>
         }
-        s
       />
     </Routes>
   );

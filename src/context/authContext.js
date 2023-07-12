@@ -14,8 +14,6 @@ export function AuthProvider({ children }) {
   function logOut() {
     localStorage.removeItem('token');
     setCurrentUser(null);
-
-    console.log(currentUser);
   }
 
   async function signUp(user) {
@@ -27,8 +25,6 @@ export function AuthProvider({ children }) {
 
     localStorage.setItem('token', token);
     setCurrentUser(token);
-    console.log('current user: ', currentUser.token);
-    console.log('token: ', token);
   }
 
   function isAuthenticated() {

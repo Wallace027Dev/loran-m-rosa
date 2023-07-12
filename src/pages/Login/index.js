@@ -74,8 +74,7 @@ function Login() {
       user.email === 'admin@mail.com'
         ? navigate(`../users`)
         : navigate(`../dashboard/${token}`);
-    } catch (error) {
-      console.log(error);
+    } catch {
       toast({
         type: 'danger',
         text: 'Ocorreu um erro ao tentar logar com o usuário!',

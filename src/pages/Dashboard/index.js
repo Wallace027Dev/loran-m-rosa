@@ -1,6 +1,8 @@
 import { useCallback, useEffect, useMemo, useState } from 'react';
 
 import Loader from '../../components/Loader';
+import Button from '../../components/Button';
+import Input from '../../components/Input';
 
 import {
   Card,
@@ -11,18 +13,15 @@ import {
   SeachNotFoundContainer,
 } from './styles';
 
-import AdvertsServices from '../../services/AdvertsServices';
+import AdvertsService from '../../services/AdvertsService';
+import UsersService from '../../services/UsersService';
 
 import sad from '../../assets/images/sad.svg';
 import emptyBox from '../../assets/images/emptyBox.svg';
 import magnifierQuestion from '../../assets/images/magnifierQuestion.svg';
-import Button from '../../components/Button';
-import Input from '../../components/Input';
-import UsersService from '../../services/UsersService';
 
 export default function Dashboard() {
   const [adverts, setAdverts] = useState([]);
-  const [searchDate, setSearchDate] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [hasError, setHasError] = useState(false);
   const [initDate, setInitDate] = useState('2023-01-01');
@@ -33,7 +32,7 @@ export default function Dashboard() {
       return [];
     }
     return adverts;
-  }, [adverts, searchDate]);
+  }, [adverts]);
 
   const loadAdverts = useCallback(async () => {
     const user = await UsersService.showUser();
@@ -42,10 +41,7 @@ export default function Dashboard() {
       try {
         setIsLoading(true);
 
-        const advertsList = await AdvertsServices.listAdverts(
-          initDate,
-          endDate
-        );
+        const advertsList = await AdvertsService.listAdverts(initDate, endDate);
 
         setAdverts(advertsList);
 

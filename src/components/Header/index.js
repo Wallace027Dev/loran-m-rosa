@@ -54,21 +54,6 @@ export default function Header() {
                 <img src={bakoads} alt="Bakoads" />
               </div>
 
-              <div className="nav-list">
-                <ul>
-                  <li className="nav-item">
-                    <a href="./dashboard" className="nav-link">
-                      Início
-                    </a>
-                  </li>
-                  <li className="nav-item">
-                    <a href={`../../payment/${token}`} className="nav-link">
-                      Perfil
-                    </a>
-                  </li>
-                </ul>
-              </div>
-
               <div className="logout-button">
                 <button type="button" onClick={handleLogout}>
                   Logout
@@ -83,19 +68,6 @@ export default function Header() {
             </nav>
 
             <div className="mobile-menu nav-list">
-              <ul>
-                <li className="nav-item">
-                  <a href="./dashboard" className="nav-link">
-                    Início
-                  </a>
-                </li>
-                <li className="nav-item">
-                  <a href="../../users" className="nav-link">
-                    Usuários
-                  </a>
-                </li>
-              </ul>
-
               <div className="logout-button">
                 <button type="button" onClick={handleLogout}>
                   Logout

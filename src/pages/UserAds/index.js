@@ -21,8 +21,7 @@ import Loader from '../../components/Loader';
 import Input from '../../components/Input';
 import Button from '../../components/Button';
 import Modal from '../../components/Modal';
-import AdvertsServices from '../../services/AdvertsServices';
-import UsersService from '../../services/UsersService';
+import AdvertsService from '../../services/AdvertsService';
 
 export default function UserAds() {
   const [adverts, setAdverts] = useState([]);
@@ -52,7 +51,7 @@ export default function UserAds() {
     try {
       setIsLoading(true);
 
-      const advertsList = await AdvertsServices.listAdverts(userId);
+      const advertsList = await AdvertsService.listAdverts(userId);
 
       setAdverts(advertsList);
 
@@ -90,7 +89,7 @@ export default function UserAds() {
     try {
       setIsLoadingDelete(true);
 
-      await AdvertsServices.deleteAdvert(advertBeingDeleted.id);
+      await AdvertsService.deleteAdvert(advertBeingDeleted.id);
 
       setAdverts((prevState) =>
         prevState.filter((advert) => advert.id !== advertBeingDeleted.id)

@@ -1,11 +1,5 @@
 import PropTypes from 'prop-types';
-import {
-  forwardRef,
-  useState,
-  useImperativeHandle,
-  useEffect,
-  useCallback,
-} from 'react';
+import { forwardRef, useState, useImperativeHandle, useEffect } from 'react';
 
 import { Form } from './styles';
 

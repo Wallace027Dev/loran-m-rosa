@@ -36,8 +36,6 @@ export default function Users() {
   const [userBeingDeleted, setUserBeingDeleted] = useState(null);
   const [isLoadingDelete, setIsLoadingDelete] = useState(false);
 
-  const token = localStorage.getItem('token');
-
   const filteredUsers = useMemo(() => {
     if (!Array.isArray(users)) {
       return [];

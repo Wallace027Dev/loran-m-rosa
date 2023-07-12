@@ -5,7 +5,7 @@ import Loader from '../../components/Loader';
 import PageHeader from '../../components/PageHeader';
 import AdvertInputOptions from '../../components/AdvertInputOptions';
 
-import AdvertsServices from '../../services/AdvertsServices';
+import AdvertsService from '../../services/AdvertsService';
 import toast from '../../utils/toast';
 
 export default function EditAdvert() {
@@ -23,14 +23,13 @@ export default function EditAdvert() {
     async function loadAdvert() {
       try {
         setAdvertId(id);
-        const advert = await AdvertsServices.getAdvertById(id);
+        const advert = await AdvertsService.getAdvertById(id);
 
         advertFormRef.current.setFieldsValues(advert);
 
         setTypeList(advert.type);
         setIsLoading(false);
-      } catch (error) {
-        console.log(error);
+      } catch {
         navigate('../../adverts');
         toast({
           type: 'danger',
@@ -88,14 +87,13 @@ export default function EditAdvert() {
         recordsStarted: parseInt(formData.recordsStarted) || 0,
       };
 
-      await AdvertsServices.createReport(advertId, advert);
+      await AdvertsService.createReport(advertId, advert);
 
       toast({
         type: 'success',
         text: 'Anúncio editado com sucesso!',
       });
-    } catch (error) {
-      console.log(error);
+    } catch {
       toast({
         type: 'danger',
         text: 'Ocorreu um erro ao editar o anúncio!',

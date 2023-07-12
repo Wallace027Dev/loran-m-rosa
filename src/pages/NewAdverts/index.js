@@ -4,7 +4,7 @@ import PageHeader from '../../components/PageHeader';
 import AdvertForm from '../../components/AdvertForm';
 import Loader from '../../components/Loader';
 
-import AdvertsServices from '../../services/AdvertsServices';
+import AdvertsService from '../../services/AdvertsService';
 
 import toast from '../../utils/toast';
 import { useNavigate } from 'react-router-dom';
@@ -26,7 +26,7 @@ export default function NewAdverts() {
         createdAt: formData.createdAt,
       };
 
-      await AdvertsServices.createAdvert(advert);
+      await AdvertsService.createAdvert(advert);
 
       toast({
         type: 'success',
@@ -34,8 +34,7 @@ export default function NewAdverts() {
       });
 
       navigate(`../adverts`);
-    } catch (error) {
-      console.log(error);
+    } catch {
       toast({
         type: 'danger',
         text: 'Ocorreu um erro ao cadastrar o anúncio!',
